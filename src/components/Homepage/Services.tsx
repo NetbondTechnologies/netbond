@@ -25,8 +25,7 @@ interface Services {
   demand: string;
 }
 
-const Services = () => {
-  const servicesArr: number[] = [1, 2, 3, 4, 5, 6];
+const Services: React.FC = () => {
   const navigate = useNavigate();
   const servicesItems: Services[] = [
     {
@@ -124,7 +123,7 @@ const Services = () => {
                 </div>
                 <h3 className="text-3xl">{e.heading}</h3>
                 <p>{e.description}</p>
-                <button className="btn-services btn btn-2 border-1 border-white/30 px-4 py-1 border-1 rounded-md active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 duration-200 cursor-pointer">
+                <button className="btn-services btn btn-2 border-1 border-white/30 px-4 py-1 rounded-md active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 duration-200 cursor-pointer">
                   Check Out{" "}
                   <span className="arrow inline-block ml-1">
                     <FontAwesomeIcon icon={faArrowRight} />

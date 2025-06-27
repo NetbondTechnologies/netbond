@@ -1,22 +1,20 @@
-import React, { useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import React, { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-const Hero = () => {
+const Hero: React.FC = () => {
+  useEffect(() => {
+    let text = document.querySelector(".emphasis") as HTMLElement;
+    let interval = setInterval(() => {
+      text.classList.toggle("text-[#f76b1c]");
+      text.classList.toggle("text-[#f76b1c60]");
+    }, 1000);
 
-  useEffect(()=>{
-    let text = document.querySelector(".emphasis") as HTMLElement
-    let interval = setInterval(()=>{
-      text.classList.toggle("text-[#f76b1c]")
-      text.classList.toggle("text-[#f76b1c60]")
-    },1000)
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
-    return ()=>{
-      clearInterval(interval)
-    }
-    
-  },[])
-  
   return (
     <>
       <div
@@ -44,13 +42,13 @@ const Hero = () => {
         <div className="flex gap-15 items-center justify-center">
           <button
             type="button"
-            className="btn border-1 border-white/30 px-6 py-2 text-lg text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
+            className="btn border-white/30 px-6 py-2 text-lg text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
           >
             Get Started
           </button>
           <button
             type="button"
-            className="secondary-btn btn border-2 border-[#f76b1c] px-6 py-2 text-lg text-center border-1 rounded-md hover:shadow-xl shadow-white hover:ring-2 hover:ring-white hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-[#f76b1c] duration-200 cursor-pointer"
+            className="secondary-btn btn border-[#f76b1c] px-6 py-2 text-lg text-center border-1 rounded-md hover:shadow-xl shadow-white hover:ring-2 hover:ring-white hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-[#f76b1c] duration-200 cursor-pointer"
           >
             Try Our B2B Services{" "}
             <span className="arrow inline-block translate-y-[1px]">
@@ -62,6 +60,6 @@ const Hero = () => {
       <div className="overlay -z-1 absolute top-0 left-0 w-full"></div>
     </>
   );
-}
+};
 
-export default Hero
+export default Hero;

@@ -15,7 +15,7 @@ interface DropDown {
   description: string;
   link: string;
 }
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const [visible, setVisible] = useState(true);
   const [prevScrollY, setPrevScrollY] = useState(window.scrollY);
 
@@ -103,7 +103,7 @@ const Navbar = () => {
           />
           <div className="w-[5vw] h-[10px] absolute top-[20px] bg-transparent"></div>
           <div className="absolute w-[45vw] dropdown-items flex flex-wrap gap-[10px] justify-center items-center h-auto -left-[300px] px-2 py-4 rounded-xl shadow-xl top-[30px] bg-white">
-            {dropdownItems.map((item: DropDown, index: number) => {
+            {dropdownItems.map((item: DropDown) => {
               return (
                 <NavLink
                   to={item.link}
@@ -125,7 +125,7 @@ const Navbar = () => {
       </ul>
       <button
         type="button"
-        className="btn border-1 border-white/30 px-4 py-1 ml-10 border-1 rounded-md active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 duration-200 cursor-pointer"
+        className="btn border-1 border-white/30 px-4 py-1 ml-10 rounded-md active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 duration-200 cursor-pointer"
       >
         Get Started
       </button>

@@ -92,26 +92,49 @@ const Info = () => {
         className={`w-[89%] mx-auto paragraphDiv para flex flex-col justify-center text-center gap-2 text-2xl`}
         ref={paragraphRef}
       >
-       <div> At NETBOND, we bring your business vision to life through innovative and</div>
-       <div> effective IT solutions, website development, and software services.</div>
-       <div> Based in the vibrant city of Zirakpur, Chandigarh, we proudly serve</div>
-       <div> clients not just in India, but across the globe.</div>
+        <div>
+          {" "}
+          At NETBOND, we bring your business vision to life through innovative
+          and
+        </div>
+        <div>
+          {" "}
+          effective IT solutions, website development, and software services.
+        </div>
+        <div>
+          {" "}
+          Based in the vibrant city of Zirakpur, Chandigarh, we proudly serve
+        </div>
+        <div> clients not just in India, but across the globe.</div>
         <br />
         <br />
         <br />
         <br />
         <br />
-       <div> Our mission is to help businesses like yours grow and succeed in the</div>
-       <div> fast-changing digital world. From building your online presence to</div>
-       <div> developing smart software, we’re here to take your business to the next</div>
-       <div> level — anywhere in the world.</div>
+        <div>
+          {" "}
+          Our mission is to help businesses like yours grow and succeed in the
+        </div>
+        <div>
+          {" "}
+          fast-changing digital world. From building your online presence to
+        </div>
+        <div>
+          {" "}
+          developing smart software, we’re here to take your business to the
+          next
+        </div>
+        <div> level — anywhere in the world.</div>
         <br />
         <br />
         <br />
         <br />
         <br />
-       <div> Transforming businesses, crafting success — your trusted partner</div>
-       <div> NETBOND. We don’t just build — we create digital legacies.</div>
+        <div>
+          {" "}
+          Transforming businesses, crafting success — your trusted partner
+        </div>
+        <div> NETBOND. We don’t just build — we create digital legacies.</div>
       </div>
     </div>
   );

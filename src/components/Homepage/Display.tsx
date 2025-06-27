@@ -1,6 +1,6 @@
-import { faArrowRight, faCarSide } from "@fortawesome/free-solid-svg-icons";
+import { faCarSide } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -18,59 +18,58 @@ const Display = () => {
     { title: "Implement Seamless Solution", image: "./asset 13.png" },
     { title: "Launch Support", image: "./asset 14.png" },
   ];
-  
 
   useGSAP(() => {
     let imgDiv = Array.from(
       document.querySelectorAll(".img-card-div") as NodeListOf<HTMLElement>
     );
-    let num: number = 300; 
-    imgDiv.forEach((e: Element, i:number) => {
-      if(i === 3){
+    let num: number = 300;
+    imgDiv.forEach((e: Element, i: number) => {
+      if (i === 3) {
         gsap.fromTo(
-        e,
-        {
-          scale: 1,
-        },
-        {scale:0.8,
-          duration: 0.4,
-          ease: "linear",
-          scrollTrigger: {
-            trigger: e,
-            start: "top 5%",
-            endTrigger: ".img-cards",
-            end: "+=10%",
-            pin:true,
-            pinSpacing: false,
-            scrub: 1,
+          e,
+          {
+            scale: 1,
           },
-        }
-      );
-      }else{
- gsap.fromTo(
-        e,
-        {
-          scale: 1,
-        },
-        {
-          scale: 0.8,
-          duration: 0.4,
-          ease: "linear",
-          scrollTrigger: {
-            trigger: e,
-            start: "top 5%",
-            endTrigger: ".img-cards",
-            end: "+=" + num +"%",
-            pin:true,
-            pinSpacing: false,
-            scrub: 1,
+          {
+            scale: 0.8,
+            duration: 0.4,
+            ease: "linear",
+            scrollTrigger: {
+              trigger: e,
+              start: "top 5%",
+              endTrigger: ".img-cards",
+              end: "+=10%",
+              pin: true,
+              pinSpacing: false,
+              scrub: 1,
+            },
+          }
+        );
+      } else {
+        gsap.fromTo(
+          e,
+          {
+            scale: 1,
           },
-        }
-      );
+          {
+            scale: 0.8,
+            duration: 0.4,
+            ease: "linear",
+            scrollTrigger: {
+              trigger: e,
+              start: "top 5%",
+              endTrigger: ".img-cards",
+              end: "+=" + num + "%",
+              pin: true,
+              pinSpacing: false,
+              scrub: 1,
+            },
+          }
+        );
       }
-     num -= 100
+      num -= 100;
     });
-
   });
 
   useEffect(() => {
@@ -149,7 +148,7 @@ const Display = () => {
         </div>
         <button
           type="button"
-          className="secondary-btn overflow-hidden btn btn-2 border-2 border-[#f76b1c] px-6 py-2 text-lg text-center flex items-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-white hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-[#f76b1c] duration-200 cursor-pointer"
+          className="secondary-btn overflow-hidden btn btn-2 border-[#f76b1c] px-6 py-2 text-lg text-center flex items-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-white hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-[#f76b1c] duration-200 cursor-pointer"
         >
           Discover What We Do{" "}
           <span className="arrow-two ml-2 inline-block -translate-y-[1px] ">
@@ -167,10 +166,12 @@ const Display = () => {
               <div
                 className="flex justify-around bg-() img-card-div mb-10 z-1"
                 key={i}
-                
               >
                 {" "}
-                <h1 className="img-card-title text-8xl pt-60 w-[60%] px-10" id={`img-card-title${i + 1}`}>
+                <h1
+                  className="img-card-title text-8xl pt-60 w-[60%] px-10"
+                  id={`img-card-title${i + 1}`}
+                >
                   {e.title}
                 </h1>{" "}
                 <img className="inline-block  w-[30%] " src={e.image} alt="" />{" "}
