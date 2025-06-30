@@ -2,12 +2,14 @@ import {
   faArrowTrendUp,
   faAt,
   faCode,
+  faICursor,
   faMobileScreenButton,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState, type ReactElement } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import { handleScrollTop } from "../App";
 
 interface DropDown {
   name: string;
@@ -18,7 +20,9 @@ interface DropDown {
 const Navbar: React.FC = () => {
   const [visible, setVisible] = useState(true);
   const [prevScrollY, setPrevScrollY] = useState(window.scrollY);
+  const navigate = useNavigate();
 
+  
   const dropdownItems: DropDown[] = [
     {
       name: "Web Development",
@@ -57,7 +61,7 @@ const Navbar: React.FC = () => {
     },
     {
       name: "Graphic Designing",
-      icon: <FontAwesomeIcon size="lg" icon={faCode} />,
+      icon: <FontAwesomeIcon size="lg" icon={faICursor} />,
       link: "/graphicDesigning",
       description:
         "We are your one-stop solution for your complete digital marketing and graphic design requirements.",
@@ -81,7 +85,7 @@ const Navbar: React.FC = () => {
 
   return (
     <div
-      className={`w-[80vw] fixed top-[20px] navbar ${
+      className={`w-[80vw] fixed top-[20px] select-none navbar ${
         visible ? "navbar--visible" : "navbar--hidden"
       } py-1 shadow-lg backdrop-blur-lg left-1/2 translate-x-[-50%] px-15 rounded-4xl flex items-center justify-between`}
     >
@@ -89,9 +93,16 @@ const Navbar: React.FC = () => {
         className="cursor-pointer nav-logo py-1 px-2 rounded-xl w-[15%] hover:-translate-y-1 hover:shadow-xl duration-300"
         src="./asset 0.png"
         alt=""
+        onClick={()=>{
+          navigate("/")
+          handleScrollTop()
+        }}
       />
       <ul className="nav-items bg-white/85 px-6 py-2 rounded-2xl flex gap-8">
-        <li className="relative cursor-pointer w-fit hover:translate-x-2 duration-200">
+        <li className="relative cursor-pointer w-fit hover:translate-x-2 duration-200" onClick={()=>{
+          navigate("/about");
+          handleScrollTop();
+        }}>
           About
         </li>
         <li className="flex dropdown items-center w-fit h-[100%] relative cursor-pointer gap-[5px]  hover:translate-x-2 duration-200">
@@ -119,7 +130,10 @@ const Navbar: React.FC = () => {
             })}
           </div>
         </li>
-        <li className="relative cursor-pointer w-fit hover:translate-x-2 duration-200">
+        <li className="relative cursor-pointer w-fit hover:translate-x-2 duration-200" onClick={()=>{
+          navigate("/contact");
+          handleScrollTop();
+        }}>
           Contact Us
         </li>
       </ul>

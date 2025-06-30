@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router";
+import { handleScrollTop } from "../App";
 
 const Footer: React.FC = () => {
   return (
@@ -16,16 +17,16 @@ const Footer: React.FC = () => {
           <div className="w-[400px]">
             <img src="asset 0.png" className="w-full" alt="" />
             <div className="w-full mt-5 flex justify-center gap-3">
-              <div className="w-[40px] h-[40px] border-1 rounded-4xl border-white p-[8px] text-center hover:bg-[#646464aa] cursor-pointer hover:text-orange-400  text-white">
+              <div className="w-[40px] h-[40px] border-1 rounded-4xl border-white p-[7px] text-center hover:bg-[#646464aa] cursor-pointer hover:text-blue-700 duration-150 text-white">
                 <FontAwesomeIcon icon={faFacebookF} />
               </div>
-              <div className="w-[40px] h-[40px] border-1 rounded-4xl border-white p-[8px] text-center hover:bg-[#646464aa] cursor-pointer hover:text-blue-400 text-white">
+              <div className="w-[40px] h-[40px] border-1 rounded-4xl border-white p-[7px] text-center hover:bg-[#646464aa] cursor-pointer hover:text-blue-400 duration-150 text-white">
                 <FontAwesomeIcon icon={faTwitter} />
               </div>
-              <div className="w-[40px] h-[40px] border-1 rounded-4xl border-white p-[8px] text-center hover:bg-[#646464aa] cursor-pointer hover:text-blue-600 text-white">
+              <div className="w-[40px] h-[40px] border-1 rounded-4xl border-white p-[7px] text-center hover:bg-[#646464aa] cursor-pointer hover:text-blue-600 duration-150 text-white">
                 <FontAwesomeIcon icon={faLinkedinIn} />
               </div>
-              <div className="w-[40px] h-[40px] border-1 rounded-4xl border-white p-[8px] text-center hover:bg-[#646464aa] cursor-pointer hover:text-(--pumpkin) text-white">
+              <div className="w-[40px] h-[40px] border-1 rounded-4xl border-white p-[7px] text-center hover:bg-[#646464aa] cursor-pointer hover:text-(--pumpkin) duration-150 text-white">
                 <FontAwesomeIcon icon={faInstagram} />
               </div>
             </div>
@@ -42,6 +43,11 @@ const Footer: React.FC = () => {
               <NavLink
                 to="/about"
                 className="hover:text-orange-400 w-[45%] text-white"
+                onClick={()=>{
+                  setTimeout(()=>{
+                    handleScrollTop()
+                  },50)
+                }}
               >
                 About
               </NavLink>
@@ -76,8 +82,13 @@ const Footer: React.FC = () => {
                 Graphic Design
               </NavLink>
               <NavLink
-                to="/"
+                to="/contact"
                 className="hover:text-orange-400 w-[45%] text-white"
+                onClick={()=>{
+                  setTimeout(()=>{
+                    handleScrollTop()
+                  },50)
+                }}
               >
                 Contact Us
               </NavLink>

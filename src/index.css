@@ -320,6 +320,58 @@ p.accordion-answer{
 .useful-links > div{
   font-family: "inter Tight", sans-serif;
 }
+.about-bg{
+  background: linear-gradient(to left , rgba(0,0,0,0) , rgba(255, 255, 255 ,0.4)) ,url("./asset 28.jpeg");
+  background-size: 100%;
+  background-position: 0 -200px;
+}
+.about-bg > h1{
+  font-family: "Outfit", sans-serif !important;
+}
+.spl-head{
+  transition: 0.3s ease;
+  font-family: "Inter Tight";
+}
+.spl-head:hover{
+  color: var(--pumpkin);
+}
+
+.strengths > div >h2{
+  color: var(--pumpkin);
+}
+div.testimonials > h4{
+  color: var(--pumpkin);
+}
+
+.whatsapp::before{
+  content:"Whatsapp Us" ;
+  color: white;
+  position: absolute;
+  padding-inline: 10px;
+  left: -10px;
+  top:15px;
+  height: 25px;
+  border-radius: 24px;
+  background-color: #12c554;
+  transition: 0.2s all ease;
+  opacity: 0;
+}
+
+
+.whatsapp:hover::before{
+  left: -115px;
+  opacity: 1;
+}
+
+.contact-s1{
+  background-size: 100%;
+  background-image: url("./asset 96.jpg");
+}
+
+p.contact-head{
+  font-weight: bold !important;
+  color:black !important;
+}
 
 @keyframes gradientAnimation {
   0% {

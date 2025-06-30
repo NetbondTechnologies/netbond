@@ -13,7 +13,6 @@ const VidSection: React.FC = () => {
       document.querySelectorAll(".vid-title") as NodeListOf<HTMLElement>
     );
     if (headingArr.length > 1) {
-      console.log(headingArr);
 
       headingArr.forEach((e: Element, i: number) => {
         gsap.to(e, {

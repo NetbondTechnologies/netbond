@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-import type { FAQ_Props } from "../App";
+
 import FAQs from "./FAQs";
+import type { FAQ_Props } from "./HomePage";
 
 interface Props {
   faqs: FAQ_Props[];
