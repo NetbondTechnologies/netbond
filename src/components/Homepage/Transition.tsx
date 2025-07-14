@@ -1,7 +1,39 @@
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 import React from 'react'
 
+gsap.registerPlugin(useGSAP);
+
 const Transition = () => {
-    
+
+  useGSAP(()=>{
+    let tl = gsap.timeline();
+    tl.to(".welcome", {
+      duration: 1.5,
+      opacity: 1,
+      ease: "power1.inOut",
+    })
+    tl.to(".welcome", {
+      duration: 0.5,
+      opacity: 0,
+      ease: "power1.inOut",
+  })
+  tl.to(".introBlock", {
+    translateY : "-100%",
+    ease: "ease",
+    duration :0.7,
+    stagger:{
+      amount: 0.5,
+      from: 'center',
+    }
+  })
+  tl.to(".introDiv", {
+    display: "none",
+    ease: "power4.inOut",
+    duration :0.1,
+  })
+  
+})
       let divArr: number[] = [1, 2, 3, 4, 5];
   return (
     <>
