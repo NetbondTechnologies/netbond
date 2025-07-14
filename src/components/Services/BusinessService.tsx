@@ -173,16 +173,12 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section - Diagonal Split Design */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-screen flex pt-[50px] items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-white via-orange-50 to-orange-100"></div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
-            <div className="inline-flex items-center space-x-2 bg-[#f76b1c] text-white px-6 py-3 rounded-full text-sm font-semibold">
-              <Building2 className="w-4 h-4" />
-              <span>B2B Growth Specialists</span>
-            </div>
+            
             
             <h1 className="text-6xl lg:text-7xl font-black text-[#141414] leading-tight">
               Scale Your
@@ -194,13 +190,11 @@ const App: React.FC = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group bg-[#f76b1c] text-white px-8 py-4 rounded-none font-bold text-lg hover:bg-[#e55a0f] transition-all duration-300 flex items-center justify-center space-x-3">
-                <span>Get Free Strategy Call</span>
+              <button className="group bg-[#f76b1c] text-white px-8 py-4 font-bold text-lg rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer flex items-center justify-center space-x-3">
+                <span>Get Strategy Call</span>
                 <Play className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="border-2 border-[#141414] text-[#141414] px-8 py-4 rounded-none font-bold text-lg hover:bg-[#141414] hover:text-white transition-all duration-300">
-                View Case Studies
-              </button>
+              
             </div>
             
             <div className="flex items-center space-x-8 pt-4">
@@ -209,7 +203,7 @@ const App: React.FC = () => {
                 <div className="text-sm text-gray-600 font-medium">B2B Clients</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-black text-[#f76b1c]">$50M+</div>
+                <div className="text-3xl font-black text-[#f76b1c]">₹50 Lakh+</div>
                 <div className="text-sm text-gray-600 font-medium">Revenue Generated</div>
               </div>
               <div className="text-center">
@@ -296,7 +290,7 @@ const App: React.FC = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service: Service, index: number) => (
-              <div key={index} className="group">
+              <div key={index}>
                 <div className="bg-white p-8 h-full border-l-4 border-transparent hover:border-[#f76b1c] transition-all duration-300 hover:shadow-xl">
                   <div className="flex items-center justify-between mb-6">
                     <div className="w-12 h-12 bg-[#f76b1c] text-white rounded-none flex items-center justify-center group-hover:bg-[#141414] transition-colors duration-300">
@@ -325,9 +319,9 @@ const App: React.FC = () => {
                   </ul>
                   
                   <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                    <button className="text-[#f76b1c] font-semibold hover:text-[#e55a0f] transition-colors flex items-center space-x-1">
+                    <button className="btn border-white/30 px-3 group py-1 text-md text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer flex items-center space-x-1">
                       <span>Learn More</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-2 ease-in-out transition-all duration-200" />
                     </button>
                   </div>
                 </div>
@@ -374,7 +368,7 @@ const App: React.FC = () => {
                 </div>
                 
                 {index < processes.length - 1 && (
-                  <div className="hidden lg:block absolute top-10 left-full w-full h-0.5 bg-[#f76b1c] opacity-30 transform translate-x-4"></div>
+                  <div className="hidden lg:block absolute top-10 left-[75%] w-[50%] h-0.5 bg-[#f76b1c] opacity-30 transform translate-x-4"></div>
                 )}
               </div>
             ))}
@@ -461,7 +455,7 @@ const App: React.FC = () => {
                 
                 <div className="mt-8 p-6 bg-[#141414] text-white">
                   <div className="text-center">
-                    <div className="text-3xl font-black text-[#f76b1c] mb-2">$2.5M+</div>
+                    <div className="text-3xl font-black text-[#f76b1c] mb-2">₹20.5 Lakh+</div>
                     <div className="text-sm">Average Revenue Increase Per Client</div>
                   </div>
                 </div>
@@ -527,7 +521,7 @@ const App: React.FC = () => {
                 Ready to Scale Your B2B Business?
               </h2>
               <p className="text-xl text-gray-300 mb-12 leading-relaxed">
-                Schedule a free strategy session and discover how we can accelerate your B2B growth.
+                Schedule a strategy session and discover how we can accelerate your B2B growth.
               </p>
               
               <div className="space-y-8">
@@ -547,7 +541,7 @@ const App: React.FC = () => {
                   </div>
                   <div>
                     <div className="font-bold text-white">B2B Inquiries</div>
-                    <div className="text-gray-300">b2b@netbondtech.com</div>
+                    <div className="text-gray-300">info@netbondtechnologies.com</div>
                   </div>
                 </div>
                 
@@ -556,7 +550,7 @@ const App: React.FC = () => {
                     <MapPin className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <div className="font-bold text-white">B2B Headquarters</div>
+                    <div className="font-bold text-white">Netbond Technologies Office</div>
                     <div className="text-gray-300">Zirakpur, Punjab, India</div>
                   </div>
                 </div>
@@ -573,54 +567,49 @@ const App: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-white p-12">
-              <h3 className="text-2xl font-bold text-[#141414] mb-8">Get Your Free B2B Growth Audit</h3>
+            <div className="bg-white p-12 rounded-2xl">
+              <h3 className="text-2xl font-bold text-[#141414] mb-8">Get Your B2B Growth Audit</h3>
               <form className="space-y-6">
                 <div className="grid grid-cols-2 gap-4">
                   <input 
                     type="text" 
                     placeholder="First Name"
-                    className="w-full border-2 border-gray-200 rounded-none px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none focus:border-[#f76b1c] transition-colors"
+                    className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200  px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none"
                   />
                   <input 
                     type="text" 
                     placeholder="Last Name"
-                    className="w-full border-2 border-gray-200 rounded-none px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none focus:border-[#f76b1c] transition-colors"
+                    className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200  px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none"
                   />
                 </div>
                 
                 <input 
                   type="email" 
                   placeholder="Business Email"
-                  className="w-full border-2 border-gray-200 rounded-none px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none focus:border-[#f76b1c] transition-colors"
+                  className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200  px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none"
                 />
                 
                 <input 
                   type="text" 
                   placeholder="Company Name"
-                  className="w-full border-2 border-gray-200 rounded-none px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none focus:border-[#f76b1c] transition-colors"
+                  className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200  px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none"
                 />
                 
                 <textarea 
                   placeholder="Describe your biggest B2B challenge..."
-                  rows={4}
-                  className="w-full border-2 border-gray-200 rounded-none px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none focus:border-[#f76b1c] transition-colors resize-none"
+                  rows={6}
+                  className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200 px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none resize-none"
                 ></textarea>
                 
                 <button 
                   type="submit"
-                  className="w-full bg-[#f76b1c] text-white py-4 rounded-none font-bold text-lg hover:bg-[#e55a0f] transition-colors duration-300 flex items-center justify-center space-x-3"
+                  className="w-full bg-[#f76b1c] text-white py-4 group font-bold text-lg rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer flex items-center justify-center space-x-3"
                 >
-                  <span>Schedule Free Strategy Call</span>
-                  <ArrowRight className="w-5 h-5" />
+                  <span>Schedule A Strategy Call</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-3 duration-200 ease-in-out transition-all" />
                 </button>
               </form>
               
-              <div className="mt-6 p-4 bg-gray-50 border-l-4 border-[#f76b1c]">
-                <p className="text-sm text-gray-600">
-                  <strong>Free 30-minute consultation</strong> - No commitment required. We'll analyze your current B2B processes and provide actionable insights.
-                </p>
-              </div>
             </div>
           </div>
         </div>
