@@ -24,6 +24,11 @@ import {
   ChevronRight,
   Play
 } from 'lucide-react';
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+import { useGSAP } from '@gsap/react';
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 interface Service {
   icon: React.ReactNode;
@@ -170,6 +175,26 @@ const App: React.FC = () => {
       metric: "250% ROI"
     }
   ];
+
+  useGSAP(()=>{
+    const allTitles = Array.from(document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>)
+
+    allTitles.map((title: HTMLElement) => {
+      const split = new SplitText(title, { type: "lines" ,mask: "lines"});
+      gsap.from(split.lines, {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: "power4.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: title,
+          start: "top 80%",
+          end: "top 30%",
+        },
+      });
+    })
+  },[])
 
   return (
     <div className="min-h-screen bg-white">

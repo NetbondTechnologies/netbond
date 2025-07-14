@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 import type { ReactElement } from "react";
 import { useNavigate } from "react-router";
 
@@ -18,7 +19,7 @@ interface Data {
   body: string;
 }
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP, SplitText);
 
 const Service = () => {
   const navigate = useNavigate();
@@ -182,6 +183,24 @@ const Service = () => {
         },
       });
     }) 
+
+    const allTitles = Array.from(document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>)
+
+    allTitles.map((title: HTMLElement) => {
+      const split = new SplitText(title, { type: "lines" ,mask: "lines"});
+      gsap.from(split.lines, {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: "power4.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: title,
+          start: "top 80%",
+          end: "top 30%",
+        },
+      });
+    })
   }, []);
 
 

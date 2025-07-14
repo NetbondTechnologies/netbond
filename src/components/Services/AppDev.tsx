@@ -36,8 +36,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import React, { type ReactElement } from "react";
 import Accordion from "../Accordion";
+import { SplitText } from "gsap/SplitText";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP, SplitText);
 
 interface AppDevServices {
   title: string;
@@ -213,7 +214,24 @@ const AppDev = () => {
       end: "+=285%",
       pin: true,
     });
-  });
+    const allTitles = Array.from(document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>)
+
+    allTitles.map((title: HTMLElement) => {
+      const split = new SplitText(title, { type: "lines" ,mask: "lines"});
+      gsap.from(split.lines, {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: "power4.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: title,
+          start: "top 80%",
+          end: "top 30%",
+        },
+      });
+    })
+  },[]);
 
   return (
     <section className="appDev">
@@ -306,7 +324,7 @@ const AppDev = () => {
 
       <section className="special-features select-none bg-(--jet) px-[5%] py-20">
         <h2 className="text-4xl text-center mb-10">
-          Our Special <span className="font-[Rowdies]">Features</span>
+          Our Special <span className="text-(--pumpkin)">Features</span>
         </h2>
         <p className="mx-auto w-[45%] text-center text-lg">
           At Netbond Technologies, We pride ourselves on delivering exceptional
