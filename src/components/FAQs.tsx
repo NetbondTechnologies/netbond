@@ -32,9 +32,19 @@ const FAQs: React.FC<Props> = ({
             setIsExpanded(!isExpanded);
           }}
         >
-          <h1 className="accordion-question">{question}</h1>
+          <div
+            className={`accordion-question text-3xl font-bold ${
+              checkAccordion[Acckey] ? "text-(--pumpkin)" : "text-white"
+            }`}
+          >
+            {question}
+          </div>
 
-          {checkAccordion[Acckey] ? <span>-</span> : <span>+</span>}
+          {checkAccordion[Acckey] ? (
+            <span className="text-(--pumpkin)">-</span>
+          ) : (
+            <span>+</span>
+          )}
         </div>
         <div
           className={`grid overflow-hidden text-lg transition-all duration-300 ease-in-out px-8 ${

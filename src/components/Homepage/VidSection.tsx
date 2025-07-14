@@ -28,7 +28,7 @@ const VidSection: React.FC = () => {
         });
       });
     }
-  });
+  },[]);
 
   return (
     <div className="videoSection px-[2%] my-10 mx-auto">
@@ -62,7 +62,7 @@ const VidSection: React.FC = () => {
       </div>
 
       <div className="w-[88%] text-center py-[50px] mx-auto">
-        <p className="text-2xl text-below-vid">
+        <p className="text-2xl text-below-vid text-(--davys-gray)">
           As a strategic branding design agency , we’re here to solve problems,
           share our expertise and challenge the convention. come and join us to
           discover a fresh prespective.
@@ -70,13 +70,13 @@ const VidSection: React.FC = () => {
       </div>
 
       <div className="w-[90%] pb-[50px] mx-auto">
-        <h1 className="text-5xl pb-10">
+        <h1 className="text-5xl pb-10 text-(--jet)">
           Why choose Netbond Marketers As Your Creative Agency?
         </h1>
-        <p className="text-xl pb-15">
+        <p className="text-xl pb-15 text-(--davys-gray)">
           Get the best. Scale with quality , Achieve more with Netbond Marketers
         </p>
-        <p className="text-2xl">
+        <p className="text-2xl text-(--davys-gray)">
           Netbond Technologies brings 8+ years of expertise in delivering
           impactful marketing solutions. Our team specializes in branding,
           social media, SEO, and data-driven campaigns to help your business

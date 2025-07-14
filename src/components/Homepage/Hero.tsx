@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router";
+import { handleScrollTop } from "../../App";
 
 const Hero: React.FC = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     let text = document.querySelector(".emphasis") as HTMLElement;
     let interval = setInterval(() => {
@@ -42,12 +45,20 @@ const Hero: React.FC = () => {
         <div className="flex gap-15 items-center justify-center">
           <button
             type="button"
+            onClick={()=>{
+              navigate("/services");
+              handleScrollTop();
+            }}
             className="btn border-white/30 px-6 py-2 text-lg text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
           >
             Get Started
           </button>
           <button
             type="button"
+            onClick={()=>{
+              navigate("/business-services");
+              handleScrollTop();
+            }}
             className="secondary-btn btn border-[#f76b1c] px-6 py-2 text-lg text-center border-1 rounded-md hover:shadow-xl shadow-white hover:ring-2 hover:ring-white hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-[#f76b1c] duration-200 cursor-pointer"
           >
             Try Our B2B Services{" "}

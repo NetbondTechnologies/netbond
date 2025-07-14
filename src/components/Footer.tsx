@@ -12,7 +12,7 @@ import { handleScrollTop } from "../App";
 const Footer: React.FC = () => {
   return (
     <>
-      <div className="bg-[#141414]">
+      <div className="bg-[#141414] footer">
         <div className=" w-[90%] py-[3%] mx-auto flex justify-start gap-20">
           <div className="w-[400px]">
             <img src="asset 0.png" className="w-full" alt="" />
@@ -43,10 +43,10 @@ const Footer: React.FC = () => {
               <NavLink
                 to="/about"
                 className="hover:text-orange-400 w-[45%] text-white"
-                onClick={()=>{
-                  setTimeout(()=>{
-                    handleScrollTop()
-                  },50)
+                onClick={() => {
+                  setTimeout(() => {
+                    handleScrollTop();
+                  }, 50);
                 }}
               >
                 About
@@ -84,10 +84,10 @@ const Footer: React.FC = () => {
               <NavLink
                 to="/contact"
                 className="hover:text-orange-400 w-[45%] text-white"
-                onClick={()=>{
-                  setTimeout(()=>{
-                    handleScrollTop()
-                  },50)
+                onClick={() => {
+                  setTimeout(() => {
+                    handleScrollTop();
+                  }, 50);
                 }}
               >
                 Contact Us
@@ -104,6 +104,9 @@ const Footer: React.FC = () => {
               Punjab, Pincode – 140603 E-mail – info@netbondtechnologies.com
               Support@netbondtechnologies.com Phone No. – +91 9056995190
             </div>
+            <span className="text-lg mt-5 cursor-pointer hover:text-orange-400 text-white block duration-200" onClick={()=>{
+              handleScrollTop();
+            }}>Back to Top</span>
           </div>
         </div>
         <div className="banner text-lg text-white font-bold w-full bg-(--pumpkin) py-4 text-center">

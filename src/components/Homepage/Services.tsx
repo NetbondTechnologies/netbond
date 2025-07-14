@@ -17,7 +17,7 @@ import { useNavigate } from "react-router";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
-interface Services {
+export interface Services {
   icon: ReactElement;
   heading: string;
   description: string;
@@ -99,7 +99,7 @@ const Services: React.FC = () => {
         pin: false,
       },
     });
-  });
+  },[]);
 
   return (
     <div className="services w-[90%] bg-(--seasalt) mt-20 px-15 pt-10 pb-30 border-3 rounded-xl mx-auto">
@@ -121,8 +121,8 @@ const Services: React.FC = () => {
                   <div className="icon translate-y-1 w-[20%]">{e.icon}</div>{" "}
                   <div className="gradient-text text-lg">{e.demand}</div>{" "}
                 </div>
-                <h3 className="text-3xl">{e.heading}</h3>
-                <p>{e.description}</p>
+                <h3 className="text-3xl text-(--jet)">{e.heading}</h3>
+                <p className="text-(--jet) ">{e.description}</p>
                 <button className="btn-services btn btn-2 border-1 border-white/30 px-4 py-1 rounded-md active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 duration-200 cursor-pointer">
                   Check Out{" "}
                   <span className="arrow inline-block ml-1">

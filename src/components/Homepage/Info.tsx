@@ -29,38 +29,29 @@ const Info = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 10%",
-          end: "+=300%",
+          end: "+=200%",
           scrub: true,
           pin: true,
         },
       });
+      gsap.from(".headingInfo", {
+        duration: 0.8,
+        y: -40,
+        opacity: 0,
+        ease: "power1.inOut",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 90%",
+          end: "top 40%",
+          scrub: true,
+        },
+      })
 
       return () => split.revert();
-    },
-    { scope: sectionRef }
+    },[]
   );
 
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        letterRef.current,
-        { x: 200, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          stagger: 0.1,
-          ease: "circ.inOut",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 98%",
-            end: "top 10%",
-            scrub: true,
-          },
-        }
-      );
-    },
-    { scope: containerRef }
-  );
+
 
   return (
     <div
@@ -68,25 +59,7 @@ const Info = () => {
       ref={sectionRef}
     >
       <h2 className="text-7xl headingInfo text-center pb-10" ref={containerRef}>
-        {`Our Task , Your Ask`.split("").map((letter, i) => {
-          return (
-            <span
-              key={i}
-              style={{
-                display: "inline-block",
-                marginRight:
-                  i === 2 || i === 7 || i === 8 || i === 14 ? "10px" : "0",
-              }}
-              ref={(er) => {
-                if (er) {
-                  letterRef.current[i] = er;
-                }
-              }}
-            >
-              {letter}
-            </span>
-          );
-        })}
+        Our Task , Your Ask
       </h2>
       <div
         className={`w-[89%] mx-auto paragraphDiv para flex flex-col justify-center text-center gap-2 text-2xl`}

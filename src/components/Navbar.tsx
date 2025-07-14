@@ -118,12 +118,15 @@ const Navbar: React.FC = () => {
               return (
                 <NavLink
                   to={item.link}
+                   onClick={()=>{
+                    handleScrollTop()
+                  }}
                   className="drop-item flex w-[48%] hover:text-[#f76b1c] hover:-translate-y-[1px] hover:shadow-xl duration-250 px-2 py-3 rounded-xl h-[120px] gap-3 justify-start"
                 >
                   <div className="icon mt-[1px] w-[20%]">{item.icon}</div>
                   <div className="nav-data flex flex-col gap-2">
-                    <h3 className="text-md">{item.name}</h3>
-                    <p className="text-sm">{item.description}</p>
+                    <h3 className="text-md text-(--jet)">{item.name}</h3>
+                    <p className="text-sm text-(--davys-gray)">{item.description}</p>
                   </div>
                 </NavLink>
               );
@@ -139,6 +142,10 @@ const Navbar: React.FC = () => {
       </ul>
       <button
         type="button"
+        onClick={() => {
+          navigate("services");
+          handleScrollTop();
+        }}
         className="btn border-1 border-white/30 px-4 py-1 ml-10 rounded-md active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 duration-200 cursor-pointer"
       >
         Get Started

@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { handleScrollTop } from "../../App";
+import { useNavigate } from "react-router";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 interface Card {
@@ -12,6 +14,7 @@ interface Card {
 }
 
 const Display = () => {
+  const navigate = useNavigate();
   const cardsArr: Card[] = [
     { title: "Understand Your Goals", image: "./asset 11.png" },
     { title: "Customized Strategy", image: "./asset 12.png" },
@@ -23,7 +26,7 @@ const Display = () => {
     let imgDiv = Array.from(
       document.querySelectorAll(".img-card-div") as NodeListOf<HTMLElement>
     );
-    let num: number = 300;
+    let num: number = 270;
     imgDiv.forEach((e: Element, i: number) => {
       if (i === 3) {
         gsap.fromTo(
@@ -68,9 +71,9 @@ const Display = () => {
           }
         );
       }
-      num -= 100;
+      num -= 90;
     });
-  });
+  }, []);
 
   useEffect(() => {
     let h3Elements = Array.from(
@@ -148,6 +151,10 @@ const Display = () => {
         </div>
         <button
           type="button"
+          onClick={() => {
+            navigate("/services");
+            handleScrollTop();
+          }}
           className="secondary-btn overflow-hidden btn btn-2 border-[#f76b1c] px-6 py-2 text-lg text-center flex items-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-white hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-[#f76b1c] duration-200 cursor-pointer"
         >
           Discover What We Do{" "}
