@@ -121,15 +121,17 @@ const Navbar: React.FC<Props> = ({location}) => {
               return (
                 <NavLink
                   to={item.link}
-                   onClick={()=>{
-                    handleScrollTop()
+                  onClick={() => {
+                    handleScrollTop();
                   }}
-                  className="drop-item flex w-[48%] hover:text-[#f76b1c] hover:-translate-y-[1px] hover:shadow-xl duration-250 px-2 py-3 rounded-xl h-[120px] gap-3 justify-start"
+                  className={`drop-item flex w-[48%] hover:text-[#f76b1c] ${location === item.link ? "-translate-y-[1px] text-[#f76b1c] shadow-xl" : ""} hover:-translate-y-[1px] hover:shadow-xl duration-250 px-2 py-3 rounded-xl h-[120px] gap-3 justify-start`}
                 >
                   <div className="icon mt-[1px] w-[20%]">{item.icon}</div>
                   <div className="nav-data flex flex-col gap-2">
-                    <h3 className="text-md text-(--jet)">{item.name}</h3>
-                    <p className="text-sm text-(--davys-gray)">{item.description}</p>
+                    <h3 className={`text-md ${location !== item.link ? "text-(--jet)": ""}`}>{item.name}</h3>
+                    <p className={`text-sm ${location !== item.link ? "text-(--davys-gray)": ""}`}>
+                      {item.description}
+                    </p>
                   </div>
                 </NavLink>
               );

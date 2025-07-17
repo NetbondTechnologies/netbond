@@ -209,6 +209,22 @@ const WebDev: React.FC = () => {
         },
       });
     })
+
+
+    const allTexts = Array.from(
+          document.querySelectorAll(".hero-text") as NodeListOf<HTMLElement>
+        );
+        allTexts.map((e: HTMLElement) => {
+          const split = new SplitText(e, { type: "lines", mask: "lines" });
+          gsap.from(split.lines, {
+            yPercent: 100,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power4.out",
+            delay:0.4,
+            stagger: 0.2,
+          });
+        });
     
   }, []);
   const navigate = useNavigate();
@@ -217,8 +233,8 @@ const WebDev: React.FC = () => {
     <>
       <div className="webdev">
         <div className="webdev-panel w-full pt-[250px] pb-[100px] bg-[url(./Hero.jpg)] shadow-lg rounded-b-2xl shadow-black bg-cover bg-center bg-no-repeat">
-          <h1 className="text-9xl mx-[5%] w-[50%]">Website Development</h1>
-          <span className="block text-(--pumpkin) mx-[5.5%] text-5xl/30 font-semibold">
+          <h1 className="text-9xl mx-[5%] w-[60%] hero-text">Website Development</h1>
+          <span className="block text-(--pumpkin) mx-[5.5%] text-5xl/30 font-semibold hero-text">
             Web Development Company In Zirakpur
           </span>
           <button

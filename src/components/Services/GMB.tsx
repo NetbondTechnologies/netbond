@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Search,
   Star,
@@ -44,7 +44,41 @@ interface GMBFaq {
   answer: string;
 }
 
+interface Form{
+  name: string;
+    email: string;
+    message: string;
+    business: string;
+}
+
 const GMB: React.FC = () => {
+
+   const [formData, setFormData] = useState<Form>({
+    name: "",
+    email: "",
+    message: "",
+    business: ""
+  });
+
+  let handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [event.target.name]: event.target.value,
+      };
+    });
+  };
+  let handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFormData({
+      name: "",
+    email: "",
+    message: "",
+    business: ""
+    })
+  };
   const services: Service[] = [
     {
       icon: <Search className="w-8 h-8" />,
@@ -208,6 +242,22 @@ const GMB: React.FC = () => {
       });
     }
 
+    const allTexts = Array.from(
+          document.querySelectorAll(".hero-text") as NodeListOf<HTMLElement>
+        );
+        allTexts.map((e: HTMLElement) => {
+          const split = new SplitText(e, { type: "lines", mask: "lines" });
+          gsap.from(split.lines, {
+            rotate: 10,
+            y: 100,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power4.out",
+            delay:0.4,
+            stagger: 0.2,
+          });
+        });
+
   },[])
 
 
@@ -219,11 +269,11 @@ const GMB: React.FC = () => {
         <div className="max-w-7xl mx-auto relative">
           <div className="text-center max-w-4xl mx-auto">
             <div className="bg-white/80 backdrop-blur-md rounded-2xl p-12 border border-gray-200 shadow-2xl">
-              <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+              <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight hero-text">
                 Dominate Local Search with
                 <span className="text-[#f76b1c]"> Google My Business</span>
               </h1>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed hero-text">
                 Transform your business visibility in Zirakpur and beyond. Our
                 expert GMB optimization services help you attract more
                 customers, build trust, and grow your revenue.
@@ -500,37 +550,71 @@ const GMB: React.FC = () => {
               <h3 className="text-2xl font-bold text-gray-900 mb-6">
                 Get Your GMB Audit
               </h3>
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={(e:React.FormEvent<HTMLFormElement>)=>{
+                handleSubmit(e);
+              }}>
                 <div>
+                  <label htmlFor="name" className=" block w-full mb-2">
+              Full Name <span className="text-red-600">*</span>
+            </label>
                   <input
                     type="text"
-                    placeholder="Your Name"
+                    name="name"
+                    id="name"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                      handleChange(e);
+                    }}
+                    placeholder="John Doe"
                     className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#f76b1c] focus:border-transparent transition-all"
                   />
                 </div>
                 <div>
+                  <label htmlFor="email" className=" block w-full mb-2">
+              Email <span className="text-red-600">*</span>
+            </label>
                   <input
                     type="email"
-                    placeholder="Your Email"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                      handleChange(e);
+                    }}
+                    name="email"
+                    id="email"
+                    placeholder="johndoe@gmail.com"
                     className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#f76b1c] focus:border-transparent transition-all"
                   />
                 </div>
                 <div>
+                  <label htmlFor="business" className=" block w-full mb-2">
+              Business Name <span className="text-red-600">*</span>
+            </label>
                   <input
                     type="text"
-                    placeholder="Business Name"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                      handleChange(e);
+                    }}
+                    name="business"
+                    id="business"
+                    placeholder="Your Business Name"
                     className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#f76b1c] focus:border-transparent transition-all"
                   />
                 </div>
                 <div>
+                  <label htmlFor="message" className=" block w-full mb-2">
+              Message 
+            </label>
                   <textarea
                     placeholder="Tell us about your business..."
                     rows={4}
+                    id="message"
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>)=>{
+                      handleChange(e);
+                    }}
+                    name="message"
                     className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#f76b1c] focus:border-transparent transition-all resize-none"
                   ></textarea>
                 </div>
                 <button
-                  type="button"
+                  type="submit"
                   className="btn border-white/30 px-6 py-2 group text-lg text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
                 >
                   <span>Get GMB Audit</span>

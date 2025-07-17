@@ -34,11 +34,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import  { type ReactElement } from "react";
+import  { useState, type ReactElement } from "react";
 import Accordion from "../Accordion";
 import { SplitText } from "gsap/SplitText";
 import {  useNavigate } from "react-router";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { handleScrollTop } from "../../App";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP, SplitText, ScrollToPlugin);
 
@@ -58,9 +59,42 @@ interface AppDevFAQS {
   question: string;
   answer: string;
 }
+interface Form{
+  name: string;
+    email: string;
+    message: string;
+    number: string;
+}
 
 const AppDev = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState<Form>({
+    name: "",
+    email: "",
+    message: "",
+    number: ""
+  });
+
+  let handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [event.target.name]: event.target.value,
+      };
+    });
+  };
+  let handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFormData({
+      name: "",
+    email: "",
+    message: "",
+    number: ""
+    })
+  };
+
   const specialFeatures: SpecialFeatures[] = [
     {
       title: "Super Performance",
@@ -181,7 +215,7 @@ const AppDev = () => {
     },
   ];
 
-  const appdevFAQS = [
+  const appdevFAQS: AppDevFAQS[] = [
     {
       question:
         "What is mobile app development, and how does it benefit businesses?",
@@ -246,6 +280,21 @@ const AppDev = () => {
         });
       });
     }
+
+    const allTexts = Array.from(
+          document.querySelectorAll(".hero-text") as NodeListOf<HTMLElement>
+        );
+        allTexts.map((e: HTMLElement) => {
+          const split = new SplitText(e, { type: "lines", mask: "lines" });
+          gsap.from(split.lines, {
+            yPercent: 100,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power4.out",
+            delay:0.4,
+            stagger: 0.2,
+          });
+        });
     
     return ()=>{
       button?.removeEventListener("click", () => {
@@ -260,8 +309,8 @@ const AppDev = () => {
   return (
     <section className="appDev">
       <section className="appDev-panel mb-20 pt-[370px] bg-[url(./Spectral.jpg)] rounded-b-3xl shadow-2xl shadow-gray-500 bg-cover px-[5%] pb-[150px]">
-        <h1 className="text-8xl mb-8">Application Development</h1>
-        <p className="text-lg">
+        <h1 className="text-8xl mb-8 hero-text">Application Development</h1>
+        <p className="text-lg hero-text">
           Mobile Application Development is the process of designing, building,
           and maintaining software applications specifically for mobile devices,
           such as smartphones and tablets. This involves creating user-friendly,
@@ -331,7 +380,8 @@ const AppDev = () => {
               <>
                 <li className="py-10 service-app border-t-2 flex justify-between cursor-pointer items-start hover:bg-[#f76c1cd9]  hover:px-10 hover:text-white border-black pb-10 offer-items group ease-out duration-500"
                 onClick={()=>{
-                  navigate("/contact")
+                  navigate("/contact");
+                  handleScrollTop();
                 }}>
                   
                     <div>
@@ -444,7 +494,7 @@ const AppDev = () => {
           <form
             action=""
             onSubmit={(e) => {
-              e.preventDefault();
+              handleSubmit(e);
             }}
           >
             <label htmlFor="name" className=" block w-full">
@@ -454,6 +504,9 @@ const AppDev = () => {
               required
               type="text"
               placeholder="John Doe"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                handleChange(e)
+              }}
               name="name"
               id="name"
               className="block w-full bg-white/10 rounded-md px-3 py-2 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
@@ -464,6 +517,9 @@ const AppDev = () => {
             <input
               required
               type="tel"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                handleChange(e)
+              }}
               placeholder="+91 xxxxx xxxxx"
               name="number"
               id="number"
@@ -475,6 +531,9 @@ const AppDev = () => {
             <input
               required
               type="email"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                handleChange(e)
+              }}
               placeholder="johndoe@example.com"
               name="email"
               id="email"
@@ -487,6 +546,9 @@ const AppDev = () => {
               name="message"
               placeholder="Tell us about your project"
               id="message"
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>)=>{
+                handleChange(e)
+              }}
               className="resize-none block w-full bg-white/10 rounded-md px-3 py-2 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
               rows={6}
             ></textarea>

@@ -127,15 +127,30 @@ const About: React.FC = () => {
         },
       });
     })
+
+     const allTexts = Array.from(
+          document.querySelectorAll(".hero-text") as NodeListOf<HTMLElement>
+        );
+        allTexts.map((e: HTMLElement) => {
+          const split = new SplitText(e, { type: "lines", mask: "lines" });
+          gsap.from(split.lines, {
+            yPercent: 100,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power4.out",
+            delay:0.4,
+            stagger: 0.2,
+          });
+        });
   },[])
 
   return (
     <>
       <div className="pt-[150px] pb-[100px] relative about-bg">
-        <h1 className="about-title text-center w-[50%] pl-30 pb-7  text-7xl">
+        <h1 className="about-title text-center w-[50%] pl-30 pb-7 hero-text text-7xl">
           About <span className="text-(--pumpkin)">Us</span>
         </h1>
-        <p className="text-xl text-center w-[50%] pl-30">
+        <p className="text-xl text-center w-[50%] pl-30 hero-text">
           Welcome to <span className="text-(--pumpkin) font-bold">Netbond</span>{" "}
           Technologies, your partner of choice in the ever-evolving digital
           transformation
@@ -168,16 +183,16 @@ const About: React.FC = () => {
         </div>
       </div>
       <div className="about-sc-2 my-20">
-        <h1 className="text-7xl pb-20 text-center">Our Specialization</h1>
+        <h2 className="text-7xl pb-20 text-center">Our Specialization</h2>
         <div className="px-30 py-10 flex flex-wrap justify-center gap-y-20 ">
           {feature.map((value: Feature) => {
             return (
               <div className="w-[48%] px-10">
                 <NavLink to={value.link}>
-                  <h2 className="inline-block text-4xl pb-5 spl-head">
+                  <h3 className="inline-block text-4xl pb-5 spl-head">
                     {" "}
                     {value.Head}{" "}
-                  </h2>
+                  </h3>
                 </NavLink>
                 <p className="text-xl">{value.Body}</p>
               </div>
@@ -185,7 +200,7 @@ const About: React.FC = () => {
           })}
         </div>
         <div className="feature-last py-20 px-[5%]">
-          <h1 className="text-5xl pb-10 text-center">Digital Marketing</h1>
+          <h2 className="text-5xl pb-10 text-center">Digital Marketing</h2>
           <p className="text-2xl">
             <span className="text-(--pumpkin) text-3xl font-bold">
               Offering
@@ -210,7 +225,7 @@ const About: React.FC = () => {
       </div>
       <hr className="w-[95%] mx-auto border-1 p-0" />
       <div className="about-sc-3 my-20 w-[90%]  mx-auto">
-        <h1 className="text-6xl pb-5 text-center"> Why Choose Us</h1>
+        <h2 className="text-6xl pb-5 text-center"> Why Choose Us</h2>
         <div className="logo-area flex gap-5 pb-20 justify-center items-center">
           <div className="w-[25%] hover:scale-105 hover:-translate-y-2 transition-all duration-300 ease-in-out">
             <img src="./asset 97.png" className="w-full" alt="" />
@@ -237,9 +252,9 @@ const About: React.FC = () => {
         </div>
       </div>
       <div className="about-sc-4 py-15">
-        <h1 className="text-5xl text-center py-10">
+        <h2 className="text-5xl text-center py-10">
           Clients speak out : What they say about our services ?
-        </h1>
+        </h2>
         <div className="testimonials">
           <h4 className="text-xl mb-10 text-center">Testimonials</h4>
           {testimonials.map((value: Testimonial) => {

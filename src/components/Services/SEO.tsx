@@ -223,26 +223,44 @@ function App() {
       });
     }
 
-    gsap.from(".bar",{
-            height: "0%",
-            stagger: 0.1,
-            duration: 3,
-            ease:"power4.inOut",
-            delay: 0.75
-            
-          })
-    
-          const metrics = Array.from(document.querySelectorAll(".metric") as NodeListOf<HTMLElement>);
-          metrics.map((metric: HTMLElement) => {
-            gsap.from(metric, {
-              textContent: "0",
-              duration: 3,
-              ease: "power4.inOut",
-              snap: { textContent: 0.5 },
-              stagger: 1,
-              delay: 0.75
-            });
-          });
+    gsap.from(".bar", {
+      height: "0%",
+      stagger: 0.1,
+      duration: 3,
+      ease: "power4.inOut",
+      delay: 0.5,
+    });
+
+    const metrics = Array.from(
+      document.querySelectorAll(".metric") as NodeListOf<HTMLElement>
+    );
+    metrics.map((metric: HTMLElement) => {
+      gsap.from(metric, {
+        textContent: "0",
+        duration: 3,
+        ease: "power4.inOut",
+        snap: { textContent: 1 },
+        stagger: 1,
+        delay: 0.5,
+      });
+    });
+
+    const allTexts = Array.from(
+      document.querySelectorAll(".hero-text") as NodeListOf<HTMLElement>
+    );
+    allTexts.map((e: HTMLElement) => {
+      const split = new SplitText(e, { type: "lines", mask: "lines" });
+      gsap.from(split.lines, {
+        rotate: 10,
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power4.out",
+        delay:0.4,
+        stagger: 0.2,
+      });
+    });
+
   }, []);
 
   const faqs: FAQS[] = [
@@ -289,14 +307,14 @@ function App() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                <span className="text-[#E26E02]">Best SEO Company</span>
-                <br />
-                <span className="text-[#141414]">in Zirakpur</span>
-                <br />
-                <span className="text-gray-600">Punjab, India</span>
+                <span className="text-[#E26E02] hero-text">
+                  Best SEO Company
+                </span>
+                <span className="text-[#141414] hero-text">in Zirakpur</span>
+                <span className="text-gray-600 hero-text">Punjab, India</span>
               </h1>
 
-              <p className="text-lg text-gray-600 mb-8 max-w-xl leading-relaxed">
+              <p className="text-lg text-gray-600 mb-8 max-w-xl leading-relaxed hero-text">
                 NetBond Technologies is the leading SEO company in Zirakpur,
                 helping businesses achieve top search rankings and drive organic
                 traffic with proven digital marketing strategies.
@@ -311,17 +329,23 @@ function App() {
 
               <div className="grid grid-cols-3 gap-8">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-[#E26E02]"><span className="metric">500</span>+</div>
+                  <div className="text-2xl font-bold text-[#E26E02]">
+                    <span className="metric">500</span>+
+                  </div>
                   <div className="text-sm text-gray-600">
                     Projects Completed
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-[#E26E02]"><span className="metric">98</span>%</div>
+                  <div className="text-2xl font-bold text-[#E26E02]">
+                    <span className="metric">98</span>%
+                  </div>
                   <div className="text-sm text-gray-600">Success Rate</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-[#E26E02]"><span className="metric">5</span>+</div>
+                  <div className="text-2xl font-bold text-[#E26E02]">
+                    <span className="metric">5</span>+
+                  </div>
                   <div className="text-sm text-gray-600">Years Experience</div>
                 </div>
               </div>
@@ -423,7 +447,7 @@ function App() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="group relative bg-white/60 backdrop-blur-lg border border-gray-200 rounded-2xl p-8 hover:bg-white/80 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                className="group relative bg-white/60 backdrop-blur-lg border border-gray-200 rounded-2xl p-8 hover:bg-white/80 transition-all duration-300 hover:scale-105 hover:shadow-xl"
               >
                 <div className="w-16 h-16 bg-[#E26E02] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <service.icon className="w-8 h-8 text-white" />
@@ -572,7 +596,7 @@ function App() {
             {whyChooseUs.map((item, index) => (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300 hover:scale-105"
+                className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 text-center"
               >
                 <div className="w-12 h-12 bg-[#E26E02] rounded-xl flex items-center justify-center mx-auto mb-4">
                   <item.icon className="w-6 h-6 text-white" />
@@ -591,10 +615,6 @@ function App() {
         id="contact"
         className="py-20 bg-[#141414] relative overflow-hidden"
       >
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#E26E02]/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#E26E02]/5 rounded-full blur-3xl"></div>
-        </div>
 
         <div
           className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"

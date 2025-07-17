@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  Building2,
+  
   Target,
   TrendingUp,
   Users,
-  Zap,
-  Shield,
+  
+  
   Globe,
-  BarChart3,
+  
   CheckCircle,
   ArrowRight,
   Award,
   Lightbulb,
-  MessageSquare,
+  
   Database,
   Rocket,
   Settings,
@@ -59,8 +59,41 @@ interface Benefit {
   description: string;
   metric: string;
 }
+interface Form{
+  name: string;
+    email: string;
+    message: string;
+    business: string;
+}
 
 const App: React.FC = () => {
+
+   const [formData, setFormData] = useState<Form>({
+      name: "",
+      email: "",
+      message: "",
+      business: ""
+    });
+  
+    let handleChange = (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+      setFormData((prev) => {
+        return {
+          ...prev,
+          [event.target.name]: event.target.value,
+        };
+      });
+    };
+    let handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      setFormData({
+        name: "",
+      email: "",
+      message: "",
+      business: ""
+      })
+    };
   const services: Service[] = [
     {
       icon: <Target className="w-6 h-6" />,
@@ -265,7 +298,7 @@ const App: React.FC = () => {
           textContent: "0",
           duration: 3,
           ease: "power4.inOut",
-          snap: { textContent: 0.5 },
+          snap: { textContent: 1 },
           stagger: 1,
           scrollTrigger: {
             trigger: "#stat-container",
@@ -274,6 +307,21 @@ const App: React.FC = () => {
           }
         });
       });
+
+      const allTexts = Array.from(
+            document.querySelectorAll(".hero-text") as NodeListOf<HTMLElement>
+          );
+          allTexts.map((e: HTMLElement) => {
+            const split = new SplitText(e, { type: "lines", mask: "lines" });
+            gsap.from(split.lines, {
+              yPercent: 100,
+              opacity: 0,
+              duration: 1.2,
+              ease: "power4.out",
+              delay:0.4,
+              stagger: 0.2,
+            });
+          });
 
     return ()=>{
       button?.removeEventListener("click", () => {
@@ -292,12 +340,12 @@ const App: React.FC = () => {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
-            <h1 className="text-6xl lg:text-7xl font-black text-[#141414] leading-tight">
+            <h1 className="text-6xl lg:text-7xl font-black text-[#141414] leading-tight hero-text">
               Scale Your
               <span className="block text-[#f76b1c]">B2B Empire</span>
             </h1>
 
-            <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
+            <p className="text-xl text-gray-600 leading-relaxed max-w-lg hero-text">
               We help ambitious B2B companies break through growth barriers with
               proven strategies, cutting-edge technology, and expert execution.
             </p>
@@ -612,7 +660,7 @@ const App: React.FC = () => {
                 <div className="mt-8 p-6 bg-[#141414] text-white">
                   <div className="text-center">
                     <div className="text-3xl font-black text-[#f76b1c] mb-2">
-                      ₹<span className="metric font-dm">20.5</span> Lakh+
+                      ₹<div className="metric font-dm inline">20</div>.5 Lakh+
                     </div>
                     <div className="text-sm">
                       Average Revenue Increase Per Client
@@ -749,34 +797,59 @@ const App: React.FC = () => {
               <h3 className="text-2xl font-bold text-[#141414] mb-8">
                 Get Your B2B Growth Audit
               </h3>
-              <form className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
+              <form className="space-y-6" onSubmit={(e: React.FormEvent<HTMLFormElement>)=>{
+                handleSubmit(e);
+              }}>
+                                  <label htmlFor="name" className=" block w-full mb-2">
+              Full Name <span className="text-red-600">*</span>
+            </label>
                   <input
                     type="text"
-                    placeholder="First Name"
+                    name="name"
+                    id="name"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                      handleChange(e);
+                    }}
+                    placeholder="John Doe"
                     className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200  px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none"
                   />
-                  <input
-                    type="text"
-                    placeholder="Last Name"
-                    className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200  px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none"
-                  />
-                </div>
-
+                  
+                              <label htmlFor="email" className=" block w-full mb-2">
+              Email <span className="text-red-600">*</span>
+            </label>
                 <input
                   type="email"
-                  placeholder="Business Email"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                      handleChange(e);
+                    }}
+                    name="email"
+                    id="email"
+                  placeholder="johndoe@gmail.com"
                   className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200  px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none"
                 />
-
+                   <label htmlFor="business" className=" block w-full mb-2">
+              Business Name <span className="text-red-600">*</span>
+            </label>
                 <input
                   type="text"
-                  placeholder="Company Name"
+                   onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                      handleChange(e);
+                    }}
+                    name="business"
+                    id="business"
+                  placeholder="Your Business Name"
                   className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200  px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none"
                 />
-
+                  <label htmlFor="message" className=" block w-full mb-2">
+              Message 
+            </label>
                 <textarea
                   placeholder="Describe your biggest B2B challenge..."
+                  id="message"
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>)=>{
+                      handleChange(e);
+                    }}
+                    name="message"
                   rows={6}
                   className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200 px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none resize-none"
                 ></textarea>

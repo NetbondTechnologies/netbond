@@ -201,6 +201,15 @@ const Service = () => {
         },
       });
     })
+
+    const split = new SplitText(".hero-text", { type: "lines", mask: "lines" });
+      gsap.from(split.lines, {
+        yPercent: 100,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power4.out",
+        stagger: 0.1,
+      });
   }, []);
 
 
@@ -208,7 +217,7 @@ const Service = () => {
     <>
       <div className="service">
         <div className="service-container pt-50 shadow-2xl rounded-b-xl shadow-[#f76b1c] pb-40">
-          <h1 className="text-8xl w-[95%] service-header font-stretch-50% px-[5%]">
+          <h1 className="text-8xl w-[95%] service-header font-stretch-50% px-[5%] hero-text">
             {`We're a full - service digital studio`.toUpperCase()}
           </h1>
         </div>

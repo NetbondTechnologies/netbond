@@ -85,6 +85,22 @@ export default function GraphiDesign() {
         });
       });
     }
+
+    const allTexts = Array.from(
+      document.querySelectorAll(".hero-text") as NodeListOf<HTMLElement>
+    );
+    allTexts.map((e: HTMLElement) => {
+      const split = new SplitText(e, { type: "lines", mask: "lines" });
+      gsap.from(split.lines, {
+        rotate: 10,
+        y: 100,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power4.out",
+        delay:0.4,
+        stagger: 0.2,
+      });
+    });
   
     return ()=>{
       
@@ -264,10 +280,7 @@ export default function GraphiDesign() {
         data-scroll-section
       >
         <div className="absolute inset-0 hero-gradient"></div>
-        <div className="absolute top-10 left-10 w-32 h-32 bg-[hsl(22,96%,53%)]/10 rounded-full blur-xl animate-pulse-slow"></div>
-        <div className="absolute bottom-20 right-20 w-48 h-48 bg-[hsl(22,96%,53%)]/5 rounded-full blur-2xl animate-float"></div>
-        <div className="absolute top-1/3 right-1/4 w-2 h-2 bg-[hsl(22,96%,53%)] rounded-full animate-pulse"></div>
-        <div className="absolute bottom-1/3 left-1/4 w-3 h-3 bg-[hsl(22,96%,53%)]/50 rounded-full animate-pulse delay-1000"></div>
+        
 
         <div className="container mx-auto max-w-7xl relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -276,11 +289,11 @@ export default function GraphiDesign() {
                 <p className="text-[hsl(22,96%,53%)] font-semibold text-lg mb-4 tracking-wide">
                   Explore our expert
                 </p>
-                <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight hero-text">
                   Graphic Design Service In{" "}
                   <span className="text-[hsl(22,96%,53%)]">Zirakpur</span>
                 </h1>
-                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                <p className="text-xl text-gray-600 mb-8 leading-relaxed hero-text">
                   We are your one-stop solution for your complete digital
                   marketing and graphic design requirements. Uplift your brand's
                   perception through our unmatched creative solutions.
@@ -390,7 +403,7 @@ export default function GraphiDesign() {
               return (
                 <>
                   <div
-                    className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-3xl p-8 hover:shadow-[hsl(22,96%,53%)]/20 transition-all duration-500 group hover:scale-105"
+                    className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-lg rounded-3xl p-8 hover:shadow-[hsl(22,96%,53%)]/20 transition-all duration-500 group hover:scale-105"
                     data-scroll
                     data-scroll-speed="0.1"
                   >
@@ -439,7 +452,7 @@ export default function GraphiDesign() {
               return (
                 <>
                   <div
-                    className="backdrop-blur-lg bg-white/80 border border-white/40 shadow-2xl rounded-3xl p-6 hover:shadow-[hsl(22,96%,53%)]/20 transition-all duration-500 group hover:scale-105"
+                    className="backdrop-blur-lg bg-white/80 border border-white/40 shadow-xl rounded-3xl p-6"
                     data-scroll
                     data-scroll-speed="0.1"
                   >
@@ -492,7 +505,7 @@ export default function GraphiDesign() {
                 return(
                   <>
                      <div
-              className="backdrop-blur-lg bg-white/80 border border-white/40 shadow-2xl rounded-3xl p-8 hover:shadow-[hsl(22,96%,53%)]/20 transition-all duration-500 group hover:scale-105"
+              className="backdrop-blur-lg bg-white/80 border border-white/40 shadow-xl rounded-3xl p-8 hover:shadow-[hsl(22,96%,53%)]/20 transition-all duration-500 group hover:scale-105"
               data-scroll
               data-scroll-speed="0.1"
             >
@@ -716,7 +729,7 @@ export default function GraphiDesign() {
                         id="phone"
                         type="tel"
                         className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[hsl(22,96%,53%)]/20 focus:border-[hsl(22,96%,53%)]"
-                        placeholder="+1 (555) 123-4567"
+                        placeholder="+91 98888 76666"
                         value={formData.phone}
                         onChange={(e) =>
                           handleInputChange("phone", e.target.value)

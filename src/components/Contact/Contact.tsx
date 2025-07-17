@@ -2,8 +2,41 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+import { useState } from "react";
 gsap.registerPlugin(ScrollTrigger, SplitText);
+interface Form{
+  name: string;
+    email: string;
+    message: string;
+    number: string;
+}
 const Contact = () => {
+   const [formData, setFormData] = useState<Form>({
+      name: "",
+      email: "",
+      message: "",
+      number: ""
+    });
+  
+    let handleChange = (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+      setFormData((prev) => {
+        return {
+          ...prev,
+          [event.target.name]: event.target.value,
+        };
+      });
+    };
+    let handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      setFormData({
+        name: "",
+      email: "",
+      message: "",
+      number: ""
+      })
+    };
   useGSAP(()=>{
     const allTitles = Array.from(document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>)
 
@@ -22,12 +55,21 @@ const Contact = () => {
         },
       });
     })
+
+    const split = new SplitText(".hero-text", { type: "lines words", mask: "lines" });
+      gsap.from(split.words, {
+        yPercent: 100,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power4.out",
+        stagger: 0.15,
+      });
   },[])
   return (
     <>
       <div className="contact">
         <div className="contact-s1">
-          <h1 className="text-8xl pt-45 backdrop-blur-sm pb-35 text-center">
+          <h1 className="text-8xl pt-45 backdrop-blur-sm pb-35 text-center hero-text">
             Contact <span className="text-(--pumpkin)">Us</span>
           </h1>
         </div>
@@ -91,7 +133,7 @@ const Contact = () => {
               <form
                 action=""
                 onSubmit={(e) => {
-                  e.preventDefault();
+                  handleSubmit(e)
                 }}
               >
                 <label htmlFor="name" className=" block w-full">
@@ -100,6 +142,9 @@ const Contact = () => {
                 <input
                   required
                   type="text"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                    handleChange(e);
+                  }}
                   placeholder="John Doe"
                   name="name"
                   id="name"
@@ -111,6 +156,9 @@ const Contact = () => {
                 <input
                   required
                   type="tel"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                    handleChange(e);
+                  }}
                   name="number"
                   placeholder="+91 xxxxx xxxxx"
                   id="number"
@@ -122,6 +170,9 @@ const Contact = () => {
                 <input
                   required
                   type="email"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                    handleChange(e);
+                  }}
                   placeholder="johndoe@example.com"
                   name="email"
                   id="email"
@@ -133,6 +184,9 @@ const Contact = () => {
                 <textarea
                   name="message"
                   id="message"
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>)=>{
+                    handleChange(e);
+                  }}
                   placeholder="Tell Us about your project here."
                   className="resize-none block w-full bg-black/5 rounded-md px-3 py-2 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) focus:ring-offset-3 focus:ring-offset-white duration-200"
                   rows={6}
