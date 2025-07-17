@@ -17,7 +17,10 @@ interface DropDown {
   description: string;
   link: string;
 }
-const Navbar: React.FC = () => {
+interface Props{
+  location: string;
+}
+const Navbar: React.FC<Props> = ({location}) => {
   const [visible, setVisible] = useState(true);
   const [prevScrollY, setPrevScrollY] = useState(window.scrollY);
   const navigate = useNavigate();
@@ -32,11 +35,11 @@ const Navbar: React.FC = () => {
         "Crafting visually stunning and user-friendly websites to establish a powerful online footprint for your brand.",
     },
     {
-      name: "Social Media",
+      name: "B2B Services",
       icon: <FontAwesomeIcon size="lg" icon={faAt} />,
-      link: "/socialMedia",
+      link: "/business-services",
       description:
-        "Engage, connect, and grow your audience with impactful social media strategies and creative content.",
+        "Grow your business with our impactful B2B strategies, that'll make your business stand out.",
     },
     {
       name: "Application Development",
@@ -143,12 +146,12 @@ const Navbar: React.FC = () => {
       <button
         type="button"
         onClick={() => {
-          navigate("services");
+          navigate(location === "/" || location === "/contact" || location === "/about" ? "/services" : "/contact");
           handleScrollTop();
         }}
         className="btn border-1 border-white/30 px-4 py-1 ml-10 rounded-md active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 duration-200 cursor-pointer"
       >
-        Get Started
+        {location === "/" || location === "/contact" || location === "/about" ? "Get Started" : "Get in Touch"}
       </button>
     </div>
   );

@@ -23,7 +23,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
 import { useState } from "react";
-gsap.registerPlugin(ScrollTrigger, SplitText);
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { useNavigate } from "react-router";
+gsap.registerPlugin(ScrollTrigger, SplitText, ScrollToPlugin);
 
 interface FAQS {
   question: string;
@@ -31,6 +33,7 @@ interface FAQS {
 }
 
 function App() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -205,6 +208,41 @@ function App() {
         },
       });
     });
+
+    const button = Array.from(
+      document.querySelectorAll(".cta-btn") as NodeListOf<HTMLElement>
+    );
+    if (button) {
+      button.forEach((e: HTMLElement) => {
+        e.addEventListener("click", () => {
+          gsap.to(window, {
+            scrollTo: { y: "#contacts", offsetY: 80, autoKill: true },
+            duration: 1,
+          });
+        });
+      });
+    }
+
+    gsap.from(".bar",{
+            height: "0%",
+            stagger: 0.1,
+            duration: 3,
+            ease:"power4.inOut",
+            delay: 0.75
+            
+          })
+    
+          const metrics = Array.from(document.querySelectorAll(".metric") as NodeListOf<HTMLElement>);
+          metrics.map((metric: HTMLElement) => {
+            gsap.from(metric, {
+              textContent: "0",
+              duration: 3,
+              ease: "power4.inOut",
+              snap: { textContent: 0.5 },
+              stagger: 1,
+              delay: 0.75
+            });
+          });
   }, []);
 
   const faqs: FAQS[] = [
@@ -265,7 +303,7 @@ function App() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <button className="group flex items-center justify-center px-8 py-4 bg-[#E26E02] text-white rounded-md font-medium  hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white transition-all duration-200 cursor-pointer">
+                <button className="group cta-btn flex items-center justify-center px-8 py-4 bg-[#E26E02] text-white rounded-md font-medium  hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white transition-all duration-200 cursor-pointer">
                   Get SEO Audit
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-200" />
                 </button>
@@ -273,17 +311,17 @@ function App() {
 
               <div className="grid grid-cols-3 gap-8">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-[#E26E02]">500+</div>
+                  <div className="text-2xl font-bold text-[#E26E02]"><span className="metric">500</span>+</div>
                   <div className="text-sm text-gray-600">
                     Projects Completed
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-[#E26E02]">98%</div>
+                  <div className="text-2xl font-bold text-[#E26E02]"><span className="metric">98</span>%</div>
                   <div className="text-sm text-gray-600">Success Rate</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-[#E26E02]">5+</div>
+                  <div className="text-2xl font-bold text-[#E26E02]"><span className="metric">5</span>+</div>
                   <div className="text-sm text-gray-600">Years Experience</div>
                 </div>
               </div>
@@ -301,10 +339,10 @@ function App() {
                     </div>
 
                     <div className="relative h-32 bg-gradient-to-r from-[#E26E02]/10 to-[#E26E02]/20 rounded-xl overflow-hidden">
-                      <div className="absolute bottom-0 left-0 w-full h-20 bg-[#E26E02] rounded-xl opacity-80"></div>
+                      <div className="absolute bottom-0 left-0 w-full h-20 bar bg-[#E26E02] rounded-xl opacity-80"></div>
                       <div className="absolute top-4 right-4 text-right">
                         <div className="text-2xl font-bold text-[#141414]">
-                          +245%
+                          +<span className="metric">245</span>%
                         </div>
                         <div className="text-sm text-gray-600">Growth</div>
                       </div>
@@ -319,7 +357,7 @@ function App() {
                           </span>
                         </div>
                         <div className="text-xl font-bold text-[#141414]">
-                          12.5K
+                          <span className="metric">22</span>.5K
                         </div>
                         <div className="text-xs text-[#E26E02]">
                           +32% this month
@@ -334,7 +372,7 @@ function App() {
                           </span>
                         </div>
                         <div className="text-xl font-bold text-[#141414]">
-                          150+
+                          <span className="metric">150</span>+
                         </div>
                         <div className="text-xs text-[#E26E02]">
                           Top 10 ranking
@@ -417,7 +455,7 @@ function App() {
           </div>
 
           <div className="text-center mt-16">
-            <button className="px-8 py-4 bg-[#E26E02] text-white rounded-md font-medium hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white transition-all duration-200 cursor-pointer">
+            <button className="px-8 py-4 cta-btn bg-[#E26E02] text-white rounded-md font-medium hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white transition-all duration-200 cursor-pointer">
               Get SEO Consultation
             </button>
           </div>
@@ -468,7 +506,12 @@ function App() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="px-8 py-4 bg-[#E26E02] text-white rounded-md font-medium hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white transition-all duration-200 cursor-pointer">
+                <button
+                  className="px-8 py-4 bg-[#E26E02] text-white rounded-md font-medium hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white transition-all duration-200 cursor-pointer"
+                  onClick={() => {
+                    navigate("/about");
+                  }}
+                >
                   Learn More About Us
                 </button>
               </div>
@@ -553,7 +596,10 @@ function App() {
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#E26E02]/5 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          id="contacts"
+        >
           <div className="text-center mb-16">
             <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full mb-6">
               <span className="text-sm font-medium text-[#E26E02]">

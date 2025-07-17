@@ -1,7 +1,7 @@
 import {
   faAndroid,
   faApple,
-  faFirefoxBrowser,
+  
 } from "@fortawesome/free-brands-svg-icons";
 import {
   faArrowUp,
@@ -24,7 +24,7 @@ import {
   faN,
   faShareNodes,
   faStopwatch,
-  faStopwatch20,
+  
   faTruck,
   faTruckPlane,
   faUtensils,
@@ -34,11 +34,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import React, { type ReactElement } from "react";
+import  { type ReactElement } from "react";
 import Accordion from "../Accordion";
 import { SplitText } from "gsap/SplitText";
+import {  useNavigate } from "react-router";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP, SplitText);
+gsap.registerPlugin(ScrollTrigger, useGSAP, SplitText, ScrollToPlugin);
 
 interface AppDevServices {
   title: string;
@@ -58,6 +60,7 @@ interface AppDevFAQS {
 }
 
 const AppDev = () => {
+  const navigate = useNavigate();
   const specialFeatures: SpecialFeatures[] = [
     {
       title: "Super Performance",
@@ -65,7 +68,7 @@ const AppDev = () => {
         "Delivering exceptional speed and efficiency to ensure seamless operations across all platforms.",
       icon: <FontAwesomeIcon icon={faBolt} />,
     },
-    
+
     {
       title: "Search Optimization",
       description:
@@ -78,9 +81,8 @@ const AppDev = () => {
         "Writing clean, structured, and scalable code for efficient development and long-term maintainability.",
       icon: <FontAwesomeIcon icon={faLayerGroup} />,
     },
-  ]
+  ];
   const specialFeatures2: SpecialFeatures[] = [
-    
     {
       title: "100% Response Time",
       description:
@@ -93,14 +95,14 @@ const AppDev = () => {
         "Achieving project goals on time with a focus on quality, precision, and client satisfaction.",
       icon: <FontAwesomeIcon icon={faGears} />,
     },
-    
+
     {
       title: "Customer Support",
       description:
         "Providing round-the-clock assistance to address your concerns and ensure uninterrupted service.",
       icon: <FontAwesomeIcon icon={faComments} />,
     },
-  ]
+  ];
   const appDevServices: AppDevServices[] = [
     {
       icon: <FontAwesomeIcon icon={faMobileScreenButton} />,
@@ -181,31 +183,32 @@ const AppDev = () => {
 
   const appdevFAQS = [
     {
-    question: "What is mobile app development, and how does it benefit businesses?",
-    answer:
-      "Mobile app development involves creating applications designed for mobile devices, enabling businesses to enhance user engagement, improve customer experiences, and boost overall efficient.",
-  },
+      question:
+        "What is mobile app development, and how does it benefit businesses?",
+      answer:
+        "Mobile app development involves creating applications designed for mobile devices, enabling businesses to enhance user engagement, improve customer experiences, and boost overall efficient.",
+    },
     {
-    question: "What types of mobile apps can you develop?",
-    answer:
-      "We specialize in developing native, hybrid, and cross-platform apps tailored for iOS, Android, and other platforms based on your business requirements.",
-  },
+      question: "What types of mobile apps can you develop?",
+      answer:
+        "We specialize in developing native, hybrid, and cross-platform apps tailored for iOS, Android, and other platforms based on your business requirements.",
+    },
     {
-    question: "How long does it take to develop a mobile app?",
-    answer:
-      "The timeline depends on the app’s complexity, features, and design. On average, it may take anywhere from 2 to 6 months for a complete app development cycle.",
-  },
+      question: "How long does it take to develop a mobile app?",
+      answer:
+        "The timeline depends on the app’s complexity, features, and design. On average, it may take anywhere from 2 to 6 months for a complete app development cycle.",
+    },
     {
-    question: "Can you help with app updates and maintenance after launch?",
-    answer:
-      "Yes, we offer comprehensive post-launch support, including updates, bug fixes, and feature enhancements to ensure your app remains relevant and functional.",
-  },
+      question: "Can you help with app updates and maintenance after launch?",
+      answer:
+        "Yes, we offer comprehensive post-launch support, including updates, bug fixes, and feature enhancements to ensure your app remains relevant and functional.",
+    },
     {
-    question: "How do you ensure data security in mobile apps?",
-    answer:
-      "We follow best practices for app security, including data encryption, secure APIs, and compliance with industry standards to safeguard user data and privacy.",
-  },
-]
+      question: "How do you ensure data security in mobile apps?",
+      answer:
+        "We follow best practices for app security, including data encryption, secure APIs, and compliance with industry standards to safeguard user data and privacy.",
+    },
+  ];
 
   useGSAP(() => {
     ScrollTrigger.create({
@@ -214,10 +217,12 @@ const AppDev = () => {
       end: "+=285%",
       pin: true,
     });
-    const allTitles = Array.from(document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>)
+    const allTitles = Array.from(
+      document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>
+    );
 
     allTitles.map((title: HTMLElement) => {
-      const split = new SplitText(title, { type: "lines" ,mask: "lines"});
+      const split = new SplitText(title, { type: "lines", mask: "lines" });
       gsap.from(split.lines, {
         y: 100,
         opacity: 0,
@@ -230,8 +235,27 @@ const AppDev = () => {
           end: "top 30%",
         },
       });
-    })
-  },[]);
+    });
+    
+    const button = document.querySelector(".cta-btn");
+    if (button) {
+      button.addEventListener("click", () => {
+        gsap.to(window, {
+          scrollTo: { y: "#contacts", offsetY: 80, autoKill: true },
+          duration: 1,
+        });
+      });
+    }
+    
+    return ()=>{
+      button?.removeEventListener("click", () => {
+        gsap.to(window, {
+          scrollTo: { y: "#contacts", offsetY: 80, autoKill: true },
+          duration: 1,
+        });
+      });
+    }
+  }, []);
 
   return (
     <section className="appDev">
@@ -286,7 +310,7 @@ const AppDev = () => {
         </h1>
         <button
           type="button"
-          className="btn border-white/30 px-6 py-2 text-lg text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
+          className="btn cta-btn border-white/30 px-6 py-2 text-lg text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
         >
           Get In Touch
         </button>
@@ -305,16 +329,23 @@ const AppDev = () => {
           {appDevServices.map((value: AppDevServices) => {
             return (
               <>
-                <li className="py-10 border-t-2 flex justify-between cursor-pointer items-start hover:bg-[#f76c1cd9]  hover:px-10 hover:text-white border-black pb-10 offer-items group ease-out duration-500">
-                  <div>
-                    <span className="text-2xl w-[30%] block">{value.icon}</span>
-                    <span className="text-2xl font-bold block">
-                      {value.title}{" "}
-                    </span>
-                  </div>
-                  <div className="arr-icon rotate-90 group-hover:rotate-45 duration-100 ease-in origin-center">
-                    {value.arrow}
-                  </div>
+                <li className="py-10 service-app border-t-2 flex justify-between cursor-pointer items-start hover:bg-[#f76c1cd9]  hover:px-10 hover:text-white border-black pb-10 offer-items group ease-out duration-500"
+                onClick={()=>{
+                  navigate("/contact")
+                }}>
+                  
+                    <div>
+                      <span className="text-2xl w-[30%] block">
+                        {value.icon}
+                      </span>
+                      <span className="text-2xl font-bold block">
+                        {value.title}{" "}
+                      </span>
+                    </div>
+                    <div className="arr-icon rotate-90 group-hover:rotate-45 duration-100 ease-in origin-center">
+                      {value.arrow}
+                    </div>
+                 
                 </li>
               </>
             );
@@ -365,92 +396,112 @@ const AppDev = () => {
       </section>
       <section className="screenshots pb-30 bg-(--jet)">
         <h2 className="text-4xl text-center py-10 ">
-          App <span className="font-[Rowdies] text-(--pumpkin)">Screenshots</span>
+          App{" "}
+          <span className="font-[Rowdies] text-(--pumpkin)">Screenshots</span>
         </h2>
-        <p className="text-xl mx-auto text-center mb-15 w-[45%]">Take a closer look at our app’s intuitive design and user-friendly interface through these detailed screenshots.</p>
-        <div className="text-center w-fit mx-auto"><img src="./app-screenshot.png" alt="" /></div>
+        <p className="text-xl mx-auto text-center mb-15 w-[45%]">
+          Take a closer look at our app’s intuitive design and user-friendly
+          interface through these detailed screenshots.
+        </p>
+        <div className="text-center w-fit mx-auto">
+          <img src="./app-screenshot.png" alt="" />
+        </div>
       </section>
 
-      <section className="form-section-appdev flex justify-center bg-(--jet) py-20 px-[5%] ">
-            <div className="form-info flex flex-col gap-10 w-[40%]">
-              <h2 className="text-4xl">
-                <span className="border-l-10 pl-2 border-(--pumpkin) py-3 ">
-                  After
-                </span>{" "}
-                Form Submission
-              </h2>
-              <p>
-                <ul className="list-disc ml-10 text-lg">
-                  <li className="pb-4 text-white">You’ll receive a Call from Our Experts.</li>
-                  <li className="pb-4 text-white">We’ll carefully evaluate of your requirements.</li>
-                  <li className="pb-4 text-white">A review of Android Application</li>
-                  <li className="pb-4 text-white">
-                    Suggestions for the best Application Strategies.
-                  </li>
-                  <li className="pb-4 text-white">
-                    Get a feel if Netbond Technologies is Suitable for you
-                  </li>
-                </ul>
-              </p>
-            </div>
-            <div className="form-component bg-black/70 backdrop-blur-sm rounded-3xl py-6 px-6 w-[55%]">
-              <form
-                action=""
-                onSubmit={(e) => {
-                  e.preventDefault();
-                }}
-              >
-                <label htmlFor="name" className=" block w-full">
-                  Full Name <span className="text-red-600">*</span>
-                </label>
-                <input 
-                    required
-                  type="text"
-                  name="name"
-                  id="name"
-                  className="block w-full bg-white/10 rounded-md px-3 py-1 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
-                />
-                <label htmlFor="number" className=" block w-full">
-                  Phone Number <span className="text-red-600">*</span>
-                </label>
-                <input 
-                    required
-                  type="tel"
-                  name="number"
-                  id="number"
-                  className="block w-full bg-white/10 rounded-md px-3 py-1 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
-                />
-                <label htmlFor="email" className=" block w-full">
-                  Email <span className="text-red-600">*</span>
-                </label>
-                <input 
-                    required
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="block w-full bg-white/10 rounded-md px-3 py-1 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
-                />
-                <label htmlFor="message" className=" block w-full">
-                  Message
-                </label>
-                <textarea
-                  name="message"
-                  id="message"
-                  className="resize-none block w-full bg-white/10 rounded-md px-3 py-1 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
-                  rows={6}
-                ></textarea>
-                <button
-                  type="submit"
-                  className="btn border-1 border-white/30 active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 black/5 rounded-md px-6 py-1 duration-200 text-lg cursor-pointer"
-                >
-                  Submit
-                </button>
-              </form>
-            </div>
-          </section>
-          <section className="appdev-faqs pt-20 bg-(--jet)">
-            <Accordion faqs={appdevFAQS}/>
-          </section>
+      <section className="form-section-appdev flex justify-center bg-(--jet) py-20 px-[5%] "
+       id="contacts">
+        <div className="form-info flex flex-col gap-10 w-[40%]">
+          <h2 className="text-4xl">
+            <span className="border-l-10 pl-2 border-(--pumpkin) py-3 ">
+              After
+            </span>{" "}
+            Form Submission
+          </h2>
+          <p>
+            <ul className="list-disc ml-10 text-lg">
+              <li className="pb-4 text-white">
+                You’ll receive a Call from Our Experts.
+              </li>
+              <li className="pb-4 text-white">
+                We’ll carefully evaluate of your requirements.
+              </li>
+              <li className="pb-4 text-white">
+                A review of Android Application
+              </li>
+              <li className="pb-4 text-white">
+                Suggestions for the best Application Strategies.
+              </li>
+              <li className="pb-4 text-white">
+                Get a feel if Netbond Technologies is Suitable for you
+              </li>
+            </ul>
+          </p>
+        </div>
+        <div
+          className="form-component bg-black/70 backdrop-blur-sm rounded-3xl py-8 px-8 w-[55%]"
+         
+        >
+          <form
+            action=""
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <label htmlFor="name" className=" block w-full">
+              Full Name <span className="text-red-600">*</span>
+            </label>
+            <input
+              required
+              type="text"
+              placeholder="John Doe"
+              name="name"
+              id="name"
+              className="block w-full bg-white/10 rounded-md px-3 py-2 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
+            />
+            <label htmlFor="number" className=" block w-full">
+              Phone Number <span className="text-red-600">*</span>
+            </label>
+            <input
+              required
+              type="tel"
+              placeholder="+91 xxxxx xxxxx"
+              name="number"
+              id="number"
+              className="block w-full bg-white/10 rounded-md px-3 py-2 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
+            />
+            <label htmlFor="email" className=" block w-full">
+              Email <span className="text-red-600">*</span>
+            </label>
+            <input
+              required
+              type="email"
+              placeholder="johndoe@example.com"
+              name="email"
+              id="email"
+              className="block w-full bg-white/10 rounded-md px-3 py-2 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
+            />
+            <label htmlFor="message" className=" block w-full">
+              Message
+            </label>
+            <textarea
+              name="message"
+              placeholder="Tell us about your project"
+              id="message"
+              className="resize-none block w-full bg-white/10 rounded-md px-3 py-2 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
+              rows={6}
+            ></textarea>
+            <button
+              type="submit"
+              className="btn border-1 border-white/30 active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 black/5 rounded-md px-6 py-1 duration-200 text-lg cursor-pointer"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </section>
+      <section className="appdev-faqs pt-20 bg-(--jet)">
+        <Accordion faqs={appdevFAQS} />
+      </section>
     </section>
   );
 };

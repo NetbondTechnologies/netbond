@@ -17,6 +17,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import React, { type ReactElement } from "react";
+import { useNavigate } from "react-router";
 gsap.registerPlugin(ScrollTrigger, useGSAP, SplitText);
 
 interface Skill {
@@ -210,6 +211,7 @@ const WebDev: React.FC = () => {
     })
     
   }, []);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -222,6 +224,9 @@ const WebDev: React.FC = () => {
           <button
             type="button"
             className="btn border-white/30 px-6 mx-[5.5%] py-2 text-lg text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
+            onClick={()=>{
+              navigate("/contact")
+            }}
           >
             Get In Touch
           </button>
@@ -341,6 +346,9 @@ const WebDev: React.FC = () => {
             <button
             type="button"
             className="btn border-white/30 px-6 py-2 text-lg text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
+            onClick={()=>{
+              navigate("/contact")
+            }}
           >
             Get In Touch
           </button>

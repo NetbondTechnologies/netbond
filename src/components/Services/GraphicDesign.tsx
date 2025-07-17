@@ -24,7 +24,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
-gsap.registerPlugin(ScrollTrigger, SplitText);
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+gsap.registerPlugin(ScrollTrigger, SplitText, ScrollToPlugin);
 
 interface FAQ {
   question: string;
@@ -75,8 +76,28 @@ export default function GraphiDesign() {
         },
       });
     })
-  }
-  ,[])
+    const button = document.querySelector(".cta-btn");
+    if (button) {
+      button.addEventListener("click", () => {
+        gsap.to(window, {
+          scrollTo: { y: "#contacts", offsetY: 80, autoKill: true },
+          duration: 1,
+        });
+      });
+    }
+  
+    return ()=>{
+      
+    if (button) {
+      button.removeEventListener("click", () => {
+        gsap.to(window, {
+          scrollTo: { y: "#contacts", offsetY: 80, autoKill: true },
+          duration: 1,
+        });
+      });
+    }
+    }
+  },[])
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -92,7 +113,6 @@ export default function GraphiDesign() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Form submitted successfully! We will contact you soon.");
     setFormData({
       firstName: "",
       lastName: "",
@@ -265,14 +285,13 @@ export default function GraphiDesign() {
                   marketing and graphic design requirements. Uplift your brand's
                   perception through our unmatched creative solutions.
                 </p>
-                <button className="group bg-[hsl(22,96%,53%)] px-8 py-4 font-semibold text-lg rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer inline-flex items-center">
+                <button className="group cta-btn bg-[hsl(22,96%,53%)] px-6 py-2 font-semibold text-lg rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer inline-flex items-center">
                   Learn more
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </button>
               </div>
             </div>
 
-            {/* Right Content */}
             <div className="relative" data-scroll data-scroll-speed="-0.3">
               <div className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-3xl p-8">
                 <div className="signature-gradient rounded-2xl p-12 h-96 flex items-center justify-center relative overflow-hidden">
@@ -284,7 +303,6 @@ export default function GraphiDesign() {
                     </h3>
                     <p className="text-white/80">Where Ideas Come to Life</p>
                   </div>
-                  {/* Floating elements */}
                   <div className="absolute top-8 left-8 w-16 h-16 bg-white/20 rounded-xl rotate-12 animate-bounce"></div>
                   <div className="absolute bottom-8 right-8 w-12 h-12 bg-white/20 rounded-full animate-pulse"></div>
                   <div className="absolute top-1/2 left-4 w-8 h-8 bg-white/20 rounded-lg rotate-45 animate-pulse delay-500"></div>
@@ -295,7 +313,6 @@ export default function GraphiDesign() {
         </div>
       </section>
 
-      {/* Company Description Section */}
       <section
         className="py-20 px-4 bg-gradient-to-b from-transparent to-gray-50/50"
         data-scroll-section
@@ -343,7 +360,6 @@ export default function GraphiDesign() {
         </div>
       </section>
 
-      {/* Services Section */}
       <section
         className="py-20 px-4 bg-[hsl(0,0%,8%)] relative overflow-hidden"
         data-scroll-section
@@ -560,6 +576,7 @@ export default function GraphiDesign() {
       <section
         className="py-20 px-4 bg-gradient-to-b from-gray-50/50 to-white"
         data-scroll-section
+        id="contacts"
       >
         <div className="container mx-auto max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-16 items-center">

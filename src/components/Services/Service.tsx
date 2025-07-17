@@ -84,11 +84,11 @@ const Service = () => {
         "Innovative and scalable app solutions tailored to meet your business needs and enhance user experiences.",
     },
     {
-      heading: "Social Media",
+      heading: "B2B Services",
       icon: <FontAwesomeIcon size="xl" icon={faArrowUp} />,
-      link: "/socialMedia",
+      link: "/business-services",
       description:
-        "Engage, connect, and grow your audience with impactful social media strategies.",
+        "Grow your business with our impactful B2B strategies, that'll make your business stand out.",
     },
     {
       heading: "GMB",
@@ -311,6 +311,12 @@ const Service = () => {
                 – evolving demands of our customers, ensuring long – term
                 sustainability.
               </h3>
+              <button className="px-8 py-2 bg-[#E26E02] text-white rounded-md font-medium hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white transition-all duration-200 cursor-pointer"
+              onClick={()=>{
+                navigate("/contact")
+              }}>
+              Get in Touch
+            </button>
             </div>
           </div>
         </div>

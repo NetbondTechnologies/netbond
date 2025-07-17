@@ -1,11 +1,8 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import HomePage from "./components/HomePage";
-import { useGSAP } from "@gsap/react";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { Routes, Route, useLocation } from "react-router";
 import Layout from "./components/Layout";
-import gsap from "gsap";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
 import Transition from "./components/Homepage/Transition";
@@ -18,40 +15,30 @@ import SEO from "./components/Services/SEO";
 import GraphicDesign from "./components/Services/GraphicDesign";
 import NotFound from "./components/NotFound";
 
-gsap.registerPlugin(useGSAP, ScrollSmoother);
-
 export const handleScrollTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 function App() {
-  
   let location = useLocation();
+  const [updateLocation, setUpdateLocation] = useState<string>(location.pathname);
 
-  const [isLocationTrue, setIsLocationTrue] =useState(true); 
-
-  useGSAP(() => {
-    ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-  content: "#smooth-content",
-      smooth: 2,
-      effects: false,
-      
-    });
-  }, []);
+  const [isLocationTrue, setIsLocationTrue] = useState(true);
 
   useEffect(() => {
-    location.pathname === "/" ? setIsLocationTrue(true) : setIsLocationTrue(false);
+    setUpdateLocation(location.pathname);
+    location.pathname === "/"
+      ? setIsLocationTrue(true)
+      : setIsLocationTrue(false);
     return () => {
-      setIsLocationTrue(false)
+      setIsLocationTrue(false);
     };
-  }, []);
+  }, [location.pathname]);
   return (
     <>
-      
       {isLocationTrue ? <Transition /> : null}
 
       <Routes>
-        <Route element={<Layout />}>
+        <Route element={<Layout location={updateLocation}/>}>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
@@ -63,7 +50,7 @@ function App() {
           <Route path="/seo" element={<SEO />} />
           <Route path="/graphicDesigning" element={<GraphicDesign />} />
         </Route>
-        <Route path="/:any" element={<NotFound/>}/>
+        <Route path="/:any" element={<NotFound />} />
       </Routes>
     </>
   );

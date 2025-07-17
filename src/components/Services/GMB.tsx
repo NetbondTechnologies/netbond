@@ -197,12 +197,23 @@ const GMB: React.FC = () => {
         },
       });
     })
+
+    const button = document.querySelector(".cta-btn");
+    if (button) {
+      button.addEventListener("click", () => {
+        gsap.to(window, {
+          scrollTo: { y: "#contacts", offsetY: 80, autoKill: true },
+          duration: 1,
+        });
+      });
+    }
+
   },[])
 
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="pt-[150px] pb-20 px-4 relative overflow-hidden bg-white">
+      <section className="pt-[120px] pb-20 px-4 relative overflow-hidden bg-white">
         <div className="absolute inset-0 bg-gradient-to-r from-orange-50 to-orange-100"></div>
 
         <div className="max-w-7xl mx-auto relative">
@@ -220,7 +231,7 @@ const GMB: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-2 justify-center">
                 <button
                   type="button"
-                  className="btn border-white/30 px-6 py-2 text-lg text-center group border-1 rounded-l-md rounded-r-none hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
+                  className="btn cta-btn border-white/30 px-6 py-2 text-lg text-center group border-1 rounded-l-md rounded-r-none hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
                 >
                   <span>Start Your GMB Journey</span>
                   <ArrowRight className="w-5 h-5 inline-block ml-2 group-hover:translate-x-3 transition-all duration-300" />
@@ -442,7 +453,7 @@ const GMB: React.FC = () => {
         </div>
       </section>
 
-      <section id="contact" className="py-20 px-4 bg-white">
+      <section id="contacts" className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16">
             <div>
