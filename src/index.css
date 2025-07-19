@@ -29,6 +29,11 @@ html{
   background-size: 100%;
   background-color: rgba(128, 128, 128, 0.336);
 }
+@media (max-width: 1024px) {
+  .overlay{
+    background-size: cover;
+  }
+}
 body {
   overflow-x: hidden;
   background-color: #ffffff;
@@ -189,11 +194,6 @@ h1.img-card-title{
   animation-delay: 1.7s;
 }
 
-.services-head {
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  backface-visibility: hidden;
-}
 .services-container::before {
   content: "";
   position: absolute;
@@ -349,7 +349,7 @@ div.testimonials > h4{
   color: white;
   position: absolute;
   padding-inline: 10px;
-  left: -10px;
+  display: none;
   top:15px;
   height: 25px;
   border-radius: 24px;
@@ -361,6 +361,7 @@ div.testimonials > h4{
 
 .whatsapp:hover::before{
   left: -115px;
+  display: block;
   opacity: 1;
 }
 
@@ -403,7 +404,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 .join-us{
   background-image: url("./asset 28.jpeg");
-  bground-size: cover;
+  background-size: cover;
   background-position: center;
 }
 

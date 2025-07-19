@@ -13,8 +13,8 @@ const Footer: React.FC = () => {
   return (
     <>
       <div className="bg-[#141414] footer">
-        <div className=" w-[90%] py-[3%] mx-auto flex justify-start gap-20">
-          <div className="w-[400px]">
+        <div className=" w-[90vw] py-[3%] mx-auto flex justify-start gap-15">
+          <div className="w-[33%]">
             <img src="asset 0.png" className="w-full" alt="" />
             <div className="w-full mt-5 flex justify-center gap-3">
               <div className="w-[40px] h-[40px] border-1 rounded-4xl border-white p-[7px] text-center hover:bg-[#646464aa] cursor-pointer hover:text-blue-700 duration-150 text-white">
@@ -31,9 +31,9 @@ const Footer: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="text-center w-[400px] h-[300px] ">
+          <div className="text-center w-[33%] h-[300px] ">
             <h1 className="text-2xl mb-8 useful-links">Useful Links</h1>
-            <div className="w-[400px] flex flex-wrap justify-center gap-x-8 gap-y-10">
+            <div className=" flex flex-wrap justify-center gap-x-8 gap-y-10">
               <NavLink
                 to="/webDev"
                 className="hover:text-orange-400 w-[45%] text-white"
@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
                 About
               </NavLink>
               <NavLink
-                to="/"
+                to="/appDev"
                 className="hover:text-orange-400 w-[45%] text-white"
               >
                 App Development
@@ -70,13 +70,13 @@ const Footer: React.FC = () => {
                 SEO
               </NavLink>
               <NavLink
-                to="/"
+                to="/business-services"
                 className="hover:text-orange-400 w-[45%] text-white"
               >
-                Social Media
+                B2B Services
               </NavLink>
               <NavLink
-                to="/"
+                to="/graphicDesigning"
                 className="hover:text-orange-400 w-[45%] text-white"
               >
                 Graphic Design
@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
               </NavLink>
             </div>
           </div>
-          <div className="w-[400px]">
+          <div className="w-[33%]">
             <h1 className="text-2xl mb-8 useful-links">Our Address : </h1>
             <div className="address text-lg">
               <span className="font-bold block ">
@@ -104,13 +104,18 @@ const Footer: React.FC = () => {
               Punjab, Pincode – 140603 E-mail – info@netbondtechnologies.com
               Support@netbondtechnologies.com Phone No. – +91 9056995190
             </div>
-            <span className="text-lg mt-5 cursor-pointer hover:text-orange-400 text-white block duration-200" onClick={()=>{
-              handleScrollTop();
-            }}>Back to Top</span>
+            <span
+              className="text-lg mt-5 cursor-pointer hover:text-orange-400 text-white block duration-200"
+              onClick={() => {
+                handleScrollTop();
+              }}
+            >
+              Back to Top
+            </span>
           </div>
         </div>
         <div className="banner text-lg text-white font-bold w-full bg-(--pumpkin) py-4 text-center">
-            ©2025-Netbond Technologies
+          ©2025-Netbond Technologies
         </div>
       </div>
     </>

@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState, type ReactElement } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { handleScrollTop } from "../App";
+import { Menu } from "lucide-react";
 
 interface DropDown {
   name: string;
@@ -17,15 +18,15 @@ interface DropDown {
   description: string;
   link: string;
 }
-interface Props{
+interface Props {
   location: string;
 }
-const Navbar: React.FC<Props> = ({location}) => {
+const Navbar: React.FC<Props> = ({ location }) => {
   const [visible, setVisible] = useState(true);
   const [prevScrollY, setPrevScrollY] = useState(window.scrollY);
   const navigate = useNavigate();
+  const [menu, setMenu] = useState<boolean>(false);
 
-  
   const dropdownItems: DropDown[] = [
     {
       name: "Web Development",
@@ -87,75 +88,118 @@ const Navbar: React.FC<Props> = ({location}) => {
   }, [prevScrollY]);
 
   return (
-    <div
-      className={`w-[80vw] fixed top-[20px] select-none navbar ${
-        visible ? "navbar--visible" : "navbar--hidden"
-      } py-1 shadow-lg backdrop-blur-lg left-1/2 translate-x-[-50%] px-15 rounded-4xl flex items-center justify-between`}
-    >
-      <img
-        className="cursor-pointer nav-logo py-1 px-2 rounded-xl w-[15%] hover:-translate-y-1 hover:shadow-xl duration-300"
-        src="./asset 0.png"
-        alt=""
-        onClick={()=>{
-          navigate("/")
-          handleScrollTop()
-        }}
-      />
-      <ul className="nav-items bg-white/85 px-6 py-2 rounded-2xl flex gap-8">
-        <li className="relative cursor-pointer w-fit hover:translate-x-2 duration-200" onClick={()=>{
-          navigate("/about");
-          handleScrollTop();
-        }}>
-          About
-        </li>
-        <li className="flex dropdown items-center w-fit h-[100%] relative cursor-pointer gap-[5px]  hover:translate-x-2 duration-200">
-          Services
-          <img
-            className="w-[10px] dropdown-img mt-1"
-            src="./asset 19.svg"
-            alt=""
-          />
-          <div className="w-[5vw] h-[10px] absolute top-[20px] bg-transparent"></div>
-          <div className="absolute w-[45vw] dropdown-items flex flex-wrap gap-[10px] justify-center items-center h-auto -left-[300px] px-2 py-4 rounded-xl shadow-xl top-[30px] bg-white">
-            {dropdownItems.map((item: DropDown) => {
-              return (
-                <NavLink
-                  to={item.link}
-                  onClick={() => {
-                    handleScrollTop();
-                  }}
-                  className={`drop-item flex w-[48%] hover:text-[#f76b1c] ${location === item.link ? "-translate-y-[1px] text-[#f76b1c] shadow-xl" : ""} hover:-translate-y-[1px] hover:shadow-xl duration-250 px-2 py-3 rounded-xl h-[120px] gap-3 justify-start`}
-                >
-                  <div className="icon mt-[1px] w-[20%]">{item.icon}</div>
-                  <div className="nav-data flex flex-col gap-2">
-                    <h3 className={`text-md ${location !== item.link ? "text-(--jet)": ""}`}>{item.name}</h3>
-                    <p className={`text-sm ${location !== item.link ? "text-(--davys-gray)": ""}`}>
-                      {item.description}
-                    </p>
-                  </div>
-                </NavLink>
-              );
-            })}
-          </div>
-        </li>
-        <li className="relative cursor-pointer w-fit hover:translate-x-2 duration-200" onClick={()=>{
-          navigate("/contact");
-          handleScrollTop();
-        }}>
-          Contact Us
-        </li>
-      </ul>
-      <button
-        type="button"
-        onClick={() => {
-          navigate(location === "/" || location === "/contact" || location === "/about" ? "/services" : "/contact");
-          handleScrollTop();
-        }}
-        className="btn border-1 border-white/30 px-4 py-1 ml-10 rounded-md active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 duration-200 cursor-pointer"
+    <>
+      <span
+        className={`fixed w-screen md:hidden block h-[85vh] rounded-t-4xl z-9999 ${
+          menu ? "translate-x-0 opacity-100" : "-translate-x-[100%] opacity-0"
+        } left-0 bottom-0 bg-black text-white text-2xl px-5 duration-300 py-3`}
+      ></span>
+      <div
+        className={`lg:w-[80vw] w-[98vw] md:w-[85vw] fixed top-[20px] select-none navbar ${
+          visible ? "navbar--visible" : "navbar--hidden"
+        } py-1 shadow-lg backdrop-blur-lg left-1/2 translate-x-[-50%] lg:px-15 rounded-4xl flex items-center justify-between pl-3 pr-8`}
       >
-        {location === "/" || location === "/contact" || location === "/about" ? "Get Started" : "Get in Touch"}
-      </button>
-    </div>
+        <img
+          className="cursor-pointer nav-logo md:py-1 px-2 rounded-xl lg:w-[15%] md:w-[25%] w-40 hover:-translate-y-1 hover:shadow-xl duration-300"
+          src="./asset 0.png"
+          alt=""
+          onClick={() => {
+            navigate("/");
+            handleScrollTop();
+          }}
+        />
+        <ul className="nav-items bg-white/85 lg:px-6 py-2 lg:text-base md:text-sm rounded-2xl hidden md:flex lg:gap-8 md:gap-4 md:px-4">
+          <li
+            className="relative cursor-pointer w-fit hover:translate-x-2 duration-200"
+            onClick={() => {
+              navigate("/about");
+              handleScrollTop();
+            }}
+          >
+            About
+          </li>
+          <li className="flex dropdown items-center w-fit h-[100%] relative cursor-pointer gap-[5px] hover:translate-x-2 duration-200">
+            Services
+            <img
+              className="w-[10px] dropdown-img mt-1"
+              src="./asset 19.svg"
+              alt=""
+            />
+            <div className="w-[5vw] h-[10px] absolute top-[20px] bg-transparent"></div>
+            <div className="absolute w-[45vw] dropdown-items flex flex-wrap gap-[10px] justify-center items-center h-auto -left-[300px] px-2 py-4 rounded-xl shadow-xl top-[30px] bg-white">
+              {dropdownItems.map((item: DropDown) => {
+                return (
+                  <NavLink
+                    to={item.link}
+                    onClick={() => {
+                      handleScrollTop();
+                    }}
+                    className={`drop-item flex w-[48%] hover:text-[#f76b1c] ${
+                      location === item.link
+                        ? "-translate-y-[1px] text-[#f76b1c] shadow-xl"
+                        : ""
+                    } hover:-translate-y-[1px] hover:shadow-xl duration-250 px-2 py-3 rounded-xl h-[120px] gap-3 justify-start`}
+                  >
+                    <div className="icon mt-[1px] w-[20%]">{item.icon}</div>
+                    <div className="nav-data flex flex-col gap-2">
+                      <h3
+                        className={`text-md ${
+                          location !== item.link ? "text-(--jet)" : ""
+                        }`}
+                      >
+                        {item.name}
+                      </h3>
+                      <p
+                        className={`text-sm ${
+                          location !== item.link ? "text-(--davys-gray)" : ""
+                        }`}
+                      >
+                        {item.description}
+                      </p>
+                    </div>
+                  </NavLink>
+                );
+              })}
+            </div>
+          </li>
+          <li
+            className="relative cursor-pointer w-fit hover:translate-x-2 duration-200"
+            onClick={() => {
+              navigate("/contact");
+              handleScrollTop();
+            }}
+          >
+            Contact Us
+          </li>
+        </ul>
+        <div
+          className="md:hidden active:bg-gray-300 rounded-full p-2 duration-300"
+          onClick={() => {
+            setMenu(!menu);
+          }}
+        >
+          <Menu size={28} />
+        </div>
+        <button
+          type="button"
+          onClick={() => {
+            navigate(
+              location === "/" ||
+                location === "/contact" ||
+                location === "/about"
+                ? "/services"
+                : "/contact"
+            );
+            handleScrollTop();
+          }}
+          className="btn border-1 border-white/30 px-4 py-1 lg:text-base lg:ml-10 md:ml-2 hidden md:block rounded-md active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 duration-200 cursor-pointer"
+        >
+          {location === "/" || location === "/contact" || location === "/about"
+            ? "Get Started"
+            : "Get in Touch"}
+        </button>
+      </div>
+    </>
   );
 };
 

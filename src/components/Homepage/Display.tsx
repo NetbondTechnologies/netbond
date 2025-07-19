@@ -141,7 +141,7 @@ const Display = () => {
             <h3 className="text-9xl/40 cursor-default display-text hover:scale-105 hover:rotate-0 -translate-x-60 rotate-2">
               Conversion
             </h3>
-            <h3 className="text-9xl/40 cursor-default display-text hover:scale-105 hover:rotate-0 translate-x-20 rotate-2">
+            <h3 className="text-9xl/40 cursor-default display-text w-fit hover:scale-105 hover:rotate-0 translate-x-20 rotate-2">
               Through
             </h3>
             <h3 className="text-9xl/40 cursor-default display-text hover:scale-105 hover:rotate-0 -translate-x-60 -rotate-2">

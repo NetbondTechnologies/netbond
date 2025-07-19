@@ -32,39 +32,39 @@ const Services: React.FC = () => {
       demand: "Most Demanded",
       heading: "Website Design",
       icon: <FontAwesomeIcon size="xl" icon={faCode} />,
-      link: "/",
+      link: "/webDev",
       description:
         "Crafting visually stunning and user-friendly websites to establish a powerful online footprint for your brand.",
     },
     {
       demand: "",
-      heading: "Branding & Marketing",
+      heading: "Graphic Designing",
       icon: <FontAwesomeIcon size="xl" icon={faCopyright} />,
-      link: "/",
+      link: "/graphicDesigning",
       description:
-        "Empowering your business with creative strategies to build a unique brand identity and connect with your audience.",
+        "We are your one-stop solution for your complete digital marketing and graphic design requirements.",
     },
     {
       demand: "",
       heading: "Application Development",
       icon: <FontAwesomeIcon size="xl" icon={faMobileScreenButton} />,
-      link: "/",
+      link: "/appDev",
       description:
         "Innovative and scalable app solutions tailored to meet your business needs and enhance user experiences.",
     },
     {
       demand: "Most Demanded",
-      heading: "Social Media",
+      heading: "B2B Services",
       icon: <FontAwesomeIcon size="xl" icon={faAt} />,
-      link: "/",
+      link: "/business-services",
       description:
-        "Engage, connect, and grow your audience with impactful social media strategies and creative content.",
+        "Grow your business with our impactful B2B strategies, that'll make your business stand out.",
     },
     {
       demand: "",
       heading: "Strategy",
       icon: <FontAwesomeIcon size="xl" icon={faBullseye} />,
-      link: "/",
+      link: "/gmb",
       description:
         "Strategic solutions to drive growth, innovation, and success in today’s competitive digital landscape to its full potential.",
     },
@@ -72,13 +72,14 @@ const Services: React.FC = () => {
       demand: "Most Demanded",
       heading: "SEO",
       icon: <FontAwesomeIcon size="xl" icon={faArrowTrendUp} />,
-      link: "/",
+      link: "/seo",
       description:
         "Boost your online presence with optimized strategies that drive organic traffic and improve search rankings.",
     },
   ];
 
   useGSAP(() => {
+    if(window.innerWidth <= 768) return;
     const split = new SplitText(".services-head", {
       type: "lines",
       linesClass: "line",
@@ -102,11 +103,37 @@ const Services: React.FC = () => {
   },[]);
 
   return (
-    <div className="services w-[90%] bg-(--seasalt) mt-20 px-15 pt-10 pb-30 border-3 rounded-xl mx-auto">
-      <h2 className="text-7xl services-head text-center mt-15 mb-30 mx-auto relative w-fit rounded-2xl text-[#f76b1c]">
+    <div className="services w-[90%] bg-(--seasalt) mt-20 md:px-15 px-5 md:pt-10 pt-5 md:pb-30 pb-5 border-3 rounded-xl mx-auto">
+      <h2 className="lg:text-6xl text-nowrap xl:text-7xl md:text-6xl text-3xl services-head text-center mt-15 mb-30 mx-auto relative w-fit rounded-2xl text-[#f76b1c]">
         Services We Provide
       </h2>
-      <div className="services-container flex h-auto w-[100%] overflow-hidden relative border-x-1 py-9 px-3">
+      <div className=" flex flex-wrap gap-20">
+          {servicesItems.map((e: Services, index: number) => {
+            return (
+              <div
+                key={index}
+                className="w-full shadow-xl md:hidden hover:text-[#f76b1c] cursor-default duration-200 hover:-translate-y-[4px] hover:shadow-2xl slide-card flex-shrink-0 flex flex-col gap-8 px-5 py-5 items-start rounded-2xl"
+                onClick={() => {
+                  navigate(`${e.link}`);
+                }}
+              >
+                <div className="icon-area w-full flex justify-between">
+                  <div className="icon translate-y-1 w-[20%]">{e.icon}</div>{" "}
+                  <div className="gradient-text text-lg">{e.demand}</div>{" "}
+                </div>
+                <h3 className="text-3xl text-(--jet)">{e.heading}</h3>
+                <p className="text-(--jet) ">{e.description}</p>
+                <button className="btn-services btn btn-2 border-1 border-white/30 px-4 py-1 rounded-md active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 duration-200 cursor-pointer">
+                  Check Out{" "}
+                  <span className="arrow inline-block ml-1">
+                    <FontAwesomeIcon icon={faArrowRight} />
+                  </span>
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      <div className="services-container hidden md:flex h-auto w-[100%] overflow-hidden relative border-x-1 py-9 px-3">
         <div className="cards-container ml-10 flex flex-nowrap gap-20">
           {servicesItems.map((e: Services, index: number) => {
             return (
