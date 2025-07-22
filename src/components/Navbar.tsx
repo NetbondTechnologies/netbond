@@ -90,17 +90,17 @@ const Navbar: React.FC<Props> = ({ location }) => {
   return (
     <>
       <span
-        className={`fixed w-screen md:hidden block h-[85vh] rounded-t-4xl z-9999 ${
-          menu ? "translate-x-0 opacity-100" : "-translate-x-[100%] opacity-0"
+        className={`fixed w-screen md:hidden block h-0 z-9999 ${
+          menu ? "translate-x-0 opacity-100" : "translate-x-[100%] opacity-0"
         } left-0 bottom-0 bg-black text-white text-2xl px-5 duration-300 py-3`}
       ></span>
       <div
         className={`lg:w-[80vw] w-[98vw] md:w-[85vw] fixed top-[20px] select-none navbar ${
           visible ? "navbar--visible" : "navbar--hidden"
-        } py-1 shadow-lg backdrop-blur-lg left-1/2 translate-x-[-50%] lg:px-15 rounded-4xl flex items-center justify-between pl-3 pr-8`}
+        } py-1 shadow-lg backdrop-blur-lg left-1/2 translate-x-[-50%] xl:px-15 rounded-4xl flex items-center justify-between pl-3 pr-8`}
       >
         <img
-          className="cursor-pointer nav-logo md:py-1 px-2 rounded-xl lg:w-[15%] md:w-[25%] w-40 hover:-translate-y-1 hover:shadow-xl duration-300"
+          className="cursor-pointer nav-logo md:py-1 px-2 rounded-xl lg:w-[18%] xl:w-[15%] md:w-[25%] w-40 hover:-translate-y-1 hover:shadow-xl duration-300"
           src="./asset 0.png"
           alt=""
           onClick={() => {
@@ -108,7 +108,7 @@ const Navbar: React.FC<Props> = ({ location }) => {
             handleScrollTop();
           }}
         />
-        <ul className="nav-items bg-white/85 lg:px-6 py-2 lg:text-base md:text-sm rounded-2xl hidden md:flex lg:gap-8 md:gap-4 md:px-4">
+        <ul className="nav-items bg-white/85 xl:px-6 py-2 xl:text-base md:text-sm rounded-2xl hidden md:flex xl:gap-8 md:gap-4 md:px-4">
           <li
             className="relative cursor-pointer w-fit hover:translate-x-2 duration-200"
             onClick={() => {
@@ -126,7 +126,7 @@ const Navbar: React.FC<Props> = ({ location }) => {
               alt=""
             />
             <div className="w-[5vw] h-[10px] absolute top-[20px] bg-transparent"></div>
-            <div className="absolute w-[45vw] dropdown-items flex flex-wrap gap-[10px] justify-center items-center h-auto -left-[300px] px-2 py-4 rounded-xl shadow-xl top-[30px] bg-white">
+            <div className="absolute xl:w-[45vw] md:w-[80vw] dropdown-items flex flex-wrap gap-[10px] justify-center items-center h-auto xl:-left-[300px] md:right-1/3 lg:right-1/10 xl:translate-x-0 translate-x-1/2 px-2 py-4 rounded-xl shadow-xl top-[30px] bg-white">
               {dropdownItems.map((item: DropDown) => {
                 return (
                   <NavLink
@@ -192,7 +192,7 @@ const Navbar: React.FC<Props> = ({ location }) => {
             );
             handleScrollTop();
           }}
-          className="btn border-1 border-white/30 px-4 py-1 lg:text-base lg:ml-10 md:ml-2 hidden md:block rounded-md active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 duration-200 cursor-pointer"
+          className="btn border-1 border-white/30 px-4 py-1 xl:text-base xl:ml-10 md:ml-2 hidden md:block rounded-md active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 duration-200 cursor-pointer"
         >
           {location === "/" || location === "/contact" || location === "/about"
             ? "Get Started"

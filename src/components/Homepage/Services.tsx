@@ -14,6 +14,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import React, { type ReactElement } from "react";
 import { useNavigate } from "react-router";
+import { useMediaQuery } from "../useMediaQuery";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
@@ -27,6 +28,7 @@ export interface Services {
 
 const Services: React.FC = () => {
   const navigate = useNavigate();
+  const isLargeScreen = useMediaQuery("(min-width: 769px)");
   const servicesItems: Services[] = [
     {
       demand: "Most Demanded",
@@ -79,7 +81,7 @@ const Services: React.FC = () => {
   ];
 
   useGSAP(() => {
-    if(window.innerWidth <= 768) return;
+    if(!isLargeScreen) return;
     const split = new SplitText(".services-head", {
       type: "lines",
       linesClass: "line",
@@ -100,19 +102,24 @@ const Services: React.FC = () => {
         pin: false,
       },
     });
+
+    return ()=>{
+       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    
+    }
   },[]);
 
   return (
     <div className="services w-[90%] bg-(--seasalt) mt-20 md:px-15 px-5 md:pt-10 pt-5 md:pb-30 pb-5 border-3 rounded-xl mx-auto">
-      <h2 className="lg:text-6xl text-nowrap xl:text-7xl md:text-6xl text-3xl services-head text-center mt-15 mb-30 mx-auto relative w-fit rounded-2xl text-[#f76b1c]">
+      <h2 className="lg:text-6xl text-nowrap xl:text-7xl md:text-6xl text-3xl services-head text-center mt-10 mb-15 xl:mt-15 xl:mb-30 mx-auto relative w-fit rounded-2xl text-[#f76b1c]">
         Services We Provide
       </h2>
-      <div className=" flex flex-wrap gap-20">
+      <div className=" flex flex-wrap md:hidden gap-20">
           {servicesItems.map((e: Services, index: number) => {
             return (
               <div
                 key={index}
-                className="w-full shadow-xl md:hidden hover:text-[#f76b1c] cursor-default duration-200 hover:-translate-y-[4px] hover:shadow-2xl slide-card flex-shrink-0 flex flex-col gap-8 px-5 py-5 items-start rounded-2xl"
+                className="w-full shadow-xl hover:text-[#f76b1c] cursor-default duration-200 hover:-translate-y-[4px] hover:shadow-2xl slide-card flex-shrink-0 flex flex-col gap-8 px-5 py-5 items-start rounded-2xl"
                 onClick={() => {
                   navigate(`${e.link}`);
                 }}

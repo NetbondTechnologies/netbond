@@ -59,13 +59,13 @@ const Info = () => {
       ref={sectionRef}
     >
       <h2
-        className="lg:text-7xl md:text-5xl text-3xl headingInfo text-center pb-10"
+        className="xl:text-7xl lg:text-6xl md:text-5xl text-3xl headingInfo text-center pb-10"
         ref={containerRef}
       >
         Our Task , Your Ask
       </h2>
       <div
-        className={`md:w-[89%] w-[90%] mx-auto paragraphDiv para flex flex-col justify-center text-center gap-2 text-base md:text-lg lg:text-2xl`}
+        className={`md:w-[89%] w-[90%] mx-auto paragraphDiv para flex flex-col justify-center text-center gap-2 text-base md:text-lg lg:text-xl xl:text-2xl`}
         ref={paragraphRef}
       >
         <div className="md:hidden text-justify">

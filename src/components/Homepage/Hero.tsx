@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
   return (
     <>
       <div
-        className="w-full h-screen z-[100] flex flex-col justify-start items-center gap-10 hero-top pt-35 lg:pt-45"
+        className="w-full h-screen z-[100] flex flex-col justify-start items-center gap-10 hero-top pt-30 xl:pt-45"
         id="hero"
       >
         <h3 className="md:text-2xl text-xl text-center cursor-default md:pb-3 mx-auto">
@@ -31,7 +31,7 @@ const Hero: React.FC = () => {
           </div>{" "}
           PRESENCE
         </h3>
-        <h1 className="lg:text-7xl md:text-6xl text-4xl w-[90%]  text-center mx-auto  lg:w-[63%] md:w-[80%]">
+        <h1 className="xl:text-7xl md:text-6xl text-4xl w-[90%] text-center mx-auto xl:w-[63%] md:w-[80%]">
           Best IT Solutions Company in{" "}
           <span className="md:text-8xl text-6xl location text-[#f76b1c]">Chandigarh</span>{" "}
         </h1>

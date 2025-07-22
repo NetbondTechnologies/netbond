@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { handleScrollTop } from "../../App";
 import { useNavigate } from "react-router";
+import { useMediaQuery } from "../useMediaQuery";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 interface Card {
@@ -14,6 +15,8 @@ interface Card {
 }
 
 const Display = () => {
+  
+    const isLargeScreen = useMediaQuery("(min-width: 769px)");
   const navigate = useNavigate();
   const cardsArr: Card[] = [
     { title: "Understand Your Goals", image: "./asset 11.png" },
@@ -23,6 +26,7 @@ const Display = () => {
   ];
 
   useGSAP(() => {
+    if(!isLargeScreen) return;
     let imgDiv = Array.from(
       document.querySelectorAll(".img-card-div") as NodeListOf<HTMLElement>
     );
@@ -73,9 +77,13 @@ const Display = () => {
       }
       num -= 90;
     });
+    return ()=>{
+       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    }
   }, []);
 
   useEffect(() => {
+    if(!isLargeScreen) return;
     let h3Elements = Array.from(
       document.querySelectorAll(
         ".display-text"
@@ -127,24 +135,22 @@ const Display = () => {
   return (
     <>
       <div className="flex flex-col items-center display-section justify-center mb-20">
-        <div className="display-container w-full pt-40 pb-15 items-center flex">
-          <div className="w-[60%] h-[605px] relative -left-40">
+        <div className="display-container w-full relative pt-40 xl:pb-15 items-center xl:flex">
+          <div className="xl:w-[60%] md:w-[80%] w-[90%] xl:mx-0 mx-auto xl:h-[605px] h-[350px] md:h-[450px] relative xl:-left-40">
             <img
               src="./asset 29.png"
               className="absolute z-[2] dispImage"
               alt=""
             />
-            <div className="w-[122%] h-[2px] absolute bg-black left-0 top-0 origin-top-left rotate-35 opacity-40"></div>
-            <div className="w-[122%] h-[2px] absolute bg-black left-0 origin-top-left -rotate-35 bottom-0 opacity-40"></div>
           </div>
-          <div className="z-[5] display-text-all">
-            <h3 className="text-9xl/40 cursor-default display-text hover:scale-105 hover:rotate-0 -translate-x-60 rotate-2">
+          <div className="z-[5] text-center left-1/2 -translate-x-1/2 md:top-50 xl:left-0 xl:translate-x-0 absolute top-30 xl:static  display-text-all">
+            <h3 className="lg:text-9xl/40 text-7xl/20 md:text-8xl cursor-default display-text hover:scale-105 hover:rotate-0 xl:-translate-x-60 xl:rotate-2">
               Conversion
             </h3>
-            <h3 className="text-9xl/40 cursor-default display-text w-fit hover:scale-105 hover:rotate-0 translate-x-20 rotate-2">
+            <h3 className="xl:text-9xl/40 lg:text-8xl text-6xl/20 cursor-default display-text xl:text-black text-white w-fit mx-auto xl:mx-0 hover:scale-105 hover:rotate-0 xl:translate-x-20 xl:rotate-2">
               Through
             </h3>
-            <h3 className="text-9xl/40 cursor-default display-text hover:scale-105 hover:rotate-0 -translate-x-60 -rotate-2">
+            <h3 className="xl:text-9xl/40 text-7xl/20 md:text-8xl font-bold cursor-default display-text hover:scale-105 hover:rotate-0 xl:-translate-x-60 xl:-rotate-2">
               Immersion
             </h3>
           </div>
@@ -164,24 +170,24 @@ const Display = () => {
         </button>
       </div>
       <div className="card-animation bg-[#141414] mt-30 z-[50] py-25">
-        <h1 className="text-9xl w-fit card-title pb-20 mx-auto">
-          How does it work <span className="question-mark ml-2">?</span>
+        <h1 className="xl:text-9xl md:text-7xl text-4xl w-fit card-title pb-20 mx-auto">
+          How does it work <span className="question-mark md:text-7xl text-6xl ml-2">?</span>
         </h1>
         <div className="img-cards w-[80%] text-center relative mx-auto">
           {cardsArr?.map((e: Card, i: number) => {
             return (
               <div
-                className="flex justify-around bg-() img-card-div mb-10 z-1"
+                className="flex md:flex-row flex-col justify-between items-center gap-10 xl:items-start xl:justify-around img-card-div mb-20 md:mb-10 z-1"
                 key={i}
               >
                 {" "}
                 <h1
-                  className="img-card-title text-8xl pt-60 w-[60%] px-10"
+                  className="img-card-title xl:text-8xl lg:text-6xl md:text-5xl text-center xl:text-start pb-5 text-4xl xl:pt-60 w-full md:w-[45%] xl:w-[60%] xl:px-10"
                   id={`img-card-title${i + 1}`}
                 >
                   {e.title}
                 </h1>{" "}
-                <img className="inline-block  w-[30%] " src={e.image} alt="" />{" "}
+                <img className="inline-block w-[80%] md:w-[50%] lg:w-[40%] xl:w-[30%] " src={e.image} alt="" />{" "}
               </div>
             );
           })}

@@ -13,9 +13,9 @@ const Footer: React.FC = () => {
   return (
     <>
       <div className="bg-[#141414] footer">
-        <div className=" w-[90vw] py-[3%] mx-auto flex justify-start gap-15">
-          <div className="w-[33%]">
-            <img src="asset 0.png" className="w-full" alt="" />
+        <div className=" w-[90vw] py-[3%] mx-auto flex xl:flex-row flex-col justify-start gap-15">
+          <div className="xl:w-[33%]">
+            <img src="asset 0.png" className="w-full lg:w-[60%] lg:block lg:mx-auto" alt="" />
             <div className="w-full mt-5 flex justify-center gap-3">
               <div className="w-[40px] h-[40px] border-1 rounded-4xl border-white p-[7px] text-center hover:bg-[#646464aa] cursor-pointer hover:text-blue-700 duration-150 text-white">
                 <FontAwesomeIcon icon={faFacebookF} />
@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="text-center w-[33%] h-[300px] ">
+          <div className="text-center xl:w-[33%] my-10 xl:my-0 h-[300px] ">
             <h1 className="text-2xl mb-8 useful-links">Useful Links</h1>
             <div className=" flex flex-wrap justify-center gap-x-8 gap-y-10">
               <NavLink
@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
               </NavLink>
             </div>
           </div>
-          <div className="w-[33%]">
+          <div className="xl:w-[33%] xl:pb-0 pb-10">
             <h1 className="text-2xl mb-8 useful-links">Our Address : </h1>
             <div className="address text-lg">
               <span className="font-bold block ">
@@ -105,7 +105,7 @@ const Footer: React.FC = () => {
               Support@netbondtechnologies.com Phone No. – +91 9056995190
             </div>
             <span
-              className="text-lg mt-5 cursor-pointer hover:text-orange-400 text-white block duration-200"
+              className="text-lg mt-5 cursor-pointer px-3 py-2 bg-orange-400 rounded-2xl w-fit hover:text-orange-400 text-white block duration-200"
               onClick={() => {
                 handleScrollTop();
               }}

@@ -18,10 +18,10 @@ const FAQs: React.FC<Props> = ({
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   return (
-    <div className="accordion-faqs w-[90%] mx-auto bg-[#141414] text-start text-white pt-5">
+    <div className="accordion-faqs xl:w-[90%] mx-auto bg-[#141414] text-start text-white pt-5">
       <div className="accordion py-5 border-b" id="accordion">
         <div
-          className="accordion-button flex justify-between items-start w-full text-4xl pb-3 cursor-pointer"
+          className="accordion-button flex justify-between items-start w-full xl:text-4xl text-3xl pb-3 cursor-pointer"
           onClick={() => {
             let tempArr = [...checkAccordion];
             tempArr = tempArr.map((e: boolean, i: number) => {
@@ -33,7 +33,7 @@ const FAQs: React.FC<Props> = ({
           }}
         >
           <div
-            className={`accordion-question text-3xl font-bold ${
+            className={`accordion-question xl:text-3xl md:text-2xl text-xl font-bold ${
               checkAccordion[Acckey] ? "text-(--pumpkin)" : "text-white"
             }`}
           >
@@ -47,7 +47,7 @@ const FAQs: React.FC<Props> = ({
           )}
         </div>
         <div
-          className={`grid overflow-hidden text-lg transition-all duration-300 ease-in-out px-8 ${
+          className={`grid overflow-hidden xl:text-lg transition-all duration-300 ease-in-out px-1 md:px-8 ${
             checkAccordion[Acckey]
               ? "grid-rows-[1fr] opacity-100"
               : "grid-rows-[0fr] opacity-0 "
