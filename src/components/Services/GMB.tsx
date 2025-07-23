@@ -268,12 +268,12 @@ const GMB: React.FC = () => {
 
         <div className="max-w-7xl mx-auto relative">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="bg-white/80 backdrop-blur-md rounded-2xl p-12 border border-gray-200 shadow-2xl">
+            <div className="bg-white/80 backdrop-blur-md rounded-2xl md:p-12 py-12 px-6 border border-gray-200 shadow-2xl">
               <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight hero-text">
                 Dominate Local Search with
                 <span className="text-[#f76b1c]"> Google My Business</span>
               </h1>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed hero-text">
+              <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed hero-text">
                 Transform your business visibility in Zirakpur and beyond. Our
                 expert GMB optimization services help you attract more
                 customers, build trust, and grow your revenue.
@@ -281,12 +281,12 @@ const GMB: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-2 justify-center">
                 <button
                   type="button"
-                  className="btn cta-btn border-white/30 px-6 py-2 text-lg text-center group border-1 rounded-l-md rounded-r-none hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
+                  className="btn cta-btn border-white/30 px-6 py-2 text-lg text-center group border-1 rounded-l-md rounded-r-md md:rounded-r-none hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
                 >
                   <span>Start Your GMB Journey</span>
                   <ArrowRight className="w-5 h-5 inline-block ml-2 group-hover:translate-x-3 transition-all duration-300" />
                 </button>
-                <button className="bg-white/80 backdrop-blur-md text-[#f76b1c] hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white px-8 py-4 rounded-r-full rounded-l-md font-semibold hover:bg-white transition-all duration-300 border cursor-pointer border-[#f76b1c]/20">
+                <button className="bg-white/80 backdrop-blur-md text-[#f76b1c] hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white px-8 py-2 font-bold md:py-4 rounded-r-full rounded-l-full md:rounded-l-md md:font-semibold hover:bg-white transition-all duration-300 border cursor-pointer border-[#f76b1c]/20">
                   View Our Work
                 </button>
               </div>

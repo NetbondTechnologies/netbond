@@ -171,7 +171,7 @@ const Display = () => {
       </div>
       <div className="card-animation bg-[#141414] mt-30 z-[50] py-25">
         <h1 className="xl:text-9xl md:text-7xl text-4xl w-fit card-title pb-20 mx-auto">
-          How does it work <span className="question-mark md:text-7xl text-6xl ml-2">?</span>
+          How does it work <span className="question-mark md:text-8xl text-6xl ml-2">?</span>
         </h1>
         <div className="img-cards w-[80%] text-center relative mx-auto">
           {cardsArr?.map((e: Card, i: number) => {

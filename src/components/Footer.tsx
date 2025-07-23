@@ -105,7 +105,7 @@ const Footer: React.FC = () => {
               Support@netbondtechnologies.com Phone No. – +91 9056995190
             </div>
             <span
-              className="text-lg mt-5 cursor-pointer px-3 py-2 bg-orange-400 rounded-2xl w-fit hover:text-orange-400 text-white block duration-200"
+              className="text-lg mt-5 cursor-pointer px-3 py-2 bg-(--pumpkin) rounded-2xl w-fit hover:text-orange-400 text-white block duration-200 hover:bg-transparent"
               onClick={() => {
                 handleScrollTop();
               }}

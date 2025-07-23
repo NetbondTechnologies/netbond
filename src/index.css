@@ -127,7 +127,6 @@ h1.card-title {
 span.question-mark {
   -webkit-text-stroke: 2px white;
   color: var(--pumpkin);
-  font-size: 9rem;
 }
 button {
   background-color: var(--pumpkin);
@@ -238,9 +237,6 @@ h1.img-card-title {
 @media (max-width: 768px) {
   .cards-container {
     animation: marquee1 20s linear infinite;
-  }
-  span.question-mark {
-    font-size: 6rem;
   }
   h1#img-card-title1 {
     transform: none;

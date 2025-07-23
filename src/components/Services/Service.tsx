@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import type { ReactElement } from "react";
 import { useNavigate } from "react-router";
+import { useMediaQuery } from "../useMediaQuery";
 
 interface Service {
   heading: string;
@@ -23,6 +24,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP, SplitText);
 
 const Service = () => {
   const navigate = useNavigate();
+  const isLargeScreen = useMediaQuery("(min-width: 769px)");
 
   const productStrategy = [
     "Strategy Workshops",
@@ -113,6 +115,7 @@ const Service = () => {
     },
   ];
   useGSAP(() => {
+    if (!isLargeScreen) return;
     ScrollTrigger.create({
       trigger: ".offer-heading",
       start: "top 10%",
@@ -150,7 +153,7 @@ const Service = () => {
     const uiTags = gsap.utils.toArray(".ui-tags");
     const uxTags = gsap.utils.toArray(".ux-tags");
 
-    productTags.forEach((tag: any, i: number)=>{
+    productTags.forEach((tag: any, i: number) => {
       gsap.to(tag, {
         translateX: `${(210 / productTags.length) * i}`,
         scrollTrigger: {
@@ -160,8 +163,8 @@ const Service = () => {
           scrub: 1,
         },
       });
-    }) 
-    uiTags.forEach((tag: any, i: number)=>{
+    });
+    uiTags.forEach((tag: any, i: number) => {
       gsap.to(tag, {
         translateX: `${(210 / uiTags.length) * i}`,
         scrollTrigger: {
@@ -171,8 +174,8 @@ const Service = () => {
           scrub: 1,
         },
       });
-    }) 
-    uxTags.forEach((tag: any, i: number)=>{
+    });
+    uxTags.forEach((tag: any, i: number) => {
       gsap.to(tag, {
         translateX: `${(210 / uxTags.length) * i}`,
         scrollTrigger: {
@@ -182,12 +185,20 @@ const Service = () => {
           scrub: 1,
         },
       });
-    }) 
+    });
 
-    const allTitles = Array.from(document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>)
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
+  useGSAP(() => {
+    const allTitles = Array.from(
+      document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>
+    );
 
     allTitles.map((title: HTMLElement) => {
-      const split = new SplitText(title, { type: "lines" ,mask: "lines"});
+      const split = new SplitText(title, { type: "lines", mask: "lines" });
       gsap.from(split.lines, {
         y: 100,
         opacity: 0,
@@ -200,32 +211,35 @@ const Service = () => {
           end: "top 30%",
         },
       });
-    })
+    });
 
     const split = new SplitText(".hero-text", { type: "lines", mask: "lines" });
-      gsap.from(split.lines, {
-        yPercent: 100,
-        opacity: 0,
-        duration: 1.5,
-        ease: "power4.out",
-        stagger: 0.1,
-      });
+    gsap.from(split.lines, {
+      yPercent: 100,
+      opacity: 0,
+      duration: 1.5,
+      ease: "power4.out",
+      stagger: 0.1,
+    });
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      split.revert();
+    };
   }, []);
-
 
   return (
     <>
       <div className="service">
-        <div className="service-container pt-50 shadow-2xl rounded-b-xl shadow-[#f76b1c] pb-40">
-          <h1 className="text-8xl w-[95%] service-header font-stretch-50% px-[5%] hero-text">
+        <div className="service-container pt-30 md:pt-50 shadow-2xl rounded-b-xl shadow-[#f76b1c] pb-10 md:pb-25 lg:pb-30 xl:pb-40">
+          <h1 className="xl:text-8xl md:text-5xl lg:text-7xl text-3xl text-center md:text-start w-[95%] service-header font-stretch-50% px-[5%] hero-text">
             {`We're a full - service digital studio`.toUpperCase()}
           </h1>
         </div>
-        <h2 className="pb-10 text-7xl w-[90%] mx-auto my-20 pr-[40%]">
+        <h2 className="md:pb-10 xl:text-7xl lg:text-5xl md:text-4xl text-2xl text-center md:text-start w-[90%] mx-auto md:my-20 my-10 xl:pr-[40%]">
           Digital Product Design Services and Solutions We offer
         </h2>
-        <span className="offer-text block text-3xl/10 mx-[5%] my-15 overflow-x-hidden py-15 px-10 border-l-25 bg-white border-(--pumpkin) font-bold ">
-          <span className="h-[160px] overflow-hidden block">
+        <span className="offer-text block md:text-lg lg:text-3xl/10 text-sm md:mx-[5%] mx-[2%] mt-1 md:my-15 overflow-x-hidden md:py-15 py-5 px-5 md:px-10 md:border-l-25 border-l-12 bg-white border-(--pumpkin) font-bold ">
+          <span className="md:h-[170px] lg:h-[160px] h-[140px] overflow-hidden block">
             We lead your startup at every step of its growth, providing
             unparalleled personal service at every interaction. Whether it’s
             launching an MVP, revamping an existing product, securing funding
@@ -234,12 +248,12 @@ const Service = () => {
             custom-tailored design services to fulfill your expectations.
           </span>
         </span>
-        <div className="offers flex px-[5%] py-45 items-start">
-          <h2 className="text-6xl offer-heading w-[50%]">
+        <div className="offers flex lg:flex-row flex-col px-[5%] lg:py-45 py-25 items-start">
+          <h2 className="lg:text-6xl md:text-4xl text-3xl w-fit pb-8 lg:pb-0 mx-auto offer-heading lg:w-[50%]">
             <span className="text-[#f76b1c]">NetBond</span> offers you
           </h2>
 
-          <ul className="w-[50%]">
+          <ul className="lg:w-[50%]">
             {servicesItems.map((value: Service) => {
               return (
                 <>
@@ -250,10 +264,10 @@ const Service = () => {
                     }}
                   >
                     <div>
-                      <span className="text-4xl font-bold pb-4 block">
+                      <span className="lg:text-4xl text-2xl font-bold pb-4 block">
                         {value.heading}
                       </span>
-                      <span className="text-xl block">
+                      <span className="lg:text-xl block">
                         {value.description}{" "}
                       </span>
                     </div>
@@ -268,17 +282,17 @@ const Service = () => {
         </div>
 
         <div className="companies w-[90%] mx-auto">
-          <h5 className="text-lg w-[18%] mx-auto mb-10 text-center">
+          <h2 className="lg:text-lg md:text-2xl md:w-[50%] text-xl lg:w-[18%] mx-auto mb-10 text-center">
             Industries we serve with Our Digital UX Design Expertise
-          </h5>
-          <h2 className="text-4xl w-[80%] mx-auto mb-30 text-center">
+          </h2>
+          <h5 className="lg:text-4xl text-lg lg:w-[80%] mx-auto mb-10 lg:mb-30 text-center">
             {" "}
             Our industry – specific Knowledge and digital product design
             expertise contribute to solving the right problems, creating the
             right products, and designing the products.{" "}
-          </h2>
+          </h5>
 
-          <div className="company-data grid select-none grid-cols-3 gap-2 px-[5%]">
+          <div className="company-data grid select-none grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:px-[5%]">
             {companyData.map((value: Data, i: number) => {
               if (i === companyData.length - 1) {
                 return (
@@ -303,29 +317,33 @@ const Service = () => {
           </div>
         </div>
 
-        <div className="poster-area w-full h-[800px] relative">
+        <div className="poster-area w-full md:h-[600px] lg:h-[800px] h-[800px] relative">
           <div className="posterBG w-full h-[100%] rounded-2xl absolute left-0 top-0 shadow-2xl"></div>
           <div className="poster w-full h-[800px] my-20 object-cover overflow-y-hidden px-[10%]">
-            <div className="top-1/2 relative -translate-y-1/4 poster-text">
-              <h2 className="text-7xl pb-15">Digital Product Design Process</h2>
-              <h3 className="text-2xl pb-10">
+            <div className="lg:top-1/2 relative lg:-translate-y-1/4 pt-20 lg:pt-0 poster-text">
+              <h2 className="xl:text-7xl lg:text-5xl md:text-4xl text-3xl pb-15">
+                Digital Product Design Process
+              </h2>
+              <h3 className="lg:text-2xl text-lg pb-10">
                 We do not take on projects that involve blind conformity or
                 designing out of context. We won’t settle for a user interface
                 design that is misaligned with your product and digital
                 strategy. Neither will we launch web development ventures
                 without user testing to validate our design solutions.
               </h3>
-              <h3 className="text-2xl pb-10">
+              <h3 className="lg:text-2xl text-lg pb-10">
                 Instead, we create scalable digital products that meet the ever
                 – evolving demands of our customers, ensuring long – term
                 sustainability.
               </h3>
-              <button className="px-8 py-2 bg-[#E26E02] text-white rounded-md font-medium hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white transition-all duration-200 cursor-pointer"
-              onClick={()=>{
-                navigate("/contact")
-              }}>
-              Get in Touch
-            </button>
+              <button
+                className="px-8 py-2  text-sm md:text-base bg-[#E26E02] text-white rounded-md font-medium hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white transition-all duration-200 cursor-pointer"
+                onClick={() => {
+                  navigate("/contact");
+                }}
+              >
+                Get in Touch
+              </button>
             </div>
           </div>
         </div>

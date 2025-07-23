@@ -15,7 +15,7 @@ const Accordion: React.FC<Props> = ({ faqs }) => {
 
   return (
     <>
-      <div className="faqs w-full text-center px-[10%] py-15 bg-[#141414]">
+      <div className="faqs w-full text-center md:px-[10%] px-[5%] py-15 bg-[#141414]">
         <h1 className="xl:text-7xl md:text-4xl text-2xl relative w-fit mx-auto pb-4 faqs-title">
           Frequently Asked Questions
         </h1>

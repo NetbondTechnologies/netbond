@@ -1,18 +1,13 @@
 import React, { useState } from "react";
 import {
-  
   Target,
   TrendingUp,
   Users,
-  
-  
   Globe,
-  
   CheckCircle,
   ArrowRight,
   Award,
   Lightbulb,
-  
   Database,
   Rocket,
   Settings,
@@ -29,7 +24,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
-gsap.registerPlugin(ScrollTrigger, SplitText,ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger, SplitText, ScrollToPlugin);
 
 interface Service {
   icon: React.ReactNode;
@@ -59,41 +54,40 @@ interface Benefit {
   description: string;
   metric: string;
 }
-interface Form{
+interface Form {
   name: string;
-    email: string;
-    message: string;
-    business: string;
+  email: string;
+  message: string;
+  business: string;
 }
 
 const App: React.FC = () => {
+  const [formData, setFormData] = useState<Form>({
+    name: "",
+    email: "",
+    message: "",
+    business: "",
+  });
 
-   const [formData, setFormData] = useState<Form>({
+  let handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [event.target.name]: event.target.value,
+      };
+    });
+  };
+  let handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFormData({
       name: "",
       email: "",
       message: "",
-      business: ""
+      business: "",
     });
-  
-    let handleChange = (
-      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
-      setFormData((prev) => {
-        return {
-          ...prev,
-          [event.target.name]: event.target.value,
-        };
-      });
-    };
-    let handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      setFormData({
-        name: "",
-      email: "",
-      message: "",
-      business: ""
-      })
-    };
+  };
   const services: Service[] = [
     {
       icon: <Target className="w-6 h-6" />,
@@ -250,12 +244,11 @@ const App: React.FC = () => {
     },
   ];
 
-  
   useGSAP(() => {
     const allTitles = Array.from(
       document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>
     );
-    
+
     allTitles.map((title: HTMLElement) => {
       const split = new SplitText(title, { type: "lines", mask: "lines" });
       gsap.from(split.lines, {
@@ -280,62 +273,64 @@ const App: React.FC = () => {
         });
       });
     }
-    gsap.from(".bar",{
-        width: "0%",
-        stagger: 0.1,
+    gsap.from(".bar", {
+      width: "0%",
+      stagger: 0.1,
+      duration: 3,
+      ease: "power4.inOut",
+      scrollTrigger: {
+        trigger: "#stat-container",
+        start: "top 80%",
+        end: "top 30%",
+      },
+    });
+
+    const metrics = Array.from(
+      document.querySelectorAll(".metric") as NodeListOf<HTMLElement>
+    );
+    metrics.map((metric: HTMLElement) => {
+      gsap.from(metric, {
+        textContent: "0",
         duration: 3,
-        ease:"power4.inOut",
+        ease: "power4.inOut",
+        snap: { textContent: 1 },
+        stagger: 1,
         scrollTrigger: {
           trigger: "#stat-container",
           start: "top 80%",
           end: "top 30%",
-        }
-      })
-
-      const metrics = Array.from(document.querySelectorAll(".metric") as NodeListOf<HTMLElement>);
-      metrics.map((metric: HTMLElement) => {
-        gsap.from(metric, {
-          textContent: "0",
-          duration: 3,
-          ease: "power4.inOut",
-          snap: { textContent: 1 },
-          stagger: 1,
-          scrollTrigger: {
-            trigger: "#stat-container",
-            start: "top 80%",
-            end: "top 30%",
-          }
-        });
+        },
       });
+    });
 
-      const allTexts = Array.from(
-            document.querySelectorAll(".hero-text") as NodeListOf<HTMLElement>
-          );
-          allTexts.map((e: HTMLElement) => {
-            const split = new SplitText(e, { type: "lines", mask: "lines" });
-            gsap.from(split.lines, {
-              yPercent: 100,
-              opacity: 0,
-              duration: 1.2,
-              ease: "power4.out",
-              delay:0.4,
-              stagger: 0.2,
-            });
-          });
+    const allTexts = Array.from(
+      document.querySelectorAll(".hero-text") as NodeListOf<HTMLElement>
+    );
+    allTexts.map((e: HTMLElement) => {
+      const split = new SplitText(e, { type: "lines", mask: "lines" });
+      gsap.from(split.lines, {
+        yPercent: 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power4.out",
+        delay: 0.4,
+        stagger: 0.2,
+      });
+    });
 
-    return ()=>{
+    return () => {
       button?.removeEventListener("click", () => {
         gsap.to(window, {
           scrollTo: { y: "#contacts", offsetY: 80, autoKill: true },
           duration: 1,
         });
       });
-    }
+    };
   }, []);
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="relative min-h-screen flex pt-[50px] items-center overflow-hidden">
+      <section className="relative min-h-screen flex md:pt-[50px] pt-[100px] items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-white via-orange-50 to-orange-100"></div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
@@ -613,7 +608,9 @@ const App: React.FC = () => {
                       <span className="font-semibold text-[#141414]">
                         Revenue Growth
                       </span>
-                      <span className="text-[#f76b1c] font-bold">+<span className="metric">285</span>%</span>
+                      <span className="text-[#f76b1c] font-bold">
+                        +<span className="metric">285</span>%
+                      </span>
                     </div>
                     <div className="w-full h-3 bg-gray-200 rounded-full">
                       <div className="w-4/5 h-3 bg-gradient-to-r from-[#f76b1c] bar to-orange-400 rounded-full"></div>
@@ -625,7 +622,9 @@ const App: React.FC = () => {
                       <span className="font-semibold text-[#141414]">
                         Lead Quality
                       </span>
-                      <span className="text-[#f76b1c] font-bold">+<span className="metric">180</span>%</span>
+                      <span className="text-[#f76b1c] font-bold">
+                        +<span className="metric">180</span>%
+                      </span>
                     </div>
                     <div className="w-full h-3 bg-gray-200 rounded-full">
                       <div className="w-3/4 h-3 bg-gradient-to-r from-[#f76b1c] bar to-orange-400 rounded-full"></div>
@@ -637,7 +636,9 @@ const App: React.FC = () => {
                       <span className="font-semibold text-[#141414]">
                         Sales Velocity
                       </span>
-                      <span className="text-[#f76b1c] font-bold">+<span className="metric">150</span>%</span>
+                      <span className="text-[#f76b1c] font-bold">
+                        +<span className="metric">150</span>%
+                      </span>
                     </div>
                     <div className="w-full h-3 bg-gray-200 rounded-full">
                       <div className="w-2/3 h-3 bg-gradient-to-r from-[#f76b1c] bar to-orange-400 rounded-full"></div>
@@ -649,7 +650,9 @@ const App: React.FC = () => {
                       <span className="font-semibold text-[#141414]">
                         Customer LTV
                       </span>
-                      <span className="text-[#f76b1c] font-bold">+<span className="metric">220</span>%</span>
+                      <span className="text-[#f76b1c] font-bold">
+                        +<span className="metric">220</span>%
+                      </span>
                     </div>
                     <div className="w-full h-3 bg-gray-200 rounded-full">
                       <div className="w-5/6 h-3 bg-gradient-to-r from-[#f76b1c] bar to-orange-400 rounded-full"></div>
@@ -797,59 +800,62 @@ const App: React.FC = () => {
               <h3 className="text-2xl font-bold text-[#141414] mb-8">
                 Get Your B2B Growth Audit
               </h3>
-              <form className="space-y-6" onSubmit={(e: React.FormEvent<HTMLFormElement>)=>{
-                handleSubmit(e);
-              }}>
-                                  <label htmlFor="name" className=" block w-full mb-2">
-              Full Name <span className="text-red-600">*</span>
-            </label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
-                      handleChange(e);
-                    }}
-                    placeholder="John Doe"
-                    className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200  px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none"
-                  />
-                  
-                              <label htmlFor="email" className=" block w-full mb-2">
-              Email <span className="text-red-600">*</span>
-            </label>
+              <form
+                className="space-y-6"
+                onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+                  handleSubmit(e);
+                }}
+              >
+                <label htmlFor="name" className=" block w-full mb-2">
+                  Full Name <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange(e);
+                  }}
+                  placeholder="John Doe"
+                  className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200  px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none"
+                />
+
+                <label htmlFor="email" className=" block w-full mb-2">
+                  Email <span className="text-red-600">*</span>
+                </label>
                 <input
                   type="email"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
-                      handleChange(e);
-                    }}
-                    name="email"
-                    id="email"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange(e);
+                  }}
+                  name="email"
+                  id="email"
                   placeholder="johndoe@gmail.com"
                   className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200  px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none"
                 />
-                   <label htmlFor="business" className=" block w-full mb-2">
-              Business Name <span className="text-red-600">*</span>
-            </label>
+                <label htmlFor="business" className=" block w-full mb-2">
+                  Business Name <span className="text-red-600">*</span>
+                </label>
                 <input
                   type="text"
-                   onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
-                      handleChange(e);
-                    }}
-                    name="business"
-                    id="business"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange(e);
+                  }}
+                  name="business"
+                  id="business"
                   placeholder="Your Business Name"
                   className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200  px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none"
                 />
-                  <label htmlFor="message" className=" block w-full mb-2">
-              Message 
-            </label>
+                <label htmlFor="message" className=" block w-full mb-2">
+                  Message
+                </label>
                 <textarea
                   placeholder="Describe your biggest B2B challenge..."
                   id="message"
-                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>)=>{
-                      handleChange(e);
-                    }}
-                    name="message"
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                    handleChange(e);
+                  }}
+                  name="message"
                   rows={6}
                   className="w-full border-2 rounded-lg focus:ring-2 focus:ring-[#f76b1c] focus:ring-offset-2 duration-200 transition-all focus:ring-offset-white border-gray-200 px-4 py-3 text-[#141414] placeholder-gray-500 focus:outline-none resize-none"
                 ></textarea>
