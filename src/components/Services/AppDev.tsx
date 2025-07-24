@@ -40,6 +40,7 @@ import { SplitText } from "gsap/SplitText";
 import {  useNavigate } from "react-router";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { handleScrollTop } from "../../App";
+import { useMediaQuery } from "../useMediaQuery";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP, SplitText, ScrollToPlugin);
 
@@ -243,14 +244,9 @@ const AppDev = () => {
         "We follow best practices for app security, including data encryption, secure APIs, and compliance with industry standards to safeguard user data and privacy.",
     },
   ];
+    const isLargeScreen = useMediaQuery("(min-width: 769px)");
 
   useGSAP(() => {
-    ScrollTrigger.create({
-      trigger: ".appdev-service-title",
-      start: "top 10%",
-      end: "+=285%",
-      pin: true,
-    });
     const allTitles = Array.from(
       document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>
     );
@@ -306,11 +302,26 @@ const AppDev = () => {
     }
   }, []);
 
+  useGSAP(()=>{
+    if(!isLargeScreen) return;
+    ScrollTrigger.create({
+      trigger: ".appdev-service-title",
+      start: "top 10%",
+      end: "+=285%",
+      pin: true,
+    });
+    return()=>{
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    }
+  },[])
+
   return (
     <section className="appDev">
-      <section className="appDev-panel mb-20 pt-[370px] bg-[url(./Spectral.jpg)] rounded-b-3xl shadow-2xl shadow-gray-500 bg-cover px-[5%] pb-[150px]">
-        <h1 className="text-8xl mb-8 hero-text">Application Development</h1>
-        <p className="text-lg hero-text">
+      <section className="appDev-panel md:mb-20 mb-10 xl:pt-[370px] lg:[250px] md:pt-[180px] pt-[130px] bg-[url(./Spectral.jpg)] rounded-b-3xl shadow-2xl shadow-gray-500 bg-cover px-[5%] pb-[50px] md:pb-[150px]">
+        <h1 className="md:text-8xl text-5xl mb-8 hero-text">
+          Application Development
+        </h1>
+        <p className="lg:text-lg md:block hidden hero-text">
           Mobile Application Development is the process of designing, building,
           and maintaining software applications specifically for mobile devices,
           such as smartphones and tablets. This involves creating user-friendly,
@@ -318,84 +329,89 @@ const AppDev = () => {
           objectives, leveraging advanced technologies, and ensuring seamless
           functionality across multiple platforms like iOS and Android.
         </p>
+        <p className="md:text-lg text-sm md:hidden hero-text">
+          Mobile Application Development is the process of designing, building,
+          and maintaining software applications specifically for mobile devices,
+          such as smartphones and tablets.
+        </p>
       </section>
       <section className="appdev-sec-1 w-[90%] mx-auto rounded-3xl flex flex-col items-center justify-center gap-8 mb-20">
-        <h2 className="text-4xl mb-5">
+        <h2 className="md:text-4xl text-center md:text-start text-2xl mb-5">
           Vast Mobile App Development Service in{" "}
           <span className="text-(--pumpkin)"> Zirakpur</span>
         </h2>
         <div className="chips flex text-center flex-wrap justify-center items-center gap-4">
-          <div className="chip w-[45%] px-5 py-4 bg-black text-white text-lg rounded-3xl border-2 border-black hover:bg-white hover:text-black duration-300">
+          <div className="chip w-full md:w-[45%] px-5 py-4 bg-black text-white text-lg rounded-3xl border-2 border-black hover:bg-white hover:text-black duration-300">
             <FontAwesomeIcon
               className="w-[100%] text-3xl mb-2"
               icon={faApple}
             />{" "}
             iOS App Development
           </div>
-          <div className="chip w-[45%] px-5 py-4 bg-black text-white text-lg rounded-3xl border-2 border-black hover:bg-white hover:text-black duration-300">
+          <div className="chip w-full md:w-[45%] px-5 py-4 bg-black text-white text-lg rounded-3xl border-2 border-black hover:bg-white hover:text-black duration-300">
             <FontAwesomeIcon
               className="w-[100%] text-3xl mb-2"
               icon={faAndroid}
             />{" "}
             Android App Development
           </div>
-          <div className="chip w-[45%] px-5 py-4 bg-black text-white text-lg rounded-3xl border-2 border-black hover:bg-white hover:text-black duration-300">
+          <div className="chip w-full md:w-[45%] px-5 py-4 bg-black text-white text-lg rounded-3xl border-2 border-black hover:bg-white hover:text-black duration-300">
             <FontAwesomeIcon
               className="w-[100%] text-3xl mb-2"
               icon={faWindowRestore}
             />{" "}
             Web App Development
           </div>
-          <div className="chip w-[45%] px-5 py-4 bg-black text-white text-lg rounded-3xl border-2 border-black hover:bg-white hover:text-black duration-300">
+          <div className="chip w-full md:w-[45%] px-5 py-4 bg-black text-white text-lg rounded-3xl border-2 border-black hover:bg-white hover:text-black duration-300">
             <FontAwesomeIcon className="w-[100%] text-3xl mb-2" icon={faN} />{" "}
             Hybrid Native App Development
           </div>
         </div>
       </section>
       <section className="appdev-cta text-center py-20 mb-20">
-        <h1 className="text-4xl mb-10">
+        <h1 className="md:text-4xl text-2xl md:px-0 px-[5%] mb-10">
           Take your business to next level with our Mobile App Development
           Service
         </h1>
         <button
           type="button"
-          className="btn cta-btn border-white/30 px-6 py-2 text-lg text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
+          className="btn cta-btn border-white/30 px-6 py-2 md:text-lg text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
         >
           Get In Touch
         </button>
       </section>
 
-      <section className="appdev-sec-2 py-25 mb-20 flex px-[5%] items-start">
-        <div className="appdev-service-title text-3xl text-(--jet) font-bold w-[40%]">
+      <section className="appdev-sec-2 lg:py-25 py-10 mb-20 flex lg:flex-row flex-col px-[5%] items-start">
+        <div className="appdev-service-title md:text-3xl lg:mb-0 mb-10 text-2xl text-(--jet) font-bold lg:w-[40%]">
           Fully Customized Mobile App Development Services For Your{" "}
-          <span className="text-(--pumpkin) text-4xl">Business</span>{" "}
-          <span className="rotate-90 inline-block ml-2">
+          <span className="text-(--pumpkin) md:text-4xl text-2xl">
+            Business
+          </span>{" "}
+          <span className="lg:rotate-90 rotate-180 md:text-2xl text-lg inline-block ml-2">
             <FontAwesomeIcon icon={faArrowUp} />
           </span>
         </div>
 
-        <ul className="w-[60%]">
+        <ul className="lg:w-[60%] w-full">
           {appDevServices.map((value: AppDevServices) => {
             return (
               <>
-                <li className="py-10 service-app border-t-2 flex justify-between cursor-pointer items-start hover:bg-[#f76c1cd9]  hover:px-10 hover:text-white border-black pb-10 offer-items group ease-out duration-500"
-                onClick={()=>{
-                  navigate("/contact");
-                  handleScrollTop();
-                }}>
-                  
-                    <div>
-                      <span className="text-2xl w-[30%] block">
-                        {value.icon}
-                      </span>
-                      <span className="text-2xl font-bold block">
-                        {value.title}{" "}
-                      </span>
-                    </div>
-                    <div className="arr-icon rotate-90 group-hover:rotate-45 duration-100 ease-in origin-center">
-                      {value.arrow}
-                    </div>
-                 
+                <li
+                  className="py-10 service-app border-t-2 flex justify-between cursor-pointer items-start hover:bg-[#f76c1cd9]  hover:px-10 hover:text-white border-black pb-10 offer-items group ease-out duration-500"
+                  onClick={() => {
+                    navigate("/contact");
+                    handleScrollTop();
+                  }}
+                >
+                  <div>
+                    <span className="text-2xl w-[30%] block">{value.icon}</span>
+                    <span className="text-2xl font-bold block">
+                      {value.title}{" "}
+                    </span>
+                  </div>
+                  <div className="arr-icon rotate-90 group-hover:rotate-45 duration-100 ease-in origin-center">
+                    {value.arrow}
+                  </div>
                 </li>
               </>
             );
@@ -403,23 +419,26 @@ const AppDev = () => {
         </ul>
       </section>
 
-      <section className="special-features select-none bg-(--jet) px-[5%] py-20">
-        <h2 className="text-4xl text-center mb-10">
+      <section className="special-features select-none bg-(--jet) px-[5%] pt-20 lg:pb-10 xl:py-20">
+        <h2 className="md:text-4xl text-3xl text-center mb-10">
           Our Special <span className="text-(--pumpkin)">Features</span>
         </h2>
-        <p className="mx-auto w-[45%] text-center text-lg">
+        <p className="mx-auto xl:w-[45%] lg:w-[70%] text-center md:text-lg">
           At Netbond Technologies, We pride ourselves on delivering exceptional
           solutions that stand out in the digital landscape. Here’s what makes
           us unique in App Development in Zirakpur
         </p>
-        <div className="special-features-list flex justify-center py-20 items-center">
-          <div className="w-[33%] pr-5">
+        <div className="lg:w-[33%] hidden mx-auto lg:block xl:hidden mt-15 pr-5">
             <img src="./phone-dummy.png" alt="" />
           </div>
-          <div className="special-feat-1 w-[33%]">
+        <div className="special-features-list flex lg:flex-row flex-col justify-center py-20 items-center">
+          <div className="lg:w-[33%] lg:hidden xl:block md:w-[70%] mb-15 lg:mb-0 pr-5">
+            <img src="./phone-dummy.png" alt="" />
+          </div>
+          <div className="special-feat-1 xl:w-[33%] lg-w-[49%]">
             {specialFeatures.map((value: SpecialFeatures) => {
               return (
-                <div className="special-feat-item rounded-2xl px-4 group flex items-center gap-3 mb-5">
+                <div className="special-feat-item rounded-2xl px-4 group flex items-center gap-3 lg:mb-5 mb-10">
                   <span className="text-3xl origin-bottom">{value.icon}</span>
                   <div>
                     <h3 className="text-2xl pl-5 font-bold">{value.title}</h3>
@@ -429,10 +448,10 @@ const AppDev = () => {
               );
             })}
           </div>
-          <div className="special-feat-2 w-[33%]">
+          <div className="special-feat-2 xl:w-[33%] lg-w-[49%] mb-15 lg:mb-0">
             {specialFeatures2.map((value: SpecialFeatures) => {
               return (
-                <div className="special-feat-item px-4 group flex items-center gap-3 mb-5">
+                <div className="special-feat-item px-4 group flex items-center gap-3 lg:mb-5 mb-10">
                   <span className="text-3xl origin-bottom">{value.icon}</span>
                   <div>
                     <h3 className="text-2xl pl-5 font-bold">{value.title}</h3>
@@ -445,23 +464,25 @@ const AppDev = () => {
         </div>
       </section>
       <section className="screenshots pb-30 bg-(--jet)">
-        <h2 className="text-4xl text-center py-10 ">
+        <h2 className="md:text-4xl text-3xl text-center py-10 ">
           App{" "}
           <span className="font-[Rowdies] text-(--pumpkin)">Screenshots</span>
         </h2>
-        <p className="text-xl mx-auto text-center mb-15 w-[45%]">
+        <p className="md:text-xl px-[5%]  mx-auto text-center mb-15 lg:w-[70%] xl:w-[45%]">
           Take a closer look at our app’s intuitive design and user-friendly
           interface through these detailed screenshots.
         </p>
-        <div className="text-center w-fit mx-auto">
+        <div className="text-center px-[1%] w-fit mx-auto">
           <img src="./app-screenshot.png" alt="" />
         </div>
       </section>
 
-      <section className="form-section-appdev flex justify-center bg-(--jet) py-20 px-[5%] "
-       id="contacts">
-        <div className="form-info flex flex-col gap-10 w-[40%]">
-          <h2 className="text-4xl">
+      <section
+        className="form-section-appdev flex flex-col lg:flex-row justify-center bg-(--jet) py-20 px-[3%] md:px-[5%] "
+        id="contacts"
+      >
+        <div className="form-info flex flex-col gap-10 mb-15 lg:mb-0 lg:w-[40%]">
+          <h2 className="md:text-4xl text-3xl">
             <span className="border-l-10 pl-2 border-(--pumpkin) py-3 ">
               After
             </span>{" "}
@@ -487,10 +508,7 @@ const AppDev = () => {
             </ul>
           </p>
         </div>
-        <div
-          className="form-component bg-black/70 backdrop-blur-sm rounded-3xl py-8 px-8 w-[55%]"
-         
-        >
+        <div className="form-component bg-black/70 backdrop-blur-sm rounded-3xl py-8 md:px-8 px-5 lg:w-[55%]">
           <form
             action=""
             onSubmit={(e) => {
@@ -504,8 +522,8 @@ const AppDev = () => {
               required
               type="text"
               placeholder="John Doe"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
-                handleChange(e)
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                handleChange(e);
               }}
               name="name"
               id="name"
@@ -517,8 +535,8 @@ const AppDev = () => {
             <input
               required
               type="tel"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
-                handleChange(e)
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                handleChange(e);
               }}
               placeholder="+91 xxxxx xxxxx"
               name="number"
@@ -531,8 +549,8 @@ const AppDev = () => {
             <input
               required
               type="email"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
-                handleChange(e)
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                handleChange(e);
               }}
               placeholder="johndoe@example.com"
               name="email"
@@ -546,8 +564,8 @@ const AppDev = () => {
               name="message"
               placeholder="Tell us about your project"
               id="message"
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>)=>{
-                handleChange(e)
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                handleChange(e);
               }}
               className="resize-none block w-full bg-white/10 rounded-md px-3 py-2 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
               rows={6}
@@ -561,7 +579,7 @@ const AppDev = () => {
           </form>
         </div>
       </section>
-      <section className="appdev-faqs pt-20 bg-(--jet)">
+      <section className="appdev-faqs md:pt-20 pt-10 bg-(--jet)">
         <Accordion faqs={appdevFAQS} />
       </section>
     </section>

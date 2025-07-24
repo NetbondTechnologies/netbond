@@ -230,7 +230,7 @@ const Service = () => {
   return (
     <>
       <div className="service">
-        <div className="service-container pt-30 md:pt-50 shadow-2xl rounded-b-xl shadow-[#f76b1c] pb-10 md:pb-25 lg:pb-30 xl:pb-40">
+        <div className="service-container pt-35 md:pt-50 shadow-2xl rounded-b-xl shadow-[#f76b1c] pb-15 md:pb-25 lg:pb-30 xl:pb-40">
           <h1 className="xl:text-8xl md:text-5xl lg:text-7xl text-3xl text-center md:text-start w-[95%] service-header font-stretch-50% px-[5%] hero-text">
             {`We're a full - service digital studio`.toUpperCase()}
           </h1>
@@ -238,8 +238,8 @@ const Service = () => {
         <h2 className="md:pb-10 xl:text-7xl lg:text-5xl md:text-4xl text-2xl text-center md:text-start w-[90%] mx-auto md:my-20 my-10 xl:pr-[40%]">
           Digital Product Design Services and Solutions We offer
         </h2>
-        <span className="offer-text block md:text-lg lg:text-3xl/10 text-sm md:mx-[5%] mx-[2%] mt-1 md:my-15 overflow-x-hidden md:py-15 py-5 px-5 md:px-10 md:border-l-25 border-l-12 bg-white border-(--pumpkin) font-bold ">
-          <span className="md:h-[170px] lg:h-[160px] h-[140px] overflow-hidden block">
+        <span className="offer-text block md:text-lg lg:text-2xl/8 xl:text-3xl/10 text-sm md:mx-[5%] mx-[2%] mt-1 md:my-15 overflow-x-hidden md:py-10 xl:py-15 py-5 px-5 md:px-10 md:border-l-25 border-l-12 bg-white border-(--pumpkin) font-bold ">
+          <span className="md:h-[14%] lg:h-[15%] h-[10%] overflow-y-hidden block">
             We lead your startup at every step of its growth, providing
             unparalleled personal service at every interaction. Whether it’s
             launching an MVP, revamping an existing product, securing funding
@@ -249,7 +249,7 @@ const Service = () => {
           </span>
         </span>
         <div className="offers flex lg:flex-row flex-col px-[5%] lg:py-45 py-25 items-start">
-          <h2 className="lg:text-6xl md:text-4xl text-3xl w-fit pb-8 lg:pb-0 mx-auto offer-heading lg:w-[50%]">
+          <h2 className="xl:text-6xl lg:text-5xl md:text-4xl text-3xl w-fit pb-8 lg:pb-2 mx-auto offer-heading lg:w-[50%]">
             <span className="text-[#f76b1c]">NetBond</span> offers you
           </h2>
 
@@ -264,10 +264,10 @@ const Service = () => {
                     }}
                   >
                     <div>
-                      <span className="lg:text-4xl text-2xl font-bold pb-4 block">
+                      <span className="xl:text-4xl lg:text-3xl text-2xl font-bold pb-4 block">
                         {value.heading}
                       </span>
-                      <span className="lg:text-xl block">
+                      <span className="xl:text-xl block">
                         {value.description}{" "}
                       </span>
                     </div>
@@ -282,7 +282,7 @@ const Service = () => {
         </div>
 
         <div className="companies w-[90%] mx-auto">
-          <h2 className="lg:text-lg md:text-2xl md:w-[50%] text-xl lg:w-[18%] mx-auto mb-10 text-center">
+          <h2 className="lg:text-lg md:text-2xl md:w-[50%] text-xl lg:w-[30%] xl:w-[18%] mx-auto mb-10 text-center">
             Industries we serve with Our Digital UX Design Expertise
           </h2>
           <h5 className="lg:text-4xl text-lg lg:w-[80%] mx-auto mb-10 lg:mb-30 text-center">
@@ -348,47 +348,52 @@ const Service = () => {
           </div>
         </div>
 
-        <div className="belowPoster w-[90%] select-none mx-auto flex justify-end h-[340px] items-start border-t-1 mt-50 mb-30 border-black">
-          <div className="px-2 product-strategy border-l-1 product-item h-full border-black w-[27.5%]">
-            <h4 className="pt-5 pb-10">Product Strategy</h4>
+        <div className="belowPoster w-[90%] select-none mx-auto flex lg:flex-row flex-col justify-end lg:h-[340px] items-start lg:border-t-1 lg:mt-50 mt-20 mb-30 border-black">
+            <h4 className="pt-5 text-xl lg:hidden w-fit mx-auto pb-10">Product Strategy</h4>
+          <div className="px-2 product-strategy border-l-2 lg:border-l-1 product-item flex flex-wrap items-center justify-center lg:block h-full border-black lg:w-[27.5%]">
+            <h4 className="pt-5 hidden lg:block pb-10">Product Strategy</h4>
 
             {productStrategy.map((value: string) => {
               return (
                 <>
-                  <div className="px-4 pt-2 pb-2.5 product-tags w-[60%] font-bold text-sm text-white bg-[#141414] mb-1 rounded-4xl">
+                  <div className="px-4 pt-2 pb-2.5 product-tags xl:w-[60%] lg:w-fit w-auto font-bold text-sm text-white bg-[#141414] mb-1 rounded-4xl">
                     {value}
                   </div>
                 </>
               );
             })}
           </div>
-          <div className="px-2 ux-design border-l-1 product-item h-full w-[15%] border-black">
-            <h4 className="pt-5 font-bold pb-10">UX Design</h4>
+            <h4 className="pt-5 font-bold text-xl lg:hidden w-fit mx-auto pb-10">UX Design</h4>
+
+          <div className="px-2 ux-design border-l-2 lg:border-l-1 product-item h-full lg:w-[15%] flex flex-wrap items-center justify-center lg:block border-black">
+            <h4 className="pt-5 font-bold hidden lg:block pb-10">UX Design</h4>
 
             {uxDesign.map((value: string) => {
               return (
                 <>
-                  <div className="px-4 pt-2 pb-2.5 ux-tags w-full font-bold text-sm text-white bg-[#141414] mb-1 rounded-4xl">
+                  <div className="px-4 pt-2 pb-2.5 ux-tags lg:w-full w-auto font-bold text-sm text-white bg-[#141414] mb-1 rounded-4xl">
                     {value}
                   </div>
                 </>
               );
             })}
           </div>
-          <div className="px-2 ui-design border-l-1 product-item h-full w-[16%] border-black">
-            <h4 className="pt-5 font-bold pb-10">UI Design</h4>
+            <h4 className="pt-5 font-bold text-xl lg:hidden w-fit mx-auto pb-10">UI Design</h4>
+
+          <div className="px-2 ui-design border-l-2 lg:border-l-1 product-item h-full lg:w-[16%] flex flex-wrap items-center justify-center lg:block border-black">
+            <h4 className="pt-5 font-bold hidden lg:block pb-10">UI Design</h4>
 
             {uiDesign.map((value: string) => {
               return (
                 <>
-                  <div className="px-4 pt-2 pb-2.5 ui-tags w-[90%] font-bold text-sm text-white bg-[#141414] mb-1 rounded-4xl">
+                  <div className="px-4 pt-2 pb-2.5 ui-tags lg:w-[90%] w-auto font-bold text-sm text-white bg-[#141414] mb-1 rounded-4xl">
                     {value}
                   </div>
                 </>
               );
             })}
           </div>
-          <div className="px-2 delivery border-l-1 product-item h-full w-[12%] border-black">
+          <div className="px-2 delivery border-l-1 hidden lg:block product-item h-full w-[12%] border-black">
             <h4 className="pt-5 font-bold pb-10">Delivery</h4>
           </div>
         </div>
