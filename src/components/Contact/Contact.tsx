@@ -69,21 +69,21 @@ const Contact = () => {
     <>
       <div className="contact">
         <div className="contact-s1">
-          <h1 className="text-8xl pt-45 backdrop-blur-sm pb-35 text-center hero-text">
+          <h1 className="xl:text-8xl lg:text-6xl text-5xl lg:pt-45 pt-30 backdrop-blur-sm lg:pb-35 pb-20 text-center hero-text">
             Contact <span className="text-(--pumpkin)">Us</span>
           </h1>
         </div>
         <div className="contact-s2 py-20">
-          <div className="connect-w_s flex justify-center w-[90%] mb-40 mx-auto items-start">
-            <div className="connect-text flex w-[65%] flex-col gap-15 justify-center items-start">
-              <h2 className="text-5xl">
+          <div className="connect-w_s flex justify-center w-[90%] lg:mb-40 mb-30 mx-auto items-start">
+            <div className="connect-text flex lg:w-[65%] w-full flex-col lg:gap-15 gap-7 justify-center items-start">
+              <h2 className="lg:text-5xl md:text-4xl text-3xl">
                 {" "}
                 <span className="text-(--pumpkin) font-extrabold">
                   Connect
                 </span>{" "}
                 With Us
               </h2>
-              <div className="text-xl mt-[-40px]">
+              <div className="lg:text-xl md:text-lg lg:mt-[-40px] mt-[-20px]">
                 We are here to answer any questions you may have about our
                 experiences. Reach out to us and we’ll respond you as soon as we
                 can. Even if there is something you have always wanted to
@@ -92,19 +92,19 @@ const Contact = () => {
               </div>
               <button
                 type="button"
-                className="btn border-1 border-white/30 px-6 py-2 rounded-md active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 black/5 duration-200 text-lg cursor-pointer"
+                className="btn border-1 border-white/30 lg:px-6 px-4 py-2 lg:py-2 text-sm rounded-md active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 black/5 duration-200 md:text-lg cursor-pointer"
               >
                 Schedule A Zoom Call Now
               </button>
             </div>
-            <div className="connect-image w-[30%]">
+            <div className="connect-image hidden lg:block w-[30%]">
               <img src="./asset 97.png" className="w-full" alt="" />
             </div>
           </div>
 
-          <div className="form-area flex justify-center mb-40 w-[90%] mx-auto ">
-            <div className="form-info flex flex-col gap-10 w-[40%]">
-              <h2 className="text-4xl">
+          <div className="form-area flex lg:flex-row flex-col justify-center lg:mb-40 mb-30 w-[90%] mx-auto ">
+            <div className="form-info flex flex-col gap-10 w-full lg:w-[40%]">
+              <h2 className="lg:text-4xl md:text-3xl text-2xl">
                 <span className="border-l-10 pl-2 border-(--pumpkin) py-3 ">
                   After
                 </span>{" "}
@@ -129,7 +129,7 @@ const Contact = () => {
                 </ul>
               </p>
             </div>
-            <div className="form-component bg-white shadow-xl rounded-3xl py-8 px-8 w-[55%]" id="contact-form">
+            <div className="form-component bg-white shadow-xl rounded-3xl py-8 lg:px-8 px-5 w-full lg:w-[55%]" id="contact-form">
               <form
                 action=""
                 onSubmit={(e) => {
@@ -201,10 +201,10 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="contact-location flex justify-center w-[90%] mx-auto">
-            <div className="location-details w-[49%]">
-              <h2 className="text-4xl pb-8">Contact Address</h2>
-              <p className=" contact-head text-lg">
+          <div className="contact-location flex lg:flex-row flex-col-reverse gap-10 justify-center lg:w-[90%] w-[95%] mx-auto">
+            <div className="location-details w-full lg:w-[49%]">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl pb-8">Contact Address</h2>
+              <p className=" contact-head md:text-lg">
                 NETBOND TECHNOLOGIES PVT. LTD.
               </p>
               <span className="block pb-5">
@@ -212,19 +212,19 @@ const Contact = () => {
                 Punjab – 140603
               </span>
               <hr className="w-[90%] border-1" />
-              <p className="pb-5 contact-head text-lg">Email - </p>
+              <p className="pb-5 contact-head md:text-lg">Email - </p>
 
               <span className="block">info@netbondtechnologies.com</span>
               <span className="block pb-5">
                 support@netbondtechnologies.com
               </span>
               <hr className="w-[90%] border-1 " />
-              <p className="pb-5 contact-head text-lg">Phone Number </p>
+              <p className="pb-5 contact-head md:text-lg">Phone Number </p>
 
               <span className="block">+91 9056995190</span>
               <span className="block">+91 9056995194</span>
             </div>
-            <div className="map w-[50%]">
+            <div className="map w-full lg:w-[50%]">
               <div style={{ width: "100%" }}>
                 <iframe
                   width="100%"

@@ -18,6 +18,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import React, { type ReactElement } from "react";
 import { useNavigate } from "react-router";
+import { useMediaQuery } from "../useMediaQuery";
 gsap.registerPlugin(ScrollTrigger, useGSAP, SplitText);
 
 interface Skill {
@@ -40,11 +41,12 @@ interface CMS {
 }
 
 const WebDev: React.FC = () => {
+  const isLargeScreen = useMediaQuery("(min-width: 769px)");
   const cms: CMS[] = [
     {
       title: "WordPress",
       description:
-        "At Netbond, we deliver high performance, fully customized WordPress websites that align perfectly with your brand and business goals. Our experts create seamless, user-friendly experiences designed to drive engagement and conversations. With robust security measures and ongoing support, we ensure your WordPress site remains optimized , secure, and scalable as your business grows. ",
+        "At Netbond, we deliver high performance, fully customized WordPress websites that align perfectly with your brand and business goals. Our experts create seamless, user-friendly experiences designed to drive engagement and conversations. With robust security measures, we ensure your WordPress site remains optimized , secure, and scalable as your business grows. ",
       logo: (
         <FontAwesomeIcon
           icon={faWordpress}
@@ -119,7 +121,7 @@ const WebDev: React.FC = () => {
     },
     {
       head: "From Data to Success",
-      body: "Leveraging data-driven strategies to deliver impactful results. Our insights and data-driven strategies fuel success stories and drive meaningful change.",
+      body: "Leveraging data-driven strategies to deliver impactful results. Our insights and data-driven strategies fuel success stories .",
       icon: <FontAwesomeIcon icon={faChartPie} />,
     },
     {
@@ -129,12 +131,13 @@ const WebDev: React.FC = () => {
     },
     {
       head: "The Journey to Excellence",
-      body: "Unlocking potential and scaling new heights. Our focus on growth ensures lasting value for individuals and organizations.",
+      body: "Unlocking potential and scaling new heights. Our focus ensures lasting value for individuals and organizations.",
       icon: <FontAwesomeIcon icon={faArrowUpRightDots} />,
     },
   ];
 
   useGSAP(() => {
+    if(!isLargeScreen) return;
     const cards = Array.from(
       document.querySelectorAll(".skill-card") as NodeListOf<HTMLElement>
     );
@@ -176,6 +179,12 @@ const WebDev: React.FC = () => {
       );
     });
 
+    return ()=>{
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    }
+
+  }, []);
+  useGSAP(()=>{
     const serviceCovers = Array.from(
       document.querySelectorAll(".webdev-service") as NodeListOf<HTMLElement>
     );
@@ -186,7 +195,7 @@ const WebDev: React.FC = () => {
         scrollTrigger: {
           trigger: cover,
           start: "top 92%",
-          end: "top 25%",
+          end: "top 40%",
           scrub: true,
         },
       });
@@ -226,20 +235,23 @@ const WebDev: React.FC = () => {
           });
         });
     
-  }, []);
+        return()=>{
+          ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        }
+  },[])
   const navigate = useNavigate();
 
   return (
     <>
       <div className="webdev">
-        <div className="webdev-panel w-full pt-[250px] pb-[100px] bg-[url(./Hero.jpg)] shadow-lg rounded-b-2xl shadow-black bg-cover bg-center bg-no-repeat">
-          <h1 className="text-9xl mx-[5%] w-[60%] hero-text">Website Development</h1>
-          <span className="block text-(--pumpkin) mx-[5.5%] text-5xl/30 font-semibold hero-text">
+        <div className="webdev-panel w-full lg:pt-[250px] md:pt-[200px] pt-[150px] lg:pb-[100px] pb-[50px] bg-[url(./Hero.jpg)] shadow-lg rounded-b-2xl shadow-black bg-cover bg-center bg-no-repeat">
+          <h1 className="lg:text-8xl md:text-5xl text-5xl mx-[5%] xl:w-[60%] hero-text">Website Development</h1>
+          <span className="block text-(--pumpkin) mx-[5.5%] lg:text-4xl/30 text-2xl lg:my-0 my-7 font-semibold hero-text">
             Web Development Company In Zirakpur
           </span>
           <button
             type="button"
-            className="btn border-white/30 px-6 mx-[5.5%] py-2 text-lg text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
+            className="btn border-white/30 px-6 mx-[5.5%] py-2 md:text-lg text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
             onClick={()=>{
               navigate("/contact")
             }}
@@ -247,22 +259,22 @@ const WebDev: React.FC = () => {
             Get In Touch
           </button>
         </div>
-        <div className="webdev-sec-1 py-[8%] px-[5%]">
-          <h2 className="text-7xl webdev-skill-head text-center pb-20">
+        <div className="webdev-sec-1 lg:py-[8%] lg:mt-0 mt-10 py-[12%] px-[5%]">
+          <h2 className="xl:text-7xl lg:text-6xl md:text-4xl text-2xl webdev-skill-head text-center pb-10 lg:pb-20">
             {" "}
             Empowering Skills To Help{" "}
             <span className="text-(--pumpkin)">You</span>{" "}
           </h2>
-          <div className="webdev-skills flex justify-center flex-wrap gap-5 items-center">
+          <div className="webdev-skills flex justify-center lg:flex-row flex-col flex-wrap gap-5 items-center">
             {Skills.map((skill) => {
               return (
                 <>
-                  <div className="skill-card flex w-[45%] flex-col gap-7 justify-center items-start px-10 py-10 bg-white shadow-xl rounded-2xl">
-                    <div className="icon text-5xl mb-3">{skill.icon}</div>
-                    <h3 className="text-2xl font-semibold mb-2">
+                  <div className="skill-card flex lg:w-[45%] flex-col gap-7 justify-center items-start px-10 py-10 bg-white shadow-xl rounded-2xl">
+                    <div className="icon lg:text-5xl text-3xl mb-3">{skill.icon}</div>
+                    <h3 className="lg:text-2xl text-xl font-semibold mb-2">
                       {skill.head}
                     </h3>
-                    <p className="text-lg">{skill.body}</p>
+                    <p className="lg:text-lg ">{skill.body}</p>
                   </div>
                 </>
               );
@@ -270,7 +282,7 @@ const WebDev: React.FC = () => {
           </div>
         </div>
         <div className="webdev-services w-full px-[5%] pt-[8%] pb-[2%] mx-auto bg-(--jet) rounded-t-3xl">
-          <h2 className="text-7xl webdev-service-head text-center mb-50">
+          <h2 className="xl:text-7xl lg:text-6xl md:text-4xl text-2xl webdev-service-head text-center mb-20 lg:mb-50">
             <span className="text-(--pumpkin)">We</span> Provide Premium
             Services
           </h2>
@@ -278,16 +290,16 @@ const WebDev: React.FC = () => {
             {services.map((service) => {
               return (
                 <>
-                  <div className="border-b-2 pb-10 border-white mb-40 overflow-hidden webdev-service-cover">
-                    <div className="webdev-service flex justify-center items-start ">
-                      <div className="service-title flex flex-col w-[60%] justify-center items-start gap-10">
-                        <h3 className="text-4xl">{service.SL_no}</h3>
-                        <div className="service-header text-white text-6xl font-bold">
+                  <div className="border-b-2 pb-10 border-white lg:mb-40 mb-25 overflow-hidden webdev-service-cover">
+                    <div className="webdev-service flex lg:flex-row flex-col justify-center items-start ">
+                      <div className="service-title flex flex-col w-[60%] justify-center items-start lg:mb-0 mb-10 gap-5 lg:gap-10">
+                        <h3 className="lg:text-4xl text-2xl">{service.SL_no}</h3>
+                        <div className="service-header text-white lg:text-6xl text-3xl font-bold">
                           {service.title}
                         </div>
                       </div>
-                      <div className="service-desc flex flex-col justify-center w-[40%] items-start gap-10">
-                        <div className="text-2xl text-white font-semibold">
+                      <div className="service-desc flex flex-col justify-center lg:w-[40%] w-full items-start gap-10">
+                        <div className="lg:text-2xl text-white font-semibold">
                           {service.description}
                         </div>
                         <div className="text-lg text-white list-none ml-2">
@@ -307,13 +319,13 @@ const WebDev: React.FC = () => {
             })}
           </div>
         </div>
-        <div className="webdev-cms w-[90%] py-[8%] mx-auto">
-          <h2 className="text-6xl webdev-cms-head px-[5%] mb-[7%]">
+        <div className="webdev-cms xl:w-[90%] w-[95%] py-[8%] mx-auto">
+          <h2 className="xl:text-6xl lg:text-5xl md:text-4xl text-2xl webdev-cms-head px-[5%] mb-[7%]">
             CMS Platform Tailored For{" "}
             <span className="text-(--pumpkin)">Client</span> Needs
           </h2>
-          <div className="w-[90%] mx-auto bg-white px-[4%] border-l-30 py-[5%] border-(--pumpkin)">
-            <h2 className="text-2xl mb-5">
+          <div className="lg:w-[90%] w-[95%] mx-auto bg-white px-[4%] lg:border-l-30 border-l-10 py-[5%] border-(--pumpkin)">
+            <h2 className="md:text-2xl text-xl mb-5">
               {" "}
               CMS and Web Solutions Designed for Your Success{" "}
               <FontAwesomeIcon
@@ -321,7 +333,7 @@ const WebDev: React.FC = () => {
                 icon={faArrowTrendUp}
               />
             </h2>
-            <div className="mb-10 text-lg font-semibold font-[Figtree]">
+            <div className="mb-10 md:text-lg text-sm font-semibold font-[Figtree]">
               At <span className="text-(--pumpkin)">Netbond</span> Technologies,
               we specialize in creating and customizing Content Management
               Systems (CMS) and dynamic web solutions tailored to meet the
@@ -330,7 +342,7 @@ const WebDev: React.FC = () => {
               engagement, our team delivers flexible, scalable, and
               user-friendly solutions.
             </div>
-            <div className="text-lg font-semibold font-[Figtree]">
+            <div className="md:text-lg text-sm font-semibold font-[Figtree]">
               From <span className="text-blue-700">WordPress</span> and{" "}
               <span className="text-green-600">Shopify</span> to modern,
               high-performance <span className="text-blue-400">React</span>
@@ -342,14 +354,14 @@ const WebDev: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="cms-platforms w-[90%] mx-auto flex justify-center gap-10 flex-wrap items-start py-[2%]">
+        <div className="cms-platforms w-[90%] lg:w-[95%] mx-auto flex justify-center gap-10 lg:gap-5 xl:gap-10 flex-wrap items-start py-[2%]">
           {cms.map((cmsPlatform) => {
             return (
               <>
-                <div className="cms-platform flex flex-col w-[45%] p-[5%] shadow-2xl justify-start bg-white rounded-3xl gap-10  hover:shadow-2xl hover:shadow-black transition-all duration-300">
-                  <div className="cms-logo">{cmsPlatform.logo}</div>
-                  <h2 className="cms-title text-4xl">{cmsPlatform.title}</h2>
-                  <div className="cms-description font-semibold text-lg font-[Figtree]">
+                <div className="cms-platform flex flex-col w-full lg:w-[45%] p-[5%] lg:py-[5%] lg:px-[3%] shadow-2xl justify-start bg-white rounded-3xl gap-10  hover:shadow-2xl hover:shadow-black transition-all duration-300">
+                  <div className="cms-logo ">{cmsPlatform.logo}</div>
+                  <h2 className="cms-title md:text-4xl text-2xl">{cmsPlatform.title}</h2>
+                  <div className="cms-description font-semibold md:text-lg font-[Figtree]">
                     {cmsPlatform.description}
                   </div>
                 </div>
@@ -357,11 +369,11 @@ const WebDev: React.FC = () => {
             );
           })}
         </div>
-        <div className="join-us w-full py-[8%] pl-[25%] mt-[50px] rounded-t-3xl">
-            <h1 className="mb-4 text-6xl ">Tell <span className="text-(--pumpkin)">Us</span> about your Ideas</h1>
+        <div className="join-us w-full py-[8%] lg:pl-[25%] pl-[8%] mt-[50px] rounded-t-3xl">
+            <h1 className="mb-4 xl:text-6xl lg:text-4xl md:text-3xl text-2xl ">Tell <span className="text-(--pumpkin)">Us</span> about your Ideas</h1>
             <button
             type="button"
-            className="btn border-white/30 px-6 py-2 text-lg text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
+            className="btn border-white/30 px-6 py-2 lg:text-lg md:text-base text-sm text-center border-1 rounded-md hover:shadow-xl shadow-[#f76b1c] hover:ring-2 hover:ring-[#f76b1c] hover:ring-offset-2 hover:scale-105 active:scale-95 hover:ring-offset-white duration-200 cursor-pointer"
             onClick={()=>{
               navigate("/contact")
             }}

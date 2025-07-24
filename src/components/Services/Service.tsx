@@ -253,7 +253,7 @@ const Service = () => {
             <span className="text-[#f76b1c]">NetBond</span> offers you
           </h2>
 
-          <ul className="lg:w-[50%]">
+          <ul className="lg:w-[50%] w-full">
             {servicesItems.map((value: Service) => {
               return (
                 <>
