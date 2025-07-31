@@ -32,6 +32,14 @@ interface FAQ {
   answer: string;
 }
 
+export interface GDFORM {
+  name: string;
+    email: string;
+    phone: string;
+    service: string;
+    message: string
+}
+
 interface Service {
   icon: ReactElement;
   head: string;
@@ -56,7 +64,11 @@ interface Testimonial {
   body: string;
 }
 
-export default function GraphiDesign() {
+interface Props{
+  setData: React.Dispatch<any>
+}
+
+export default function GraphiDesign(props : Props) {
 
   useGSAP(()=>{
     const allTitles = Array.from(document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>)
@@ -114,9 +126,8 @@ export default function GraphiDesign() {
     }
     }
   },[])
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+  const [formData, setFormData] = useState<GDFORM>({
+    name: "",
     email: "",
     phone: "",
     service: "",
@@ -129,9 +140,9 @@ export default function GraphiDesign() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    props.setData(formData)
     setFormData({
-      firstName: "",
-      lastName: "",
+      name:"",
       email: "",
       phone: "",
       service: "",
@@ -657,47 +668,27 @@ export default function GraphiDesign() {
                 </h3>
 
                 <form className="space-y-6" onSubmit={handleSubmit}>
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-1 gap-6">
                     <div>
                       <label
-                        htmlFor="firstName"
+                        htmlFor="name"
                         className="block text-sm font-medium text-gray-700 mb-2"
                       >
-                        First Name
+                        Full Name
                       </label>
                       <input
-                        id="firstName"
+                        id="name"
                         type="text"
                         className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[hsl(22,96%,53%)]/20 focus:border-[hsl(22,96%,53%)]"
                         placeholder="John"
-                        value={formData.firstName}
+                        value={formData.name}
                         onChange={(e) =>
-                          handleInputChange("firstName", e.target.value)
-                        }
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="lastName"
-                        className="block text-sm font-medium text-gray-700 mb-2"
-                      >
-                        Last Name
-                      </label>
-                      <input
-                        id="lastName"
-                        type="text"
-                        className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[hsl(22,96%,53%)]/20 focus:border-[hsl(22,96%,53%)]"
-                        placeholder="Doe"
-                        value={formData.lastName}
-                        onChange={(e) =>
-                          handleInputChange("lastName", e.target.value)
+                          handleInputChange("name", e.target.value)
                         }
                         required
                       />
                     </div>
                   </div>
-
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label

@@ -54,14 +54,18 @@ interface Benefit {
   description: string;
   metric: string;
 }
-interface Form {
+export interface Form {
   name: string;
   email: string;
   message: string;
   business: string;
 }
 
-const App: React.FC = () => {
+interface Props {
+  setData: React.Dispatch<any>;
+}
+
+const App: React.FC<Props> = ({ setData }) => {
   const [formData, setFormData] = useState<Form>({
     name: "",
     email: "",
@@ -81,6 +85,7 @@ const App: React.FC = () => {
   };
   let handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setData(formData);
     setFormData({
       name: "",
       email: "",

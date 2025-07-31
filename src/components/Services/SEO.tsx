@@ -32,9 +32,22 @@ interface FAQS {
   answer: string;
 }
 
-function App() {
+export interface SEOFORM {
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+  website: string;
+}
+
+interface Props {
+  setData: React.Dispatch<any>;
+}
+
+function SEO(props: Props) {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<SEOFORM>({
     name: "",
     email: "",
     phone: "",
@@ -56,8 +69,15 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
+    props.setData(formData);
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      website: "",
+      service: "",
+      message: "",
+    });
   };
 
   const servicesDD = [
@@ -256,11 +276,10 @@ function App() {
         opacity: 0,
         duration: 1.2,
         ease: "power4.out",
-        delay:0.4,
+        delay: 0.4,
         stagger: 0.2,
       });
     });
-
   }, []);
 
   const faqs: FAQS[] = [
@@ -615,7 +634,6 @@ function App() {
         id="contact"
         className="py-20 bg-[#141414] relative overflow-hidden"
       >
-
         <div
           className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
           id="contacts"
@@ -887,4 +905,4 @@ function App() {
   );
 }
 
-export default App;
+export default SEO;

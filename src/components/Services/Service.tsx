@@ -115,6 +115,34 @@ const Service = () => {
     },
   ];
   useGSAP(() => {
+    const allTitles = Array.from(
+      document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>
+    );
+
+    allTitles.map((title: HTMLElement) => {
+      const split = new SplitText(title, { type: "lines", mask: "lines" });
+      gsap.from(split.lines, {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: "power4.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: title,
+          start: "top 80%",
+          end: "top 30%",
+        },
+      });
+    });
+
+    const split = new SplitText(".hero-text", { type: "lines", mask: "lines" });
+    gsap.from(split.lines, {
+      yPercent: 100,
+      opacity: 0,
+      duration: 1.5,
+      ease: "power4.out",
+      stagger: 0.1,
+    });
     if (!isLargeScreen) return;
     ScrollTrigger.create({
       trigger: ".offer-heading",
@@ -187,40 +215,6 @@ const Service = () => {
       });
     });
 
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
-
-  useGSAP(() => {
-    const allTitles = Array.from(
-      document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>
-    );
-
-    allTitles.map((title: HTMLElement) => {
-      const split = new SplitText(title, { type: "lines", mask: "lines" });
-      gsap.from(split.lines, {
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        ease: "power4.out",
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: title,
-          start: "top 80%",
-          end: "top 30%",
-        },
-      });
-    });
-
-    const split = new SplitText(".hero-text", { type: "lines", mask: "lines" });
-    gsap.from(split.lines, {
-      yPercent: 100,
-      opacity: 0,
-      duration: 1.5,
-      ease: "power4.out",
-      stagger: 0.1,
-    });
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       split.revert();
@@ -349,7 +343,9 @@ const Service = () => {
         </div>
 
         <div className="belowPoster w-[90%] select-none mx-auto flex lg:flex-row flex-col justify-end lg:h-[340px] items-start lg:border-t-1 lg:mt-50 mt-20 mb-30 border-black">
-            <h4 className="pt-5 text-xl lg:hidden w-fit mx-auto pb-10">Product Strategy</h4>
+          <h4 className="pt-5 text-xl lg:hidden w-fit mx-auto pb-10">
+            Product Strategy
+          </h4>
           <div className="px-2 product-strategy border-l-2 lg:border-l-1 product-item flex flex-wrap items-center justify-center lg:block h-full border-black lg:w-[27.5%]">
             <h4 className="pt-5 hidden lg:block pb-10">Product Strategy</h4>
 
@@ -363,7 +359,9 @@ const Service = () => {
               );
             })}
           </div>
-            <h4 className="pt-5 font-bold text-xl lg:hidden w-fit mx-auto pb-10">UX Design</h4>
+          <h4 className="pt-5 font-bold text-xl lg:hidden w-fit mx-auto pb-10">
+            UX Design
+          </h4>
 
           <div className="px-2 ux-design border-l-2 lg:border-l-1 product-item h-full lg:w-[15%] flex flex-wrap items-center justify-center lg:block border-black">
             <h4 className="pt-5 font-bold hidden lg:block pb-10">UX Design</h4>
@@ -378,7 +376,9 @@ const Service = () => {
               );
             })}
           </div>
-            <h4 className="pt-5 font-bold text-xl lg:hidden w-fit mx-auto pb-10">UI Design</h4>
+          <h4 className="pt-5 font-bold text-xl lg:hidden w-fit mx-auto pb-10">
+            UI Design
+          </h4>
 
           <div className="px-2 ui-design border-l-2 lg:border-l-1 product-item h-full lg:w-[16%] flex flex-wrap items-center justify-center lg:block border-black">
             <h4 className="pt-5 font-bold hidden lg:block pb-10">UI Design</h4>

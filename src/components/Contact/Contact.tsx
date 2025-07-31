@@ -3,45 +3,56 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useState } from "react";
+import axios from "axios";
+
 gsap.registerPlugin(ScrollTrigger, SplitText);
-interface Form{
+
+export interface ContactForm {
   name: string;
-    email: string;
-    message: string;
-    number: string;
+  email: string;
+  message: string;
+  number: string;
 }
-const Contact = () => {
-   const [formData, setFormData] = useState<Form>({
+
+interface Props {
+  setData: React.Dispatch<any>;
+}
+
+const Contact: React.FC<Props> = ({ setData }) => {
+  const [formData, setFormData] = useState<ContactForm>({
+    name: "",
+    email: "",
+    message: "",
+    number: "",
+  });
+
+  let handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [event.target.name]: event.target.value,
+      };
+    });
+  };
+  let handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setData(formData);
+    setFormData({
       name: "",
       email: "",
       message: "",
-      number: ""
+      number: "",
     });
-  
-    let handleChange = (
-      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
-      setFormData((prev) => {
-        return {
-          ...prev,
-          [event.target.name]: event.target.value,
-        };
-      });
-    };
-    let handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      setFormData({
-        name: "",
-      email: "",
-      message: "",
-      number: ""
-      })
-    };
-  useGSAP(()=>{
-    const allTitles = Array.from(document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>)
+  };
+  useGSAP(() => {
+    const allTitles = Array.from(
+      document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>
+    );
 
     allTitles.map((title: HTMLElement) => {
-      const split = new SplitText(title, { type: "lines" ,mask: "lines"});
+      const split = new SplitText(title, { type: "lines", mask: "lines" });
       gsap.from(split.lines, {
         y: 100,
         opacity: 0,
@@ -54,17 +65,20 @@ const Contact = () => {
           end: "top 30%",
         },
       });
-    })
+    });
 
-    const split = new SplitText(".hero-text", { type: "lines words", mask: "lines" });
-      gsap.from(split.words, {
-        yPercent: 100,
-        opacity: 0,
-        duration: 1.5,
-        ease: "power4.out",
-        stagger: 0.15,
-      });
-  },[])
+    const split = new SplitText(".hero-text", {
+      type: "lines words",
+      mask: "lines",
+    });
+    gsap.from(split.words, {
+      yPercent: 100,
+      opacity: 0,
+      duration: 1.5,
+      ease: "power4.out",
+      stagger: 0.15,
+    });
+  }, []);
   return (
     <>
       <div className="contact">
@@ -129,11 +143,14 @@ const Contact = () => {
                 </ul>
               </p>
             </div>
-            <div className="form-component bg-white shadow-xl rounded-3xl py-8 lg:px-8 px-5 w-full lg:w-[55%]" id="contact-form">
+            <div
+              className="form-component bg-white shadow-xl rounded-3xl py-8 lg:px-8 px-5 w-full lg:w-[55%]"
+              id="contact-form"
+            >
               <form
                 action=""
                 onSubmit={(e) => {
-                  handleSubmit(e)
+                  handleSubmit(e);
                 }}
               >
                 <label htmlFor="name" className=" block w-full">
@@ -142,7 +159,7 @@ const Contact = () => {
                 <input
                   required
                   type="text"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleChange(e);
                   }}
                   placeholder="John Doe"
@@ -156,7 +173,7 @@ const Contact = () => {
                 <input
                   required
                   type="tel"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleChange(e);
                   }}
                   name="number"
@@ -170,7 +187,7 @@ const Contact = () => {
                 <input
                   required
                   type="email"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleChange(e);
                   }}
                   placeholder="johndoe@example.com"
@@ -184,7 +201,7 @@ const Contact = () => {
                 <textarea
                   name="message"
                   id="message"
-                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>)=>{
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                     handleChange(e);
                   }}
                   placeholder="Tell Us about your project here."
@@ -203,7 +220,9 @@ const Contact = () => {
 
           <div className="contact-location flex lg:flex-row flex-col-reverse gap-10 justify-center lg:w-[90%] w-[95%] mx-auto">
             <div className="location-details w-full lg:w-[49%]">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl pb-8">Contact Address</h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl pb-8">
+                Contact Address
+              </h2>
               <p className=" contact-head md:text-lg">
                 NETBOND TECHNOLOGIES PVT. LTD.
               </p>

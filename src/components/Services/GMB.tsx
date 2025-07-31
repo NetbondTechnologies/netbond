@@ -44,20 +44,23 @@ interface GMBFaq {
   answer: string;
 }
 
-interface Form{
+interface Form {
   name: string;
-    email: string;
-    message: string;
-    business: string;
+  email: string;
+  message: string;
+  business: string;
 }
 
-const GMB: React.FC = () => {
+interface Props {
+  setData: React.Dispatch<any>;
+}
 
-   const [formData, setFormData] = useState<Form>({
+const GMB: React.FC<Props> = ({ setData }) => {
+  const [formData, setFormData] = useState<Form>({
     name: "",
     email: "",
     message: "",
-    business: ""
+    business: "",
   });
 
   let handleChange = (
@@ -72,12 +75,13 @@ const GMB: React.FC = () => {
   };
   let handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setData(formData);
     setFormData({
       name: "",
-    email: "",
-    message: "",
-    business: ""
-    })
+      email: "",
+      message: "",
+      business: "",
+    });
   };
   const services: Service[] = [
     {
@@ -161,63 +165,69 @@ const GMB: React.FC = () => {
   const faqs: GMBFaq[] = [
     {
       question: "What is Google My Business (GMB) and why is it important?",
-      answer: "Google My Business (GMB) is a free tool that helps businesses manage their online presence across Google, including Search and Maps. It’s crucial for increasing visibility, attracting local customers, and building trust through verified business information in zirakpur."
+      answer:
+        "Google My Business (GMB) is a free tool that helps businesses manage their online presence across Google, including Search and Maps. It’s crucial for increasing visibility, attracting local customers, and building trust through verified business information in zirakpur.",
     },
     {
       question: "How can Netbond Technologies help with GMB?",
-      answer: "At Netbond Technologies, we provide end-to-end GMB management services, including profile setup, optimization, content creation, citation building, and performance tracking. Our goal is to ensure your business stands out in local search results."
+      answer:
+        "At Netbond Technologies, we provide end-to-end GMB management services, including profile setup, optimization, content creation, citation building, and performance tracking. Our goal is to ensure your business stands out in local search results.",
     },
     {
       question: "What information should be included in my GMB profile?",
-      answer: "Your GMB profile should include accurate business details like name, address, phone number, operating hours, website link, services offered, and high-quality photos. We ensure all this information is optimized and up-to-date."
+      answer:
+        "Your GMB profile should include accurate business details like name, address, phone number, operating hours, website link, services offered, and high-quality photos. We ensure all this information is optimized and up-to-date.",
     },
     {
       question: "Can GMB help improve my local search rankings?",
-      answer: "Yes! A well-optimized GMB profile can significantly boost your local SEO rankings. By providing accurate information, engaging content, and managing reviews, we help your business appear prominently in local search results."
+      answer:
+        "Yes! A well-optimized GMB profile can significantly boost your local SEO rankings. By providing accurate information, engaging content, and managing reviews, we help your business appear prominently in local search results.",
     },
     {
       question: "What is GMB ROI tracking?",
-      answer: "GMB ROI tracking involves monitoring how your GMB profile drives customer actions like calls, website visits, and directions. Our advanced tracking helps you measure the effectiveness of your GMB efforts and refine strategies for better results."
+      answer:
+        "GMB ROI tracking involves monitoring how your GMB profile drives customer actions like calls, website visits, and directions. Our advanced tracking helps you measure the effectiveness of your GMB efforts and refine strategies for better results.",
     },
-  ]
-  
-  useGSAP(()=>{
-      
-      const elemArr: HTMLElement[] = [
-        document.querySelector(".percent") as HTMLElement,
-        document.querySelector(".plus-one") as HTMLElement,
-        document.querySelector(".plus-two") as HTMLElement,
-      ];
-      elemArr.map((elem: HTMLElement ,index: number) => {
-        gsap.to(elem, {
-          textContent: index === 0 ? "98" : index === 1 ? "5" : "500",
-          duration: 3,
-          ease: "power4.inOut",
-          snap: { textContent: 1 },
-          stagger: 1,
-          scrollTrigger: {
-            trigger: "#stat-container",
-            start: "top 80%",
-            end: "top 30%",
-          }
-        });
-      });
+  ];
 
-      gsap.from(".bar",{
-        width: "0%",
+  useGSAP(() => {
+    const elemArr: HTMLElement[] = [
+      document.querySelector(".percent") as HTMLElement,
+      document.querySelector(".plus-one") as HTMLElement,
+      document.querySelector(".plus-two") as HTMLElement,
+    ];
+    elemArr.map((elem: HTMLElement, index: number) => {
+      gsap.to(elem, {
+        textContent: index === 0 ? "98" : index === 1 ? "5" : "500",
         duration: 3,
-        ease:"power4.inOut",
+        ease: "power4.inOut",
+        snap: { textContent: 1 },
+        stagger: 1,
         scrollTrigger: {
           trigger: "#stat-container",
           start: "top 80%",
           end: "top 30%",
-        }
-      })
+        },
+      });
+    });
 
-      const allTitles = Array.from(document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>)
+    gsap.from(".bar", {
+      width: "0%",
+      duration: 3,
+      ease: "power4.inOut",
+      scrollTrigger: {
+        trigger: "#stat-container",
+        start: "top 80%",
+        end: "top 30%",
+      },
+    });
+
+    const allTitles = Array.from(
+      document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>
+    );
 
     allTitles.map((title: HTMLElement) => {
-      const split = new SplitText(title, { type: "lines" ,mask: "lines"});
+      const split = new SplitText(title, { type: "lines", mask: "lines" });
       gsap.from(split.lines, {
         y: 100,
         opacity: 0,
@@ -230,7 +240,7 @@ const GMB: React.FC = () => {
           end: "top 30%",
         },
       });
-    })
+    });
 
     const button = document.querySelector(".cta-btn");
     if (button) {
@@ -243,23 +253,21 @@ const GMB: React.FC = () => {
     }
 
     const allTexts = Array.from(
-          document.querySelectorAll(".hero-text") as NodeListOf<HTMLElement>
-        );
-        allTexts.map((e: HTMLElement) => {
-          const split = new SplitText(e, { type: "lines", mask: "lines" });
-          gsap.from(split.lines, {
-            rotate: 10,
-            y: 100,
-            opacity: 0,
-            duration: 1.2,
-            ease: "power4.out",
-            delay:0.4,
-            stagger: 0.2,
-          });
-        });
-
-  },[])
-
+      document.querySelectorAll(".hero-text") as NodeListOf<HTMLElement>
+    );
+    allTexts.map((e: HTMLElement) => {
+      const split = new SplitText(e, { type: "lines", mask: "lines" });
+      gsap.from(split.lines, {
+        rotate: 10,
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power4.out",
+        delay: 0.4,
+        stagger: 0.2,
+      });
+    });
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
@@ -428,10 +436,10 @@ const GMB: React.FC = () => {
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-300">Local SEO Score</span>
                       <span>
-                        
-                      <span className="text-green-400 font-medium percent">
-                        0
-                      </span> <span className="text-green-400 inline">%</span>
+                        <span className="text-green-400 font-medium percent">
+                          0
+                        </span>{" "}
+                        <span className="text-green-400 inline">%</span>
                       </span>
                     </div>
                     <div className="w-full bg-white/20 rounded-full h-2">
@@ -441,17 +449,15 @@ const GMB: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 text-center">
-                    <div className="text-2xl font-bold inline-block text-[#f76b1c] mb-1 plus-one">
-                    </div>
+                    <div className="text-2xl font-bold inline-block text-[#f76b1c] mb-1 plus-one"></div>
                     <span className="text-[#f76b1c] text-2xl inline">+</span>
                     <div className="text-gray-300 text-sm">
                       Years Experience
                     </div>
                   </div>
                   <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 text-center">
-                    <div className="text-2xl font-bold text-[#f76b1c] mb-1 inline-block plus-two">
-                      
-                    </div><span className="text-[#f76b1c] text-2xl inline">+</span>
+                    <div className="text-2xl font-bold text-[#f76b1c] mb-1 inline-block plus-two"></div>
+                    <span className="text-[#f76b1c] text-2xl inline">+</span>
                     <div className="text-gray-300 text-sm">Happy Clients</div>
                   </div>
                 </div>
@@ -540,7 +546,9 @@ const GMB: React.FC = () => {
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900">Email</div>
-                    <div className="text-gray-600">info@netbondtechnologies.com</div>
+                    <div className="text-gray-600">
+                      info@netbondtechnologies.com
+                    </div>
                   </div>
                 </div>
               </div>
@@ -550,18 +558,21 @@ const GMB: React.FC = () => {
               <h3 className="text-2xl font-bold text-gray-900 mb-6">
                 Get Your GMB Audit
               </h3>
-              <form className="space-y-6" onSubmit={(e:React.FormEvent<HTMLFormElement>)=>{
-                handleSubmit(e);
-              }}>
+              <form
+                className="space-y-6"
+                onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+                  handleSubmit(e);
+                }}
+              >
                 <div>
                   <label htmlFor="name" className=" block w-full mb-2">
-              Full Name <span className="text-red-600">*</span>
-            </label>
+                    Full Name <span className="text-red-600">*</span>
+                  </label>
                   <input
                     type="text"
                     name="name"
                     id="name"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       handleChange(e);
                     }}
                     placeholder="John Doe"
@@ -570,11 +581,11 @@ const GMB: React.FC = () => {
                 </div>
                 <div>
                   <label htmlFor="email" className=" block w-full mb-2">
-              Email <span className="text-red-600">*</span>
-            </label>
+                    Email <span className="text-red-600">*</span>
+                  </label>
                   <input
                     type="email"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       handleChange(e);
                     }}
                     name="email"
@@ -585,11 +596,11 @@ const GMB: React.FC = () => {
                 </div>
                 <div>
                   <label htmlFor="business" className=" block w-full mb-2">
-              Business Name <span className="text-red-600">*</span>
-            </label>
+                    Business Name <span className="text-red-600">*</span>
+                  </label>
                   <input
                     type="text"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       handleChange(e);
                     }}
                     name="business"
@@ -600,13 +611,13 @@ const GMB: React.FC = () => {
                 </div>
                 <div>
                   <label htmlFor="message" className=" block w-full mb-2">
-              Message 
-            </label>
+                    Message
+                  </label>
                   <textarea
                     placeholder="Tell us about your business..."
                     rows={4}
                     id="message"
-                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>)=>{
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                       handleChange(e);
                     }}
                     name="message"
@@ -625,7 +636,7 @@ const GMB: React.FC = () => {
           </div>
         </div>
       </section>
-      <Accordion faqs={faqs}/>
+      <Accordion faqs={faqs} />
     </div>
   );
 };
