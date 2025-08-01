@@ -114,11 +114,23 @@ const Service = () => {
         "Services offered to the businesses and companies to help them grow and get into the limelight.",
     },
   ];
+
   useGSAP(() => {
+    const split = new SplitText(".hero-text", { type: "lines", mask: "lines" });
+    gsap.from(split.lines, {
+      yPercent: 100,
+      opacity: 0,
+      duration: 1.5,
+      ease: "power4.out",
+      stagger: 0.1,
+    });
     const allTitles = Array.from(
       document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>
     );
 
+    console.log("allTitles", allTitles);
+    console.log("poster", document.querySelector(".poster"));
+    console.log("belowPoster", document.querySelector(".belowPoster"));
     allTitles.map((title: HTMLElement) => {
       const split = new SplitText(title, { type: "lines", mask: "lines" });
       gsap.from(split.lines, {
@@ -134,15 +146,13 @@ const Service = () => {
         },
       });
     });
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      split.revert();
+    };
+  });
 
-    const split = new SplitText(".hero-text", { type: "lines", mask: "lines" });
-    gsap.from(split.lines, {
-      yPercent: 100,
-      opacity: 0,
-      duration: 1.5,
-      ease: "power4.out",
-      stagger: 0.1,
-    });
+  useGSAP(() => {
     if (!isLargeScreen) return;
     ScrollTrigger.create({
       trigger: ".offer-heading",
@@ -217,7 +227,6 @@ const Service = () => {
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      split.revert();
     };
   }, []);
 

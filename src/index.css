@@ -297,6 +297,48 @@ div.paragraphDiv {
   animation: gradientAnimation 8s ease infinite;
 }
 
+@keyframes glow-sweep {
+  0% {
+    background-position: -300% 0;
+  }
+  100% {
+    background-position: 300% 0;
+  }
+}
+
+@keyframes glow-sweep-delayed {
+  0% {
+    background-position: -300% 0;
+  }
+  100% {
+    background-position: 300% 0;
+  }
+}
+
+.animate-glow-sweep {
+  background-size: 300% 100%;
+  animation: glow-sweep 2.5s ease-in-out infinite;
+}
+
+.animate-glow-sweep-delayed {
+  background-size: 300% 100%;
+  animation: glow-sweep-delayed 2.5s ease-in-out infinite 0.4s;
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 20px currentColor;
+  }
+  
+  .text-glow-strong {
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor,
+      0 0 20px currentColor;
+  }
+}
+
 h3.display-text {
   transition: 0.4s all ease;
 }

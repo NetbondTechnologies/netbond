@@ -15,6 +15,7 @@ import SEO from "./components/Services/SEO";
 import GraphicDesign from "./components/Services/GraphicDesign";
 import NotFound from "./components/NotFound";
 import axios from "axios";
+import Loader from "./components/Loader";
 
 export const handleScrollTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -35,15 +36,28 @@ function App() {
   const sendApplication = async () => {
     if (data.name.length > 0) {
       try {
+        setIsLoading(true);
         let response = await axios.post(
           "https://api.emailjs.com/api/v1.0/email/send",
           apData
         );
+        setData({
+          name: "",
+          firstName: "",
+        });
         if (response.status === 200) {
-          alert("Application Sent ✔");
+          setMessage("Application Sent ✔");
+          setTimeout(() => {
+            setIsLoading(false);
+            setMessage("Sending Application...");
+          }, 1000);
         }
       } catch (error) {
-        alert("Something Went Wrong :( , Try After 2 minutes");
+        setMessage("Something Went Wrong :( , Try After 2 minutes");
+        setTimeout(() => {
+          setIsLoading(false);
+          setMessage("Sending Application...");
+        }, 1000);
       }
     } else {
       console.log("Please Fill All The Fields");
@@ -55,13 +69,11 @@ function App() {
     location.pathname
   );
   const [isLocationTrue, setIsLocationTrue] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("Sending Application...");
 
   useEffect(() => {
     sendApplication();
-    setData({
-      name: "",
-      firstName: "",
-    });
   }, [data.name]);
 
   useEffect(() => {
@@ -76,6 +88,7 @@ function App() {
   return (
     <>
       {isLocationTrue ? <Transition /> : null}
+      {isLoading ? <Loader text={message} /> : null}
 
       <Routes>
         <Route element={<Layout location={updateLocation} />}>
