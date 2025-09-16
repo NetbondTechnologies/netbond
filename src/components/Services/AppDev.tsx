@@ -284,10 +284,10 @@ const AppDev = () => {
 
   return (
     <section className="appDev">
-      <section className="appDev-panel md:mb-20 mb-10 xl:pt-[370px] lg:[250px] md:pt-[180px] pt-[130px] bg-[url(./Spectral.jpg)] rounded-b-3xl shadow-2xl shadow-gray-500 bg-cover px-[5%] pb-[50px] md:pb-[150px]">
+      <section className="appDev-panel md:mb-20 mb-10 xl:pt-[370px] lg:[250px] md:pt-[180px] pt-[130px] bg-[#141414] rounded-b-3xl shadow-2xl shadow-gray-500 bg-cover px-[5%] pb-[50px] md:pb-[150px]" style={{backgroundImage:"url('./Spectral.jpg')"}}>
         <h1 className="md:text-8xl text-5xl mb-8 hero-text">
           Application Development
-        </h1>
+        </h1> 
         <p className="lg:text-lg md:block hidden hero-text">
           Mobile Application Development is the process of designing, building,
           and maintaining software applications specifically for mobile devices,

@@ -59,7 +59,7 @@ const VidSection: React.FC = () => {
 
       <div className="end xl:w-[90%] md:w-[95%] mx-auto h-[90%] lg:mt-[200px] mt-[100px] bg-black rounded-4xl overflow-hidden">
         <video
-          src="https://www.netbondtechnologies.com/wp-content/uploads/2024/12/Services-2.mp4"
+          src="./Services-2.mp4"
           className="w-[100%] h-[90%]"
           autoPlay
           loop
