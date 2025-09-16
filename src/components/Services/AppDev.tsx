@@ -24,7 +24,6 @@ import {
   faN,
   faShareNodes,
   faStopwatch,
-  
   faTruck,
   faTruckPlane,
   faUtensils,
@@ -34,7 +33,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import  { useState, type ReactElement } from "react";
+import  { type ReactElement } from "react";
 import Accordion from "../Accordion";
 import { SplitText } from "gsap/SplitText";
 import {  useNavigate } from "react-router";
@@ -60,41 +59,9 @@ interface AppDevFAQS {
   question: string;
   answer: string;
 }
-interface Form{
-  name: string;
-    email: string;
-    message: string;
-    number: string;
-}
 
 const AppDev = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState<Form>({
-    name: "",
-    email: "",
-    message: "",
-    number: ""
-  });
-
-  let handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData((prev) => {
-      return {
-        ...prev,
-        [event.target.name]: event.target.value,
-      };
-    });
-  };
-  let handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setFormData({
-      name: "",
-    email: "",
-    message: "",
-    number: ""
-    })
-  };
 
   const specialFeatures: SpecialFeatures[] = [
     {
@@ -477,108 +444,6 @@ const AppDev = () => {
         </div>
       </section>
 
-      <section
-        className="form-section-appdev flex flex-col lg:flex-row justify-center bg-(--jet) py-20 px-[3%] md:px-[5%] "
-        id="contacts"
-      >
-        <div className="form-info flex flex-col gap-10 mb-15 lg:mb-0 lg:w-[40%]">
-          <h2 className="md:text-4xl text-3xl">
-            <span className="border-l-10 pl-2 border-(--pumpkin) py-3 ">
-              After
-            </span>{" "}
-            Form Submission
-          </h2>
-          <p>
-            <ul className="list-disc ml-10 text-lg">
-              <li className="pb-4 text-white">
-                You’ll receive a Call from Our Experts.
-              </li>
-              <li className="pb-4 text-white">
-                We’ll carefully evaluate of your requirements.
-              </li>
-              <li className="pb-4 text-white">
-                A review of Android Application
-              </li>
-              <li className="pb-4 text-white">
-                Suggestions for the best Application Strategies.
-              </li>
-              <li className="pb-4 text-white">
-                Get a feel if Netbond Technologies is Suitable for you
-              </li>
-            </ul>
-          </p>
-        </div>
-        <div className="form-component bg-black/70 backdrop-blur-sm rounded-3xl py-8 md:px-8 px-5 lg:w-[55%]">
-          <form
-            action=""
-            onSubmit={(e) => {
-              handleSubmit(e);
-            }}
-          >
-            <label htmlFor="name" className=" block w-full">
-              Full Name <span className="text-red-600">*</span>
-            </label>
-            <input
-              required
-              type="text"
-              placeholder="John Doe"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                handleChange(e);
-              }}
-              name="name"
-              id="name"
-              className="block w-full bg-white/10 rounded-md px-3 py-2 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
-            />
-            <label htmlFor="number" className=" block w-full">
-              Phone Number <span className="text-red-600">*</span>
-            </label>
-            <input
-              required
-              type="tel"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                handleChange(e);
-              }}
-              placeholder="+91 xxxxx xxxxx"
-              name="number"
-              id="number"
-              className="block w-full bg-white/10 rounded-md px-3 py-2 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
-            />
-            <label htmlFor="email" className=" block w-full">
-              Email <span className="text-red-600">*</span>
-            </label>
-            <input
-              required
-              type="email"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                handleChange(e);
-              }}
-              placeholder="johndoe@example.com"
-              name="email"
-              id="email"
-              className="block w-full bg-white/10 rounded-md px-3 py-2 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
-            />
-            <label htmlFor="message" className=" block w-full">
-              Message
-            </label>
-            <textarea
-              name="message"
-              placeholder="Tell us about your project"
-              id="message"
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                handleChange(e);
-              }}
-              className="resize-none block w-full bg-white/10 rounded-md px-3 py-2 text-md mb-5 mt-2 focus:ring-3 outline-none focus:ring-(--pumpkin) duration-200"
-              rows={6}
-            ></textarea>
-            <button
-              type="submit"
-              className="btn border-1 border-white/30 active:scale-95 hover:ring-2 hover:shadow-xl shadow-[#f76b1c] hover:ring-[#f76b1c] hover:ring-offset-2 hover:ring-offset-white hover:scale-105 black/5 rounded-md px-6 py-1 duration-200 text-lg cursor-pointer"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      </section>
       <section className="appdev-faqs md:pt-20 pt-10 bg-(--jet)">
         <Accordion faqs={appdevFAQS} />
       </section>

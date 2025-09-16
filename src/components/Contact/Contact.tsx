@@ -3,7 +3,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useState } from "react";
-import axios from "axios";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 

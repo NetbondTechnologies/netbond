@@ -16,7 +16,6 @@ import {
   ArrowRight,
   ExternalLink,
   Send,
-  
   User,
 } from "lucide-react";
 import Accordion from "../Accordion";
