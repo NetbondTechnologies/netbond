@@ -128,9 +128,7 @@ const Service = () => {
       document.getElementsByTagName("h2") as HTMLCollectionOf<HTMLElement>
     );
 
-    console.log("allTitles", allTitles);
-    console.log("poster", document.querySelector(".poster"));
-    console.log("belowPoster", document.querySelector(".belowPoster"));
+
     allTitles.map((title: HTMLElement) => {
       const split = new SplitText(title, { type: "lines", mask: "lines" });
       gsap.from(split.lines, {
